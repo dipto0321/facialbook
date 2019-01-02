@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :active_friendships, class_name: "Friendship", foreign_key: :user_id
-  
+
   has_many :passive_friendships, class_name: "Friendship", foreign_key: :friend_id
 
   has_many :added_friends, through: :active_friendships,
