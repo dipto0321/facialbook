@@ -15,6 +15,14 @@ class User < ApplicationRecord
 
   has_many :adding_friends, through: :passive_friendships, source: :user
 
+  has_many :active_requests, class_name: "FriendRequest", foreign_key: :requester_id
+
+  has_many :passive_requests, class_name: "FriendRequest", foreign_key: :requestee_id
+
+  has_many :requestees, through: :active_requests
+
+  has_many :requesters, through: :passive_requests
+
   def friends
     added_friends + adding_friends
   end
