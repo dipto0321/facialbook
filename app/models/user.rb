@@ -12,4 +12,8 @@ class User < ApplicationRecord
   source: :friend
 
   has_many :adding_friends, through: :passive_friendships, source: :user
+
+  def friends
+    self.added_friends + self.adding_friends
+  end
 end
