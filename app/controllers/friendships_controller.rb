@@ -20,9 +20,15 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  private
-
-  def friendship_params
-    params.require(:friendship).permit(:user_id, :friend_id)
+  def destroy
+    @friendship = Friendship.find_by(id: params[:id])
+    if @friendship.delete
+      flash[:warning] = "Friend removed"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = "Friend already deleted"
+      redirect_back(fallback_location: root_path)
+    end
   end
+
 end

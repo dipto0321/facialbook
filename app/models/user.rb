@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def friends
     added_friends + adding_friends
   end
+
+  def friendships
+    Friendship.where("user_id=? OR friend_id=?", self.id, self.id)
+  end
 end

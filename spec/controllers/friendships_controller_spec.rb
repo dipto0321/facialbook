@@ -38,4 +38,44 @@ RSpec.describe FriendshipsController do
       end
     end
   end
+
+  describe "#destroy" do
+    it "removes the friendship from the database" do
+
+      user = create(:user)
+      friend = create(:user)
+      sign_in(user)
+      friendship = create(:friendship, user_id: user.id, friend_id: friend.id)
+      expect{
+        delete :destroy, params: {
+          id: friendship.id
+        }
+      }.to change(Friendship, :count).by(-1)
+    end
+
+    context "instance variables and redirection" do
+      before :each do
+        @user = create(:user)
+        
+        @friend = create(:user)
+        
+        @friendship = create(:friendship, user_id: @user.id, friend_id: @friend.id)
+        
+        parameters = {params: {id: @friendship.id}}
+
+        sign_in(@user)
+        
+        delete :destroy, parameters
+      end
+
+      it "assigns to @friendship" do
+        expect(assigns(:friendship)).to eq(@friendship)
+      end
+
+      it "redirects after successful delete" do
+        expect(response).to redirect_to(root_path)
+      end
+
+    end
+  end
 end
