@@ -1,2 +1,12 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>User's info</h1>
+<hr>
+<p>Email : <%= @user.email %></p>
+<%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post %>
+<% if @user.friends.any? %>
+  <h4>Friends</h4>
+  <ul>
+    <% @user.friends.each do |friend| %>
+      <li><%= link_to  friend.email, friend %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -10,9 +10,21 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #show" do
+    before :each do
+      @user = create(:user)
+      parameters = {params: {id: @user.id}}
+      get :show, parameters
+    end
     it "returns http success" do
-      get :show
       expect(response).to have_http_status(:success)
+    end
+
+    it 'Assigns to @user' do
+      expect(assigns(:user)).to eq(@user)
+    end
+
+    it 'renders template' do
+      expect(response).to render_template(:show)
     end
   end
 
