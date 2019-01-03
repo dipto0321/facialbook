@@ -1,8 +1,8 @@
-<% if user.passive_requests.any? %>
+<% if user.pending_passive_requests.any? %>
   <h4>Friend requests</h4>
   <hr>
   <ul>
-    <% user.passive_requests.each do |request| %>
+    <% user.pending_passive_requests.each do |request| %>
       <li>
         <%= link_to request.requester.email , request.requester %>
         <%= link_to 'Confirm' , friendships_path(friendship: {
