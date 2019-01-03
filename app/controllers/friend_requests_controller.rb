@@ -3,7 +3,7 @@ class FriendRequestsController < ApplicationController
   def create
     @requestee = User.find_by(id: params[:friend_request][:requestee_id])
 
-    @requester = User.find_by(id: params[:friend_request][:requester_id])
+    @requester = current_user
 
     @friend_request = @requester.active_requests.build(requestee_id: @requestee.id )
     begin
