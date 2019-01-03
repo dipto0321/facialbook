@@ -9,7 +9,7 @@
           user_id: request.requester.id,
           friend_id: current_user.id
         }),method: :post, class: "btn btn-sm btn-primary" %>
-        <%= link_to 'Delete' , '#', class: "btn btn-sm btn-default" %>
+        <%= link_to 'Delete' , friend_request_path(request), method: :delete, class: "btn btn-sm btn-default" %>
       </li>
     <% end %>
   </ul>

@@ -16,4 +16,14 @@ class FriendRequestsController < ApplicationController
      redirect_back(fallback_location: user_path(@requester))
     end
   end
+
+  def destroy
+    @friend_request = FriendRequest.find_by(id: params[:id])
+    if @friend_request.delete
+      flash[:warning] = 'Request deleted'
+    else
+      flash[:danger] = 'Request already deleted'
+    end
+    redirect_back(fallback_location: root_path)
+  end
 end
