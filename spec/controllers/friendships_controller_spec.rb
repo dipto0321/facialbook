@@ -16,12 +16,12 @@ RSpec.describe FriendshipsController do
     end
     context 'instance variable assignments and redirection' do
       before(:each) do
+        @friend = create(:user)
         @user = create(:user)
-        @friend = create(:user, email: 'friend@gmail.com')
 
         parameters = { params: { friendship: attributes_for(:friendship, user_id: @user.id, friend_id: @friend.id) } }
 
-        sign_in(@user)
+        sign_in(@friend)
         post :create, parameters
       end
 

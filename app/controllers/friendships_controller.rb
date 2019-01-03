@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
 
   def create
     @user = User.find_by(id: params[:friendship][:user_id])
-    @friend = User.find_by(id: params[:friendship][:friend_id])
+    @friend = current_user
 
     @friendship = @user.active_friendships.build(friend_id: @friend.id)
 
