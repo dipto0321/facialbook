@@ -51,7 +51,7 @@ feature "checking one's pending requests" do
     click_on("Log in")
   end
 
-  it 'works' do
-    save_and_open_page
+  it "shows a logged user's pending friend requests in the home page" do
+    expect(page).to have_selector(:link_or_button, 'Confirm')
   end
 end
