@@ -9,12 +9,15 @@ class FriendshipsController < ApplicationController
 
     @friendship = @user.active_friendships.build(friend_id: @friend.id)
 
+    @friend_request = FriendRequest.where("requester_id=? AND requestee_id=?", @user.id, @friend.id)[0]
+
     begin
       @friendship.save
     rescue => exception
       flash[:danger] = 'You are already friends'
       redirect_back(fallback_location: root_path)
     else
+      @friend_request.accept
       flash[:success] = "You are now friends"
      redirect_back(fallback_location: user_path(@user))
     end

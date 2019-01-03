@@ -5,7 +5,10 @@
     <% user.passive_requests.each do |request| %>
       <li>
         <%= link_to request.requester.email , request.requester %>
-        <%= link_to 'Confirm' , '#', class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Confirm' , friendships_path(friendship: {
+          user_id: request.requester.id,
+          friend_id: current_user.id
+        }),method: :post, class: "btn btn-sm btn-primary" %>
         <%= link_to 'Delete' , '#', class: "btn btn-sm btn-default" %>
       </li>
     <% end %>
