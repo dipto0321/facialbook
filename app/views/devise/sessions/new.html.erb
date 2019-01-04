@@ -2,7 +2,7 @@
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-inline") do |f| %>
   <div class="row">
-    <div class="form-inputs form-inline col">
+    <div class="form-inputs form-inline">
       <%= f.input :email,
                   required: false,
                   autofocus: true,
@@ -13,7 +13,7 @@
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
     </div>
 
-    <div class="form-actions col">
+    <div class="form-actions">
       <%= f.button :submit, "Log in", class: 'btn-primary'%>
     </div>
   </div>
