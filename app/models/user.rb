@@ -36,7 +36,9 @@ class User < ApplicationRecord
   end
 
   def pending_request?(requestee)
-    !self.active_requests.where("responded=? AND requestee_id=?", false, requestee.id)[0].responded
+    pending = self.active_requests.where("responded=? AND requestee_id=?", false, requestee.id)[0] 
+    return false if pending.nil?
+    !pending.responded
   end
 
   def pending_passive_requests
