@@ -90,4 +90,11 @@ li#friend_request {
   .dropdown-toggle::after {
     display: none;
   }
+
+  .badge.badge-danger {
+    position: relative;
+    right: 15px;
+    top: 8px;
+    font-size: 0.8rem;
+  }
 }
