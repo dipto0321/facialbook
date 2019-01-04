@@ -6,7 +6,7 @@ feature "confirm and delete" do
     @requestee = create(:user)
     
     # First log in
-    visit new_user_session_path
+    visit root_path
     fill_in "Email", with: @requester.email
     fill_in "Password", with: "password"
     click_on("Log in")
@@ -15,7 +15,7 @@ feature "confirm and delete" do
     click_on("Add Friend")
     visit root_path
     click_on("Sign Out")
-    click_on("Sign in")
+    click_on("Log in")
 
     fill_in "Email", with: @requestee.email
     fill_in "Password", with: "password"

@@ -8,7 +8,7 @@
 <%end%>
 <% if @user.friends.any? %>
   <h4>Friends</h4>
-  <ul>
+  <ul id="partial-friends-list">
     <% @user.friends.each do |friend| %>
       <li><%= link_to  friend.email, friend %></li>
     <% end %>

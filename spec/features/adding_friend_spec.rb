@@ -7,7 +7,7 @@ feature 'clicking Add Friend button' do
     @friend2 = create(:user)
     
     # First log in
-    visit new_user_session_path
+    visit root_path
     fill_in "Email", with: @user.email
     fill_in "Password", with: "password"
     click_on("Log in")
@@ -43,9 +43,8 @@ feature "checking one's pending requests" do
 
     click_on("Add Friend")
 
-    visit root_path
     click_on("Sign Out")
-    click_on("Sign in")
+    click_on("Log in")
     fill_in "Email", with: @friend.email
     fill_in "Password", with: "password"
     click_on("Log in")
