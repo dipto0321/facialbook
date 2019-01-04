@@ -1,7 +1,7 @@
 <% if user.pending_passive_requests.any? %>
   <ul class="list-group">
     <% user.pending_passive_requests.each do |request| %>
-      <li class="list-group-item">
+      <li class="dropdown-item">
         <%= link_to request.requester.email , request.requester %>
         <%= link_to 'Confirm' , friendships_path(friendship: {
           user_id: request.requester.id,
@@ -9,6 +9,7 @@
         }),method: :post, class: "btn btn-sm btn-primary" %>
         <%= link_to 'Delete' , friend_request_path(request), method: :delete, class: "btn btn-sm btn-default" %>
       </li>
+      <li class="dropdown-divider"></li>
     <% end %>
   </ul>
 
