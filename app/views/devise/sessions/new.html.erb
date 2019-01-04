@@ -1,22 +1,27 @@
 <h2>Log in</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-inline") do |f| %>
-  <div class="row">
-    <div class="form-inputs form-inline">
+  <div class="form-row">
+    <div class="col-md-5">
       <%= f.input :email,
                   required: false,
+                  label: false,
                   autofocus: true,
-                  input_html: { autocomplete: "email" } %>
+                  input_html: { autocomplete: "email", placeholder: "Email" } %>
+    </div>
+    <div class="col-md-5">
       <%= f.input :password,
                   required: false,
-                  input_html: { autocomplete: "current-password" } %>
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                  label: false,
+                  input_html: { autocomplete: "current-password", placeholder: "Password" } %>
     </div>
-
-    <div class="form-actions">
+    <div class="col-md-2">
       <%= f.button :submit, "Log in", class: 'btn-primary'%>
     </div>
   </div>
+  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+  
 <% end %>
 
 <%= render "devise/shared/links" %>
