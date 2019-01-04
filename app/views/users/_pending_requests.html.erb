@@ -1,9 +1,7 @@
 <% if user.pending_passive_requests.any? %>
-  <p>Friend requests</p>
-  <hr>
-  <ul>
+  <ul class="list-group">
     <% user.pending_passive_requests.each do |request| %>
-      <li class="dropdown-item">
+      <li class="list-group-item">
         <%= link_to request.requester.email , request.requester %>
         <%= link_to 'Confirm' , friendships_path(friendship: {
           user_id: request.requester.id,
@@ -13,4 +11,7 @@
       </li>
     <% end %>
   </ul>
+
+<% else %>
+  No pending request
 <% end %>

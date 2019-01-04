@@ -12,7 +12,9 @@
   <li class="nav-item dropdown" id="friend_request">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fa fa-users"></i></a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <div class="dropdown-menu dropdown-menu-right p-2" aria-labelledby="navbarDropdown">
+      <p>Friend requests</p>
+      <hr>
       <%= render partial:"users/pending_requests", locals:{user: current_user}%>
     </div>
   </li>
