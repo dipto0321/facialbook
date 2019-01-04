@@ -1,7 +1,7 @@
 <h2>Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-inline") do |f| %>
-  <div class="form-row">
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "") do |f| %>
+  <div class="form">
     <div class="col-md-5">
       <%= f.input :email,
                   required: false,
@@ -15,8 +15,8 @@
                   label: false,
                   input_html: { autocomplete: "current-password", placeholder: "Password" } %>
     </div>
-    <div class="col-md-2">
-      <%= f.button :submit, "Log in", class: 'btn-primary'%>
+    <div class="col-md-5">
+      <%= f.button :submit, "Log in", class: 'btn-primary btn-block'%>
     </div>
   </div>
   <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
