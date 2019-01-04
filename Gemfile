@@ -40,6 +40,8 @@ gem 'jquery-rails'
 gem 'mini_magick', '4.9.2'
 gem 'omniauth', '~> 1.9'
 gem 'simple_form'
+gem 'faker'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,7 +53,6 @@ group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails', '~> 1.6', require: false
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'hirb'
   gem 'launchy'
   gem 'rack_session_access'
