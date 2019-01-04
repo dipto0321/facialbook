@@ -1,4 +1,17 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+.navbar-brand.unlogged {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+  top: 10px;
+  position: relative;
+}
+
+.navbar-brand.logged {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+}
 
 .main-form {
   width: 50%;
@@ -14,20 +27,35 @@
 }
 
 .bg-fb {
-  background-color: #4267b2 !important;
+  background-color: #405D9B !important;
 }
 
 .nav-height {
   height: 8rem !important;
 }
 
-// .nav-sign-in {
-//   input {
-//     height: 1.6em;
-//     border-radius: 0;
-//   }
+.nav-sign-in {
 
-//   input.btn.btn-sm {
-//     font-size: 0.9rem;
-//   }
-// }
+  input[type="email"],
+  input[type="password"] {
+    height: 1.6em;
+    border-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+  }
+
+  input.btn.btn-sm {
+    font-size: 0.9rem;
+  }
+
+  .nav-remember_me {
+    margin-top: -10px;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+
+    .user_remember_me {
+      margin-bottom: 0;
+    }
+  }
+}
