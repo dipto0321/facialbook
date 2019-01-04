@@ -26,6 +26,12 @@ feature 'clicking Add Friend button' do
   it "changes the Add Friend button into Request Sent button" do
     expect(page).to have_selector(:link_or_button, "Request Sent")
   end
+
+  it "doesn't show the Add Friend button if the current_user visits his/her own profile" do
+    visit user_path(@user)
+    expect(page).to_not have_selector(:link_or_button, "Add Friend")
+  end
+
 end
 
 feature "checking one's pending requests" do
