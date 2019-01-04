@@ -11,6 +11,7 @@
 .navbar-brand.logged {
   font-family: 'Roboto', sans-serif;
   font-size: 1.8rem;
+  margin-right: 5px;
 }
 
 .main-form {
@@ -64,5 +65,22 @@
     .user_remember_me {
       margin-bottom: 0;
     }
+  }
+}
+
+#navbarSupportedContent {
+  input[type="search"] {
+    border-radius: 1px;
+    height: 1.6rem;
+    width: 25rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  button {
+    height: 1.6rem;
+    border-radius: 1px;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    color: #555;
   }
 }
