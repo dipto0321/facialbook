@@ -1,27 +1,23 @@
-<h2>Log in</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: "") do |f| %>
-  <div class="form">
-    <div class="col-md-5">
+<div class="card my-5 text-center">
+  <h4 class="display-4  py-3">Log in</h4>
+  <div class="card-body main-form">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email,
                   required: false,
                   label: false,
                   autofocus: true,
-                  input_html: { autocomplete: "email", placeholder: "Email" } %>
-    </div>
-    <div class="col-md-5">
+                  input_html: { autocomplete: "email", placeholder: "Email", class: "main-form-control" } %>
       <%= f.input :password,
                   required: false,
                   label: false,
-                  input_html: { autocomplete: "current-password", placeholder: "Password" } %>
-    </div>
-    <div class="col-md-5">
-      <%= f.button :submit, "Log in", class: 'btn-primary btn-block'%>
-    </div>
+                  input_html: { autocomplete: "current-password", placeholder: "Password", class: "main-form-control" } %>
+      <%= f.button :submit, "Log in", class: 'btn-primary btn-block log-in-btn'%>
+
+      <div class="mt-3">
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
   </div>
-  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-
-  
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

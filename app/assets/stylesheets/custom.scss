@@ -1,1 +1,22 @@
 @import "bootstrap";
+
+.main-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.log-in-btn {
+  height: 55px !important;
+}
+
+.main-form-control {
+  height: calc(2.25rem + 11px);
+}
+
+.bg-fb {
+  background-color: #4267b2 !important;
+}
+
+.nav-height {
+  height: 8rem !important;
+}
