@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :first_name, :last_name, :gender, :birthday, presence: true
+  has_one :profile
 
   has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
 
