@@ -32,4 +32,9 @@ RSpec.describe User, type: :model do
 
     it {should have_many(:requesters).through(:passive_requests)}
   end
+
+  describe "Profile association" do
+    it { should have_one(:profile) }
+    it{ should accept_nested_attributes_for(:profile) }
+  end
 end
