@@ -12,4 +12,5 @@ RSpec.describe Profile, type: :model do
       expect(build(:invalid_profile, user_id:user.id)).to_not be_valid
     end
   end
+
 end
