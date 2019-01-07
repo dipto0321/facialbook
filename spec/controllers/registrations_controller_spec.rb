@@ -16,6 +16,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
           }
         }
       }.to change(User, :count).by(1)
+      expect(User.last.profile).to_not eq(nil)
     end
 
     context "successful signup" do
