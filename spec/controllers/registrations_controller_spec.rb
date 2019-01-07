@@ -20,5 +20,20 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         }
       }.to change(User, :count).by(1)
     end
+
+    context "successful signup" do
+    
+      before :each do
+        parameters = {params:{user: attributes_for(:user)}}
+        post :create, parameters
+        @user = User.last
+      end
+    
+      it "redirects to the new user's page" do
+        expect(response).to redirect_to(edit_user_registration_path(@user))
+      end
+      
+    end
+
   end
 end
