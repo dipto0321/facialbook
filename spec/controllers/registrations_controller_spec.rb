@@ -11,7 +11,8 @@ RSpec.describe Users::RegistrationsController, type: :controller do
           user: {
             email: Faker::Internet.email,
             password: 'password',
-            password_confirmation: 'password'
+            password_confirmation: 'password',
+            profile: attributes_for(:profile)
           }
         }
       }.to change(User, :count).by(1)
