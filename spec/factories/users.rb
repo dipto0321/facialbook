@@ -7,7 +7,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
     first_name {Faker::Name.male_first_name}
     last_name {Faker::Name.last_name}
-    gender "male"
+    gender { "male" }
     birthday {Faker::Date.birthday(18, 65)}
     bio {Faker::Lorem.sentence(3)}
   end
@@ -17,7 +17,7 @@ FactoryBot.define do
     password { 'password' }
     password_confirmation { 'password' }
     first_name {Faker::Name.last_name}
-    gender "male"
+    gender { "male" }
     birthday {Faker::Date.birthday(18, 65)}
     bio Faker::Lorem.sentence(3)
   end

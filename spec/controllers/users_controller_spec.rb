@@ -28,4 +28,22 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'Post #create' do
+    it 'saves to the database' do
+      expect{
+        post :create, params: {
+          user: {
+            first_name: Faker::Name.first_name,
+            last_name: Faker::Name.last_name,
+            email: Faker::Internet.email,
+            password: 'password',
+            password_confirmation: 'password',
+            birthday: Faker::Date.birthday(18, 65),
+            gender: 'male'
+          }
+        }
+      }.to change(User, :count).by(1)
+    end
+  end
+
 end
