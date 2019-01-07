@@ -9,13 +9,9 @@ RSpec.describe Users::RegistrationsController, type: :controller do
       expect {
         post :create, params: {
           user: {
-            first_name: Faker::Name.first_name,
-            last_name: Faker::Name.last_name,
             email: Faker::Internet.email,
             password: 'password',
-            password_confirmation: 'password',
-            birthday: Faker::Date.birthday(18, 65),
-            gender: 'male'
+            password_confirmation: 'password'
           }
         }
       }.to change(User, :count).by(1)
