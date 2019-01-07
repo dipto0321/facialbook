@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <% if user_signed_in? %>
           <%= render  "layouts/header_profile" %>
-        <% elsif params[:controller] != "devise/sessions" && params[:controller] != "devise/registrations" %>
+        <% elsif params[:controller] != "devise/sessions" && params[:controller] != "users/registrations" %>
           <%= render  "layouts/header_form" %>
         <% end %>
       </div>
