@@ -5,9 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
   def create
@@ -42,19 +42,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [profile: [:first_name, :last_name, :birthday, :gender]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [profile_attributes: [:first_name, :last_name, :birthday, :gender]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [profile: [:first_name, :last_name, :birthday, :gender]])
+    devise_parameter_sanitizer.permit(:account_update, keys: [profile_attributes: [:first_name, :last_name, :birthday, :gender]])
   end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    # super(resource)
-    edit_user_registration_path(@user)
-  end
+  # def after_sign_up_path_for(resource)
+  #   # super(resource)
+  #   edit_user_registration_path(resource)
+  # end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)

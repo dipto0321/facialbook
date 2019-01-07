@@ -1,0 +1,39 @@
+<%= f.error_notification %>
+<div class="form-inputs">
+  <% data_resource = params[:controller] == "devise/registrations" && params[:action] == "new" ? resource.build_profile : resource.profile%>
+  <%= f.simple_fields_for :profile, data_resource do |f| %>
+    <%= f.input :first_name,
+                  required: true,
+                  autofocus: true ,
+                  input_html: { autocomplete: "first_name" }%>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "last_name" }%>
+  <%end%>
+  <%= f.input :email,
+              required: true,
+              autofocus: true ,
+              input_html: { autocomplete: "email" }%>
+  <%= f.input :password,
+              required: true,
+              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+              input_html: { autocomplete: "new-password" } %>
+  <%= f.input :password_confirmation,
+              required: true,
+              input_html: { autocomplete: "new-password" } %>
+  <%= f.simple_fields_for :profile, resource.profile do |f|%>
+    <%= f.input :birthday,
+                required: true,
+                as: :date,
+                start_year: 1905,
+                end_year: Date.today.year,
+                input_html: { autocomplete: "birthday"} %>
+    <%= f.input :gender, as: :radio_buttons, collection: [['0', 'female'], ['1', 'male']], label_method: :second, value_method: :first %>
+  <% end %>
+  
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
