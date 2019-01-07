@@ -4,14 +4,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-  <%= f.input :first_name,
-                required: true,
-                autofocus: true ,
-                input_html: { autocomplete: "first_name" }%>
-  <%= f.input :last_name,
-              required: true,
-              autofocus: true ,
-              input_html: { autocomplete: "last_name" }%>
+    <%= f.simple_fields_for Profile.new do |p| %>
+      <%= p.input :first_name,
+                    required: true,
+                    autofocus: true ,
+                    input_html: { autocomplete: "first_name" }%>
+      <%= p.input :last_name,
+                  required: true,
+                  autofocus: true ,
+                  input_html: { autocomplete: "last_name" }%>
+    <%end%>
     <%= f.input :email,
                 required: true,
                 autofocus: true ,
@@ -23,13 +25,15 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :birthday,
-                required: true,
-                as: :date,
-                start_year: 1905,
-                end_year: Date.today.year,
-                input_html: { autocomplete: "birthday"} %>
-    <%= f.input :gender, as: :radio_buttons, collection: [['0', 'female'], ['1', 'male']], label_method: :second, value_method: :first %>
+    <%= f.simple_fields_for Profile.new do |p|%>
+      <%= p.input :birthday,
+                  required: true,
+                  as: :date,
+                  start_year: 1905,
+                  end_year: Date.today.year,
+                  input_html: { autocomplete: "birthday"} %>
+      <%= p.input :gender, as: :radio_buttons, collection: [['0', 'female'], ['1', 'male']], label_method: :second, value_method: :first %>
+    <%end%>
     
   </div>
 
