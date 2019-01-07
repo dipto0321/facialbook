@@ -8,6 +8,11 @@ RSpec.describe User, type: :model do
       expect(FactoryBot.build(:user)).to be_valid
     end
 
+    it "should build a profile after building the user" do
+      user = build(:user)
+      expect(user.profile).to_not eq(nil)
+    end
+
     it 'should have a invalid factory' do
       expect(FactoryBot.build(:invalid_user)).not_to be_valid
     end
