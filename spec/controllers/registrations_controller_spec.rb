@@ -12,7 +12,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
             email: Faker::Internet.email,
             password: 'password',
             password_confirmation: 'password',
-            profile: attributes_for(:profile)
+            profile_attributes: attributes_for(:profile)
           }
         }
       }.to change(User, :count).by(1)
@@ -22,13 +22,13 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     context "successful signup" do
     
       before :each do
-        parameters = {params:{user: attributes_for(:user)}}
+        parameters = {params:{user: attributes_for(:user, profile_attributes: attributes_for(:profile))}}
         post :create, parameters
         @user = User.last
       end
     
       it "redirects to the new user's page" do
-        expect(response).to redirect_to(edit_user_registration_path(@user))
+        expect(response).to redirect_to(edit_profile_path(@user.profile))
       end
       
     end
