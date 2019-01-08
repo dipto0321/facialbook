@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @profile = @user.profile
   end
 
   private
