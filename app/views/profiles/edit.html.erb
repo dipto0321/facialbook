@@ -1,5 +1,6 @@
 <h1>Profiles#edit</h1>
 <%= simple_form_for @profile do |f|%>
+  <%= f.input :profile_picture %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :birthday,

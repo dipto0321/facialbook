@@ -1,7 +1,7 @@
 <h1>User's info</h1>
 <hr>
 <p>Email : <%= @user.email %></p>
-<%= link_to  "Update", edit_user_registration_path %>
+<%= link_to  "Update", edit_profile_path(current_user) %>
 <% if @user != current_user %>
   <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
   <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post %>
