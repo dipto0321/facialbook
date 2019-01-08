@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   resources :friendships, only: %i[create destroy]
 
   resources :friend_requests, only: %i[create update destroy]
+
+  resources :profiles, only: %i[edit update]
 end
