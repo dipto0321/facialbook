@@ -108,4 +108,8 @@ li#friend_request {
   display: flex;
   list-style-type: none;
   padding-left: 0;
+
+  p.card-text {
+    font-size: 0.7rem;
+  }
 }
