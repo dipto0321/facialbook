@@ -26,10 +26,10 @@ feature "user sign-up" do
       expect(page).to have_selector("input[type='radio']", count: 2)
     end
     it 'shows label for female' do
-      expect(page).to have_selector("label",text: 'female')
+      expect(page).to have_selector("label",text: 'Female')
     end
     it 'shows label for male' do
-      expect(page).to have_selector("label",text: 'male')
+      expect(page).to have_selector("label",text: 'Male')
     end
     it 'shows email field' do
       expect(page).to have_selector("input[name='user[email]']", count: 1)

@@ -41,7 +41,7 @@
                 end_year: Date.today.year,
                 input_html: { autocomplete: "birthday", class:"px-0 mx-0"}%>
       <div class="form-check form-check-inline">
-        <%= f.input :gender, as: :radio_buttons, collection: [['female', 'female'], ['male', 'male']], label_method: :second, value_method: :first%>
+        <%= f.input :gender, as: :radio_buttons, collection: [['female', 'Female'], ['male', 'Male']], label_method: :second, value_method: :first%>
       </div>
 
   <% end %>
@@ -50,5 +50,5 @@
 
 <div class="form-acti
 ons">
-  <%= f.button :submit, "Sign up", class: "btn-info btn-block" %>
+  <%= f.button :submit, "Sign up", class: "btn-success btn-block" %>
 </div>

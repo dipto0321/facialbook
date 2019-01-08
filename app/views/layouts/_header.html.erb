@@ -2,6 +2,11 @@
   <div class="container">
       <% if !user_signed_in? %>
         <a class="navbar-brand unlogged" href="<%= root_path %>" >facebook</a>
+        <% if params[:controller]!="devise/sessions" && params[:controller]!= "static_pages"%>
+         <div class="ml-5">
+            <%= render "devise/shared/links"%>
+          </div>
+        <% end %>
       <% else %>
         <a class="navbar-brand logged" href="<%= root_path %>" ><i class="fa fa-facebook-official"></i></a>
       <% end %>

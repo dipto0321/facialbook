@@ -3,10 +3,11 @@
 <section class="row mt-5">
   <div class="col-md-7">
     <h3>Facebook helps you connect and share with the people in your life.</h3>
+    <%= image_tag "bg.png", class:"mt-5"%>
   </div>
   <div class="col-md-5 pl-5">
     <h1>Sign up</h1>
-    <p>It's free and always will be.</p>
+    <h5>It's free and always will be.</h5>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render  "devise/registrations/registration_form", f: f %>
     <% end %>
