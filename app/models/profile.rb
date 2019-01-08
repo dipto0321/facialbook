@@ -6,4 +6,7 @@ class Profile < ApplicationRecord
   validates :birthday, presence: true
   validates :gender, presence: true
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

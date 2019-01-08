@@ -1,7 +1,9 @@
-<h1>User's info</h1>
+<h1><%=@profile.full_name %></h1>
 <hr>
-<p>Email : <%= @user.email %></p>
-<%= link_to  "Update", edit_profile_path(current_user) %>
+
+<% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"%>
+  <%= image_tag image_url, class:"profile-picture"%>
+<%= link_to  "Update", edit_profile_path(@profile) %>
 <% if @user != current_user %>
   <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
   <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post %>
@@ -9,6 +11,7 @@
     <%= link_to "Request Sent", "#"%>
   <% end %>
 <% end %>
+<p><%= @profile.bio %></>
 <% if @user.friends.any? %>
   <p>Friends <span id="friends_count"><%=@user.friends.count%></span> <span id="mutual_friends_count">Mutual Friends <%= current_user.mutual_friends(@user).count%></span></p>
   <ul id="partial-friends-list">
