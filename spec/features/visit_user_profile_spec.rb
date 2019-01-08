@@ -18,7 +18,7 @@ feature "visiting user's profile" do
   end
 
   it "shows friend's email" do
-    expect(page).to have_content(@friend.email)
+    expect(page).to have_content(@friend.profile.full_name)
   end
   it 'shows add friend button' do
     expect(page).to have_selector(:link_or_button, 'Add Friend')
