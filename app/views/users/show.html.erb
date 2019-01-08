@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="card mt-2">
-      <div class="card-body">
+      <div class="card-body p-0">
         <% if @user.friends.any? %>
           <p>Friends <span id="friends_count"><%=@user.friends.count%></span> 
             <% if current_user != @user && current_user.mutual_friends(@user).any?%>
@@ -31,7 +31,12 @@
               <li>
                 <% image = friend.profile.profile_picture? ? friend.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
                 <a href="<%=user_path(friend)%>">
-                  <%=image_tag image, class:"img-fluid w-25"%>
+                  <div class="card" style="width: 5rem;">
+                    <%=image_tag image, class:"card-img-top img-fluid"%>
+                    <div class="card-body">
+                      <p class="card-text"><%= friend.profile.full_name %></p>
+                    </div>
+                  </div>
                 </a>
               </li>
             <% end %>
