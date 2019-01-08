@@ -9,7 +9,7 @@ User.create(
     last_name: "Verkar",
     birthday: Faker::Date.birthday,
     gender: "male",
-    bio: Faker::Lorem.paragraph(2)
+    bio: Faker::Lorem.paragraph(10)
   }
 )
 
@@ -23,7 +23,7 @@ User.create(
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
       gender: "male",
-      bio: Faker::Lorem.paragraph(2)
+      bio: Faker::Lorem.paragraph(10)
     }
   )
 end
@@ -38,7 +38,7 @@ end
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
       gender: "female",
-      bio: Faker::Lorem.paragraph(2)
+      bio: Faker::Lorem.paragraph(10)
     }
   )
 end
