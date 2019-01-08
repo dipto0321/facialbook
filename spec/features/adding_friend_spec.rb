@@ -7,7 +7,7 @@ feature 'clicking Add Friend button' do
     @friend2 = create(:user)
     
     # First log in
-    visit root_path
+    visit new_user_session_path
     fill_in "Email", with: @user.email
     fill_in "Password", with: "password"
     click_on("Log in")
