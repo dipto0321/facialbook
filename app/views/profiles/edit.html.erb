@@ -12,7 +12,7 @@
                 start_year: 1905,
                 end_year: Date.today.year,
                 input_html: { autocomplete: "birthday"} %>
-    <%= f.input :gender, as: :radio_buttons, collection: [['0', 'female'], ['1', 'male']], label_method: :second, value_method: :first %>
+    <%= f.input :gender, as: :radio_buttons, collection: [['female', 'female'], ['male', 'male']], label_method: :second, value_method: :first %>
     <%= f.input :bio %>
   <%= f.button :submit, "Update Profile"%>
 <%end%>
