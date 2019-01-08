@@ -22,7 +22,7 @@
   <%= f.input :password_confirmation,
               required: true,
               input_html: { autocomplete: "new-password" } %>
-  <%= f.simple_fields_for :profile, resource.profile do |f|%>
+  <%= f.simple_fields_for :profile, data_resource do |f|%>
     <%= f.input :birthday,
                 required: true,
                 as: :date,
@@ -35,5 +35,5 @@
 </div>
 
 <div class="form-actions">
-  <%= f.button :submit %>
+  <%= f.button :submit, "Sign up" %>
 </div>

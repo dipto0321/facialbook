@@ -7,19 +7,19 @@ feature "user sign-up" do
 
   context 'all fills are present' do
     it 'shows first name field' do
-      expect(page).to have_selector("input[name='user[profile][first_name]']")
+      expect(page).to have_selector("input[name='user[profile_attributes][first_name]']")
     end
     it 'shows last name field' do
-      expect(page).to have_selector("input[name='user[profile][last_name]']")
+      expect(page).to have_selector("input[name='user[profile_attributes][last_name]']")
     end
     it 'shows birthday select box for year' do
-      expect(page).to have_select('user[profile][birthday(1i)]')
+      expect(page).to have_select('user[profile_attributes][birthday(1i)]')
     end
     it 'shows birthday select box for month' do
-      expect(page).to have_select('user[profile][birthday(2i)]')
+      expect(page).to have_select('user[profile_attributes][birthday(2i)]')
     end
     it 'shows birthday select box for date' do
-      expect(page).to have_select('user[profile][birthday(3i)]')
+      expect(page).to have_select('user[profile_attributes][birthday(3i)]')
     end
 
     it 'shows two radio buttons' do
