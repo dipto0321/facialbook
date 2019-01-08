@@ -137,3 +137,13 @@ li#friend_request {
     font-family: Arial, Helvetica, sans-serif
   }
 }
+
+.user_profile_gender {
+  legend {
+    display: none;
+  }
+
+  .form-check {
+    display: inline;
+  }
+}
