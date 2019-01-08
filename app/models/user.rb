@@ -25,8 +25,7 @@ class User < ApplicationRecord
 
   has_many :requesters, through: :passive_requests
 
-  accepts_nested_attributes_for :profile, allow_destroy: true, reject_if: proc { |attributes| attributes['first_name'].blank? || attributes['last_name'].blank? || attributes['birthday'].blank? ||attributes['gender'].blank? }
-
+  accepts_nested_attributes_for :profile, allow_destroy: true
   def friends
     added_friends + adding_friends
   end

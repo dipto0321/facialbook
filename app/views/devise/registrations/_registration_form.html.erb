@@ -1,6 +1,6 @@
 <%= f.error_notification %>
 <div class="form-inputs">
-  <% data_resource = params[:controller] == "devise/registrations" && params[:action] == "new" ? resource.build_profile : resource.profile%>
+  <% data_resource = params[:controller] == "devise/registrations" && params[:action] == "new" ? resource.build_profile : resource.profile %>
   <%= f.simple_fields_for :profile, data_resource do |f| %>
     <%= f.input :first_name,
                   required: true,
