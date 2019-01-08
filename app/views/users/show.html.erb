@@ -1,11 +1,10 @@
-<h1><%=@profile.full_name %></h1>
-<hr>
 <section class="row">
   <div class="col-md-3">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" id="profile-card">
         <% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
         <%= image_tag image_url, class:"img-fluid"%>
+        <h1 id="profile-full-name"><%=@profile.full_name %></h1>
         <p class="card-text">
           <p><%= @profile.bio %>
         </p>
