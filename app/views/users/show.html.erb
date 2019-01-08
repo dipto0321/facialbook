@@ -13,6 +13,11 @@
           <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
           <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
             <%= link_to "Request Sent", "#"%>
+          <%elsif current_user.friends.include?(@user)%>
+            <%= link_to "Remove friend", friendship_path(Friendship.where("friend_id=?", params[:id])[0]), 
+            method: :delete,
+            class:"btn btn-sm btn-light"
+            %>
           <% end %>
         <% end %>
       </div>
