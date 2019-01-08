@@ -26,7 +26,7 @@ feature "visiting user's profile" do
 
   it 'shows all friends of user' do
     within('ul#partial-friends-list') do
-      expect(page).to have_selector(:link_or_button, @friend2.email)
+      expect(page).to have_selector(:link_or_button, @friend2.profile.full_name)
     end
   end
   

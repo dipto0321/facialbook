@@ -33,7 +33,7 @@ feature "confirm and delete" do
     
     it "adds the new friend to requestee's friend list" do
       visit user_path(@requestee)
-      expect(page).to have_selector(:link_or_button, @requester.email)
+      expect(page).to have_selector(:link_or_button, @requester.profile.full_name)
     end
   end
 
@@ -48,7 +48,7 @@ feature "confirm and delete" do
 
     it "doesn't add the requester to the requestee's friend list" do
       visit user_path(@requestee)
-      expect(page).to_not have_selector(:link_or_button, @requester.email)
+      expect(page).to_not have_selector(:link_or_button, @requester.profile.full_name)
     end
   end
 
