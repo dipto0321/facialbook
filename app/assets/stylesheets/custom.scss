@@ -157,3 +157,14 @@ li#friend_request {
   max-width: 8%;
   display: inline;
 }
+
+.request-sent {
+  color: #34495e;
+  border: 1px solid #95a5a6;
+  border-radius: 2px;
+  padding: 5px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

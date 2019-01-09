@@ -14,9 +14,15 @@
           method: :delete,
           class:"btn btn-sm btn-dark"%>
         <% elsif current_user.pending_request?(friend)%>
-          <%= link_to "Request sent", "#"%>
+          <%= link_to "Request sent", "#", class: "request-sent" %>
         <%else%>
-          <%= link_to "Add friend", "#", class:"btn btn-sm btn-primary"%>
+          <%= link_to "Add friend", 
+          friend_requests_path(
+            friend_request: {
+              requestee_id: friend.id,
+              requester_id: current_user.id
+            }), method: :post,
+           class:"btn btn-sm btn-primary"%>
         <%end%>
 
 
