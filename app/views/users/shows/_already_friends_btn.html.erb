@@ -3,7 +3,8 @@
     Friends
   </a>
   <div class="dropdown-menu">
-    <%= link_to "Unfriend", friendship_path(Friendship.find_friendship(params[:id])), 
+    <% friendship = Friendship.where("(user_id=? AND friend_id=?) OR (user_id=? AND friend_id=?)", current_user.id, user.id, user.id, current_user.id)[0]%>
+    <%= link_to "Unfriend", friendship_path(friendship), 
     method: :delete,
     class:"dropdown-item px-0 pl-1"
     %>

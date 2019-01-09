@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_072427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
-    t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id", unique: true
+    t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id"
     t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
   end
 
