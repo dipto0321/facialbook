@@ -1,0 +1,29 @@
+<div class="card m-1">
+  <div class="card-body">
+    <% if @user.friends.any? %>
+      <div>
+      <%= link_to  "Friends #{@user.friends.count}", user_all_friends_path(@user), id: "mutual_friends_count" %> 
+        <% if current_user != @user && current_user.mutual_friends(@user).any?%>
+          <%= link_to  "Mutual Friends #{current_user.mutual_friends(@user).count}", user_mutual_friends_path(@user), id: "mutual_friends_count" %>
+        <% end %>
+      </div>
+      <ul id="partial-friends-list" class="row">
+        <% @user.friends.take(9).each do |friend| %>
+            <li class="col-4 px-0 mt-1">
+              <% image = friend.profile.profile_picture? ? friend.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+              <a href="<%=user_path(friend)%>">
+                <div class="card">
+                  <%=image_tag image, class:"card-img-top img-fluid"%>
+                  <div class="card-body p-0">
+                    <p class="card-text text-center"><%= friend.profile.full_name %></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="card-text">No friends yet</p>
+    <% end %>
+  </div>
+</div>

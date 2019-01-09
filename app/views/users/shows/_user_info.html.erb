@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body" id="profile-card">
+    <% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+    <%= image_tag image_url, class:"img-fluid"%>
+    <h1 id="profile-full-name"><%=@profile.full_name %></h1>
+    <p class="card-text">
+      <p><%= @profile.bio %>
+    </p>
+    <% if @user != current_user %>
+      <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
+      <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
+      <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
+        <%= link_to "Request Sent", "#"%>
+      <%elsif current_user.friends.include?(@user)%>
+        <%= link_to "Remove friend", friendship_path(Friendship.find_friendship(params[:id])), 
+        method: :delete,
+        class:"btn btn-sm btn-light"
+        %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
