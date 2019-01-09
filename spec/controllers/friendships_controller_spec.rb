@@ -9,11 +9,11 @@ RSpec.describe FriendshipsController do
       friend = create(:user)
       friend_request = create(:friend_request, requester_id: user.id, requestee_id: friend.id)
       sign_in(friend)
-      expect {
+      expect do
         post :create, params: {
           friendship: { user_id: user.id, friend_id: friend.id }
         }
-      }.to change(Friendship, :count).by(1)
+      end.to change(Friendship, :count).by(1)
     end
     context 'instance variable assignments and redirection' do
       before(:each) do
@@ -35,7 +35,7 @@ RSpec.describe FriendshipsController do
         expect(assigns(:friend)).to eq(@friend)
       end
 
-      it "assigns to @friend_request" do
+      it 'assigns to @friend_request' do
         expect(assigns(:friend_request)).to eq(@friend_request)
       end
 
@@ -45,43 +45,41 @@ RSpec.describe FriendshipsController do
     end
   end
 
-  describe "#destroy" do
-    it "removes the friendship from the database" do
-
+  describe '#destroy' do
+    it 'removes the friendship from the database' do
       user = create(:user)
       friend = create(:user)
       sign_in(user)
       friendship = create(:friendship, user_id: user.id, friend_id: friend.id)
-      expect{
+      expect do
         delete :destroy, params: {
           id: friendship.id
         }
-      }.to change(Friendship, :count).by(-1)
+      end.to change(Friendship, :count).by(-1)
     end
 
-    context "instance variables and redirection" do
+    context 'instance variables and redirection' do
       before :each do
         @user = create(:user)
-        
+
         @friend = create(:user)
-        
+
         @friendship = create(:friendship, user_id: @user.id, friend_id: @friend.id)
-        
-        parameters = {params: {id: @friendship.id}}
+
+        parameters = { params: { id: @friendship.id } }
 
         sign_in(@user)
-        
+
         delete :destroy, parameters
       end
 
-      it "assigns to @friendship" do
+      it 'assigns to @friendship' do
         expect(assigns(:friendship)).to eq(@friendship)
       end
 
-      it "redirects after successful delete" do
+      it 'redirects after successful delete' do
         expect(response).to redirect_to(root_path)
       end
-
     end
   end
 end

@@ -1,31 +1,32 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProfilesController, type: :controller do
-
-  describe "GET #edit" do
+  describe 'GET #edit' do
     before :each do
       @user = create(:user)
       sign_in(@user)
-      get :edit, params:{id:@user.id}
+      get :edit, params: { id: @user.id }
     end
 
-    it "assigns to @profile" do
+    it 'assigns to @profile' do
       expect(assigns(:profile)).to eq(@user.profile)
     end
 
-    it "renders the edit template" do
-      expect(response).to render_template("edit")
+    it 'renders the edit template' do
+      expect(response).to render_template('edit')
     end
   end
 
-  describe "PATCH #update" do
+  describe 'PATCH #update' do
     before :each do
       @user = create(:user)
       @profile = @user.profile
       @bio = Faker::Lorem.sentence(3)
       sign_in(@user)
 
-      parameters = {params:{
+      parameters = { params: {
         id: @profile.id,
         profile: {
           user_id: @user.id,
@@ -35,7 +36,7 @@ RSpec.describe ProfilesController, type: :controller do
           gender: @profile.gender,
           bio: @bio
         }
-      }}
+      } }
 
       patch :update, parameters
     end
@@ -47,5 +48,4 @@ RSpec.describe ProfilesController, type: :controller do
       expect(response).to redirect_to(@user)
     end
   end
-
 end

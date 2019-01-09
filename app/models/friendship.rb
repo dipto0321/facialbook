@@ -6,6 +6,6 @@ class Friendship < ApplicationRecord
   # attr_reader :find_friendship
 
   def self.find_friendship(id)
-    Friendship.where("friend_id=? OR user_id=?", id,id)[0]
+    Friendship.where('friend_id=? OR user_id=?', id, id)[0]
   end
 end

@@ -7,11 +7,11 @@ FactoryBot.define do
     password_confirmation { 'password' }
 
     after :build do |user|
-      user.profile = Profile.new(user_id: user.id, 
-        first_name: Faker::Name.male_first_name,
-        last_name: Faker::Name.last_name,
-        gender: "male",
-        birthday: Faker::Date.birthday(18,65))
+      user.profile = Profile.new(user_id: user.id,
+                                 first_name: Faker::Name.male_first_name,
+                                 last_name: Faker::Name.last_name,
+                                 gender: 'male',
+                                 birthday: Faker::Date.birthday(18, 65))
     end
   end
 

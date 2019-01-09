@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature "user sign-up" do
+feature 'user sign-up' do
   before :each do
     visit signup_path
   end
@@ -26,10 +28,10 @@ feature "user sign-up" do
       expect(page).to have_selector("input[type='radio']", count: 2)
     end
     it 'shows label for female' do
-      expect(page).to have_selector("label",text: 'Female')
+      expect(page).to have_selector('label', text: 'Female')
     end
     it 'shows label for male' do
-      expect(page).to have_selector("label",text: 'Male')
+      expect(page).to have_selector('label', text: 'Male')
     end
     it 'shows email field' do
       expect(page).to have_selector("input[name='user[email]']", count: 1)

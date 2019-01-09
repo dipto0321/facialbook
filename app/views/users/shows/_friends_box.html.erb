@@ -2,7 +2,7 @@
   <div class="card-body">
     <% if @user.friends.any? %>
       <div>
-      <%= link_to  "Friends #{@user.friends.count}", user_all_friends_path(@user), id: "mutual_friends_count" %> 
+      <%= link_to  "Friends #{@user.friends.count}", user_all_friends_path(@user), id: "mutual_friends_count" %>
         <% if current_user != @user && current_user.mutual_friends(@user).any?%>
           <%= link_to  "Mutual Friends #{current_user.mutual_friends(@user).count}", user_mutual_friends_path(@user), id: "mutual_friends_count" %>
         <% end %>

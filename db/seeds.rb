@@ -5,10 +5,10 @@ User.create(
   password: 'password',
   password_confirmation: 'password',
   profile_attributes: {
-    first_name: "Ryto",
-    last_name: "Verkar",
+    first_name: 'Ryto',
+    last_name: 'Verkar',
     birthday: Faker::Date.birthday,
-    gender: "male",
+    gender: 'male',
     bio: Faker::Lorem.paragraph(10)
   }
 )
@@ -22,7 +22,7 @@ User.create(
       first_name: Faker::Name.male_first_name,
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
-      gender: "male",
+      gender: 'male',
       bio: Faker::Lorem.paragraph(10)
     }
   )
@@ -37,7 +37,7 @@ end
       first_name: Faker::Name.female_first_name,
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
-      gender: "female",
+      gender: 'female',
       bio: Faker::Lorem.paragraph(10)
     }
   )
@@ -54,7 +54,7 @@ ryto = User.first
       first_name: Faker::Name.male_first_name,
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
-      gender: "male",
+      gender: 'male',
       bio: Faker::Lorem.paragraph(10)
     }
   )
@@ -73,7 +73,7 @@ end
       first_name: Faker::Name.female_first_name,
       last_name: Faker::Name.last_name,
       birthday: Faker::Date.birthday,
-      gender: "female",
+      gender: 'female',
       bio: Faker::Lorem.paragraph(10)
     }
   )

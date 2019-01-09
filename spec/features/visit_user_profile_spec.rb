@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature "visiting user's profile" do
@@ -5,15 +7,15 @@ feature "visiting user's profile" do
     @user = create(:user)
     @friend = create(:user)
     @friend2 = create(:user)
-    
+
     # First log in
     visit new_user_session_path
-    fill_in "Email", with: @user.email
-    fill_in "Password", with: "password"
-    click_on("Log in")
- 
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: 'password'
+    click_on('Log in')
+
     create(:friendship, user_id: @friend.id, friend_id: @friend2.id)
- 
+
     visit user_path(@friend)
   end
 
@@ -29,5 +31,4 @@ feature "visiting user's profile" do
       expect(page).to have_selector(:link_or_button, @friend2.profile.full_name)
     end
   end
-  
 end

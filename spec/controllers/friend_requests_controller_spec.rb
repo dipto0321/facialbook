@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FriendRequestsController, type: :controller do
@@ -7,11 +9,11 @@ RSpec.describe FriendRequestsController, type: :controller do
       requester = create(:user)
 
       sign_in(requester)
-      expect {
+      expect do
         post :create, params: {
           friend_request: { requestee_id: requestee.id, requester_id: requester.id }
         }
-      }.to change(FriendRequest, :count).by(1)
+      end.to change(FriendRequest, :count).by(1)
     end
 
     context 'instance variable assignments and redirection' do
@@ -45,12 +47,12 @@ RSpec.describe FriendRequestsController, type: :controller do
       requester = create(:user)
       friend_request = create(:friend_request, requester_id: requester.id, requestee_id: requestee.id)
       sign_in(requestee)
-      
-      expect {
+
+      expect do
         delete :destroy, params: {
           id: friend_request.id
         }
-      }.to change(FriendRequest, :count).by(-1)
+      end.to change(FriendRequest, :count).by(-1)
     end
 
     context 'variable assignment and redirection' do

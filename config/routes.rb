@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   namespace :users do
     get 'all_friends/index'
   end
-  root "static_pages#home"
-  devise_for :users, controllers:{
+  root 'static_pages#home'
+  devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
 

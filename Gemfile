@@ -35,13 +35,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'carrierwave', '1.2.3'
 gem 'devise', '~> 4.5'
+gem 'faker'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'mini_magick', '4.9.2'
 gem 'omniauth', '~> 1.9'
 gem 'simple_form'
-gem 'faker'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

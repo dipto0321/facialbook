@@ -17,9 +17,9 @@ class User < ApplicationRecord
 
   has_many :adding_friends, through: :passive_friendships, source: :user
 
-  has_many :active_requests, class_name: "FriendRequest", foreign_key: :requester_id
+  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id
 
-  has_many :passive_requests, class_name: "FriendRequest", foreign_key: :requestee_id
+  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id
 
   has_many :requestees, through: :active_requests
 
@@ -31,20 +31,21 @@ class User < ApplicationRecord
   end
 
   def mutual_friends(friend)
-    self.friends & friend.friends
+    friends & friend.friends
   end
 
   def friendships
-    Friendship.where("user_id=? OR friend_id=?", self.id, self.id)
+    Friendship.where('user_id=? OR friend_id=?', id, id)
   end
 
   def pending_request?(requestee)
-    pending = self.active_requests.where("responded=? AND requestee_id=?", false, requestee.id)[0] 
+    pending = active_requests.where('responded=? AND requestee_id=?', false, requestee.id)[0]
     return false if pending.nil?
+
     !pending.responded
   end
 
   def pending_passive_requests
-    self.passive_requests.where("responded=?", false)
+    passive_requests.where('responded=?', false)
   end
 end
