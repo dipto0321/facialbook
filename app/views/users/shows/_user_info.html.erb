@@ -12,9 +12,9 @@
       <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
         <%= link_to "Request Sent", "#"%>
       <%elsif current_user.friends.include?(@user)%>
-        <%= link_to "Remove friend", friendship_path(Friendship.find_friendship(params[:id])), 
+        <%= link_to "Unfriend", friendship_path(Friendship.find_friendship(params[:id])), 
         method: :delete,
-        class:"btn btn-sm btn-light"
+        class:"btn btn-sm btn-dark"
         %>
       <% end %>
     <% end %>

@@ -1,11 +1,25 @@
 <h1><%= @user.profile.full_name%></h1>
 <% if @all_friends.any? %>
-  <ul class="list-group row">
+  <ul class="row">
     <% @all_friends.each do |friend|%>
-      <li class="list-group-item w-50 px-0">
+      <li class="col-6 list-group-item">
       <% image_url = @user.profile.profile_picture? ? @user.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
         <a href="<%=user_path(friend)%>"><%= image_tag image_url, class:"img-fluid profile-picture"%></a>
-        <%= link_to friend.profile.full_name %>
+        <%= link_to friend.profile.full_name, friend %>
+
+        <% if current_user.friends.include?(friend)%>
+          <%= link_to "Unfriend", friendship_path(
+            Friendship.find_friendship(friend.id)
+          ),
+          method: :delete,
+          class:"btn btn-sm btn-dark"%>
+        <% elsif current_user.pending_request?(friend)%>
+          <%= link_to "Request sent", "#"%>
+        <%else%>
+          <%= link_to "Add friend", "#", class:"btn btn-sm btn-primary"%>
+        <%end%>
+
+
       </li>
     <%end%>
   </ul>
