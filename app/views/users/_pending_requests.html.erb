@@ -2,7 +2,11 @@
   <ul class="list-group">
     <% user.pending_passive_requests.each do |request| %>
       <li class="dropdown-item">
-        <%= link_to request.requester.email , request.requester %>
+        <% image_url = request.requester.profile.profile_picture? ? request.requester.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+        <a href="<%= user_path(request.requester)%>">
+          <%= image_tag image_url, class:"img-fluid profile-picture"%>
+        </a>
+        <%= link_to request.requester.profile.full_name , request.requester %>
         <%= link_to 'Confirm' , friendships_path(friendship: {
           user_id: request.requester.id,
           friend_id: current_user.id

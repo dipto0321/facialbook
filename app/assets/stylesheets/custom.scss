@@ -102,11 +102,15 @@ li#friend_request {
     top: 8px;
     font-size: 0.8rem;
   }
-}
 
-.profile-picture {
-  max-width: 20%;
-  display: inline;
+  div.dropdown-menu {
+    width: 20rem;
+  }
+
+  .profile-picture {
+    max-width: 20%;
+    display: inline;
+  }
 }
 
 #partial-friends-list {
@@ -147,4 +151,9 @@ li#friend_request {
   .form-check {
     display: inline;
   }
+}
+
+.profile-picture {
+  max-width: 8%;
+  display: inline;
 }
