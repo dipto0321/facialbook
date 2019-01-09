@@ -7,7 +7,9 @@
       <p><%= @profile.bio %>
     </p>
     <% if @user != current_user %>
-      <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
+      <%if @user.pending_request?(current_user)%>
+        <%= link_to "Respond to request", "#"%>
+      <% elsif !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
       <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
       <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
           <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
@@ -22,8 +24,6 @@
               %>
             </div>
         </div>
-
-
       <%elsif current_user.friends.include?(@user)%>
         <div class="dropdown">
             <a class="btn btn-sm btn-silver dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
