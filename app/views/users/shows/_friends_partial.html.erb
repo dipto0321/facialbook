@@ -1,0 +1,27 @@
+<ul class="row mx-auto" id="friends_list">
+    <% friend_resource.each do |friend|%>
+      <li class="col-6 list-group-item mx-2 mb-2">
+      <% image_url = @user.profile.profile_picture? ? @user.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+        <a href="<%=user_path(friend)%>"><%= image_tag image_url, class:"img-fluid profile-picture"%></a>
+        <%= link_to friend.profile.full_name, friend %>
+
+        <% if current_user.friends.include?(friend)%>
+          <%= link_to "Unfriend", friendship_path(
+            Friendship.find_friendship(friend.id)
+          ),
+          method: :delete,
+          class:"btn btn-sm btn-silver float-right"%>
+        <% elsif current_user.pending_request?(friend)%>
+          <%= link_to "Request sent", "#", class: "btn btn-sm request-sent float-right" %>
+        <%else%>
+          <%= link_to "Add friend", 
+          friend_requests_path(
+            friend_request: {
+              requestee_id: friend.id,
+              requester_id: current_user.id
+            }), method: :post,
+           class:"btn btn-sm btn-primary float-right"%>
+        <%end%>
+      </li>
+    <%end%>
+  </ul>

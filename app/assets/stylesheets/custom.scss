@@ -6,6 +6,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.profile-full-name {
+  font-size: 1.5rem;
+}
+
 .navbar-brand.unlogged {
   font-family: 'Roboto', sans-serif;
   font-size: 2.5rem;
@@ -125,10 +129,6 @@ li#friend_request {
 
 #profile-card {
 
-  #profile-full-name {
-    font-size: 1.5rem;
-  }
-
   p.card-text~p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.9rem;
@@ -154,7 +154,7 @@ li#friend_request {
 }
 
 .profile-picture {
-  max-width: 8%;
+  max-width: 12%;
   display: inline;
 }
 
@@ -170,4 +170,10 @@ li#friend_request {
 .bg-silver,
 .btn-silver {
   background-color: #bdc3c7 !important;
+}
+
+#friends_list {
+  li.list-group-item.col-6 {
+    max-width: 30rem;
+  }
 }
