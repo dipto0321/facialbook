@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_09_093350) do
+ActiveRecord::Schema.define(version: 2019_01_09_095051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_01_09_093350) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
-    t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id", unique: true
+    t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id"
     t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
   end
 
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_01_09_093350) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
