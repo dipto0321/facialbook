@@ -12,9 +12,9 @@
             Friendship.find_friendship(friend.id)
           ),
           method: :delete,
-          class:"btn btn-sm btn-dark"%>
+          class:"btn btn-sm btn-silver float-right"%>
         <% elsif current_user.pending_request?(friend)%>
-          <%= link_to "Request sent", "#", class: "request-sent" %>
+          <%= link_to "Request sent", "#", class: "btn btn-sm request-sent float-right" %>
         <%else%>
           <%= link_to "Add friend", 
           friend_requests_path(
@@ -22,10 +22,8 @@
               requestee_id: friend.id,
               requester_id: current_user.id
             }), method: :post,
-           class:"btn btn-sm btn-primary"%>
+           class:"btn btn-sm btn-primary float-right"%>
         <%end%>
-
-
       </li>
     <%end%>
   </ul>

@@ -10,7 +10,7 @@
       <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
       <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
       <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
-        <%= link_to "Request Sent", "#"%>
+        <%= link_to "Request sent", "#", class: "btn btn-block request-sent"%>
       <%elsif current_user.friends.include?(@user)%>
         <%= link_to "Unfriend", friendship_path(Friendship.find_friendship(params[:id])), 
         method: :delete,

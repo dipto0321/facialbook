@@ -161,10 +161,13 @@ li#friend_request {
 .request-sent {
   color: #34495e;
   border: 1px solid #95a5a6;
-  border-radius: 2px;
-  padding: 5px;
 
   &:hover {
     text-decoration: none;
   }
+}
+
+.bg-silver,
+.btn-silver {
+  background-color: #bdc3c7 !important;
 }
