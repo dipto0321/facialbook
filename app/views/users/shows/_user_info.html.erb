@@ -10,12 +10,32 @@
       <% if !current_user.requestees.include?(@user) && !current_user.friends.include?(@user)%>
       <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
       <%elsif current_user.requestees.include?(@user) && current_user.pending_request?(@user) %>
-        <%= link_to "Request sent", "#", class: "btn btn-block request-sent"%>
+          <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
+          <div class="dropdown">
+            <a class="btn btn-block request-sent btn-silver dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Request sent
+            </a>
+            <div class="dropdown-menu">
+              <%= link_to "Cancel request", friend_request_path(request), 
+              method: :delete,
+              class:"dropdown-item px-0 pl-1"
+              %>
+            </div>
+        </div>
+
+
       <%elsif current_user.friends.include?(@user)%>
-        <%= link_to "Unfriend", friendship_path(Friendship.find_friendship(params[:id])), 
-        method: :delete,
-        class:"btn btn-sm btn-dark"
-        %>
+        <div class="dropdown">
+            <a class="btn btn-sm btn-silver dropdown-toggle btn-block" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Friends
+            </a>
+            <div class="dropdown-menu">
+              <%= link_to "Unfriend", friendship_path(Friendship.find_friendship(params[:id])), 
+              method: :delete,
+              class:"dropdown-item px-0 pl-1"
+              %>
+            </div>
+        </div>
       <% end %>
     <% end %>
   </div>
