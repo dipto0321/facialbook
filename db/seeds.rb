@@ -1,7 +1,84 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# frozen_string_literal: true
+
+User.create(
+  email: 'ryto.verkar@gmail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  profile_attributes: {
+    first_name: 'Ryto',
+    last_name: 'Verkar',
+    birthday: Faker::Date.birthday,
+    gender: 'male',
+    bio: Faker::Lorem.paragraph(10)
+  }
+)
+
+45.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    profile_attributes: {
+      first_name: Faker::Name.male_first_name,
+      last_name: Faker::Name.last_name,
+      birthday: Faker::Date.birthday,
+      gender: 'male',
+      bio: Faker::Lorem.paragraph(10)
+    }
+  )
+end
+
+45.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    profile_attributes: {
+      first_name: Faker::Name.female_first_name,
+      last_name: Faker::Name.last_name,
+      birthday: Faker::Date.birthday,
+      gender: 'female',
+      bio: Faker::Lorem.paragraph(10)
+    }
+  )
+end
+
+ryto = User.first
+
+5.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    profile_attributes: {
+      first_name: Faker::Name.male_first_name,
+      last_name: Faker::Name.last_name,
+      birthday: Faker::Date.birthday,
+      gender: 'male',
+      bio: Faker::Lorem.paragraph(10)
+    }
+  )
+  Friendship.create(
+    user_id: ryto.id,
+    friend_id: User.last.id
+  )
+end
+
+5.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    profile_attributes: {
+      first_name: Faker::Name.female_first_name,
+      last_name: Faker::Name.last_name,
+      birthday: Faker::Date.birthday,
+      gender: 'female',
+      bio: Faker::Lorem.paragraph(10)
+    }
+  )
+  Friendship.create(
+    user_id: ryto.id,
+    friend_id: User.last.id
+  )
+end

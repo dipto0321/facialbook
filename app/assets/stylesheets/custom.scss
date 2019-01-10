@@ -1,1 +1,188 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+body {
+  background: #EDF0F5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-full-name {
+  font-size: 1.5rem;
+}
+
+.navbar-brand.unlogged {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+  top: 10px;
+  position: relative;
+}
+
+.navbar-brand.logged {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  margin-right: 5px;
+}
+
+.main-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.log-in-btn {
+  height: 55px !important;
+}
+
+.main-form-control {
+  height: calc(2.25rem + 11px);
+}
+
+.bg-fb {
+  background-color: #405D9B !important;
+}
+
+.nav-height {
+  height: 8rem !important;
+}
+
+.inline-form-btn {
+  height: 1.5rem;
+  font-size: 0.9rem;
+  padding: 0 0.5rem;
+  border-radius: 0;
+  position: relative;
+  bottom: 3px;
+  background-color: #4267b2;
+  border-color: #4267b2;
+}
+
+.nav-sign-in {
+
+  input[type="email"],
+  input[type="password"] {
+    height: 1.6em;
+    border-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+  }
+
+  .nav-remember_me {
+    margin-top: -10px;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+
+    .user_remember_me {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#navbarSupportedContent {
+  input[type="search"] {
+    border-radius: 1px;
+    height: 1.6rem;
+    width: 25rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  button {
+    height: 1.6rem;
+    border-radius: 1px;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    color: #555;
+  }
+}
+
+li#friend_request {
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .badge.badge-danger {
+    position: relative;
+    right: 15px;
+    top: 8px;
+    font-size: 0.8rem;
+  }
+
+  div.dropdown-menu {
+    width: 23rem;
+  }
+
+  .profile-picture {
+    max-width: 20%;
+    display: inline;
+  }
+}
+
+#partial-friends-list {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+
+  p.card-text {
+    font-size: 0.7rem;
+  }
+}
+
+#profile-card {
+
+  p.card-text~p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+  }
+}
+
+.form-inputs {
+
+  input,
+  select {
+    font-family: Arial, Helvetica, sans-serif
+  }
+}
+
+.user_profile_gender {
+  legend {
+    display: none;
+  }
+
+  .form-check {
+    display: inline;
+  }
+}
+
+.profile-picture {
+  max-width: 12%;
+  display: inline;
+}
+
+.request-sent {
+  color: #34495e;
+  border: 1px solid #95a5a6;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.bg-silver,
+.btn-silver {
+  background-color: #bdc3c7 !important;
+}
+
+#friends_list {
+  li.list-group-item.col-6 {
+    max-width: 30rem;
+  }
+}
+
+#all_friends_count,
+#mutual_friends_count {
+  font-size: 0.8rem;
+}
+
+.font-sm {
+  font-size: 0.865rem;
+}
