@@ -23,9 +23,9 @@ RSpec.describe User, type: :model do
 
     it { should have_many(:passive_friendships).with_foreign_key('friend_id').class_name('Friendship') }
 
-    it { should have_many(:added_friends).through(:active_friendships) }
+    it { should have_many(:added_friends).through(:active_friendships).source(:friend) }
 
-    it { should have_many(:adding_friends).through(:passive_friendships) }
+    it { should have_many(:adding_friends).through(:passive_friendships).source(:user) }
   end
 
   describe 'FriendRequest Association' do
@@ -39,7 +39,15 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Profile association' do
-    it { should have_one(:profile) }
-    it { should accept_nested_attributes_for(:profile) }
+    it { should have_one(:profile).dependent(:destroy) }
+    it { should accept_nested_attributes_for(:profile).allow_destroy(true) }
+  end
+
+  describe 'Timeline association' do
+    it { should have_one(:timeline).with_foreign_key(:owner_id)}
+  end
+
+  describe 'Post association' do
+    it { should have_many(:posts).dependent(:destroy) }
   end
 end
