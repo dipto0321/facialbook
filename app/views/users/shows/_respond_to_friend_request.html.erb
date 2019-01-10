@@ -1,9 +1,10 @@
 <div class="dropdown">
   <% btn_style = params[:controller] == 'users' ? "btn-block" : "float-right"%>
-  <a class="btn btn-sm btn-silver dropdown-toggle <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <a class="btn btn-sm btn-silver dropdown-toggle font-sm <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Respond to Friend Request
   </a>
-  <div class="dropdown-menu">
+  <% dropdown_menu_wd = params[:controller] == 'users' ? 13.3 : 12.7 %>
+  <div class="dropdown-menu" style="min-width: <%= dropdown_menu_wd%>rem;">
     <!--Confirm request-->
     <%= link_to "Confirm request",
      friendships_path(friendship:{

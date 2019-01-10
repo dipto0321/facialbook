@@ -3,7 +3,8 @@
   <a class="btn btn-silver dropdown-toggle <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Friends
   </a>
-  <div class="dropdown-menu">
+  <% dropdown_menu_wd = params[:controller] == 'users' ? 13.3 : 5.2 %>
+  <div class="dropdown-menu" style="min-width: <%= dropdown_menu_wd%>rem;">
     <% friendship = Friendship.find_friendship(current_user,user)%>
     <%= link_to "Unfriend", friendship_path(friendship), 
     method: :delete,
