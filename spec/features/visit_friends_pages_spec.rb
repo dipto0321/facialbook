@@ -36,7 +36,7 @@ feature "visiting all_friends page" do
 
     it "should show Add Friend button for user's friends who are not yet friends with visitor" do
       @user.friends.each do |friend|
-        expect(page).to have_selector(:link_or_button, "Add friend") if !@visitor.friends.include?(friend)
+        expect(page).to have_selector(:link_or_button, "Add Friend") if !@visitor.friends.include?(friend)
       end
     end
 
