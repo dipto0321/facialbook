@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :timeline do
-    owner { nil }
+    owner_id { 1 }
   end
 end
