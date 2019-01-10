@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'posts/new'
+  get 'posts/edit'
   namespace :users do
     get 'mutual_friends/index'
   end
