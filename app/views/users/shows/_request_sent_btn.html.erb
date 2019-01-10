@@ -1,5 +1,6 @@
 <div class="dropdown">
-  <a class="btn btn-sm request-sent btn-silver dropdown-toggle float-right" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <% btn_style = params[:controller] == 'users' ? "btn-block" : "float-right btn-sm"%>
+  <a class="btn request-sent btn-silver dropdown-toggle <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Request sent
   </a>
   <div class="dropdown-menu">
