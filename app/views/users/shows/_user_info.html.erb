@@ -14,7 +14,7 @@
           <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
           <%= render  partial: "users/shows/request_sent_btn", locals: {request: request} %>
         <% elsif @user.pending_request?(current_user) %>
-          <p>Need to respond</p>
+          <%= render partial:"users/shows/respond_to_friend_request", locals:{user: @user}%>
         <% end %>
       <% else %>
         <%= render  partial:"users/shows/already_friends_btn",locals:{user: @user} %>
