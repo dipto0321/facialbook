@@ -2,17 +2,18 @@
     <% friend_resource.each do |friend|%>
       <li class="col-6 list-group-item mx-2 mb-2">
       <div class="row">
-        <div class="col-9">
+        <div class="col-6">
           <% image_url = @user.profile.profile_picture? ? @user.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
           <a href="<%=user_path(friend)%>"><%= image_tag image_url, class:"img-fluid profile-picture"%></a>
           <%= link_to friend.profile.full_name, friend %>
         </div>
-        <div class="col-3">
+        <div class="col-6">
             <% if current_user != friend %>
             <% if current_user.friends.include?(friend)%>
               <%= render  "users/shows/already_friends_btn", user: friend %>
             <% elsif current_user.pending_request?(friend)%>
-              <%= link_to "Request sent", "#", class: "btn btn-sm request-sent float-right" %>
+              <% request = current_user.active_requests.where('responded=? AND requestee_id=?', false, friend.id)[0]%>
+              <%= render  "users/shows/request_sent_btn", request: request %>
             <%else%>
               <%= link_to "Add friend", 
               friend_requests_path(
