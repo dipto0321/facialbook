@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.text :body
       t.string :post_pic
       t.references :user, foreign_key: true
-      t.references :postable, polymorphic: true
+      t.references :timeline, foreign_key: true
 
       t.timestamps
     end

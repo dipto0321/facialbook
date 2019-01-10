@@ -41,11 +41,10 @@ ActiveRecord::Schema.define(version: 2019_01_10_081112) do
     t.text "body"
     t.string "post_pic"
     t.bigint "user_id"
-    t.string "postable_type"
-    t.bigint "postable_id"
+    t.bigint "timeline_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+    t.index ["timeline_id"], name: "index_posts_on_timeline_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -90,6 +89,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_081112) do
   add_foreign_key "friend_requests", "users", column: "requester_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "posts", "timelines"
   add_foreign_key "posts", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "timelines", "users", column: "owner_id"

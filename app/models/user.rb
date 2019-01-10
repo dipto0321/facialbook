@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   has_one :timeline, foreign_key: :owner_id
 
-  has_one :newsfeed, foreign_key: :owner_id
-
   has_many :posts, dependent: :destroy
 
   has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
