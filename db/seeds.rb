@@ -87,5 +87,5 @@ users = User.take(10)
 
 users.each do |user|
   user.build_timeline
-  user.timeline.posts.build(user_id: user.id, body: Faker::Lorem.paragraph(10))
+  user.timeline.posts.create(user_id: user.id, body: Faker::Lorem.paragraph(10))
 end
