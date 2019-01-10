@@ -5,22 +5,24 @@
         <a href="<%=user_path(friend)%>"><%= image_tag image_url, class:"img-fluid profile-picture"%></a>
         <%= link_to friend.profile.full_name, friend %>
 
-        <% if current_user.friends.include?(friend)%>
-          <%= link_to "Unfriend", friendship_path(
-            Friendship.find_friendship(current_user, friend)
-          ),
-          method: :delete,
-          class:"btn btn-sm btn-silver float-right"%>
-        <% elsif current_user.pending_request?(friend)%>
-          <%= link_to "Request sent", "#", class: "btn btn-sm request-sent float-right" %>
-        <%else%>
-          <%= link_to "Add friend", 
-          friend_requests_path(
-            friend_request: {
-              requestee_id: friend.id,
-              requester_id: current_user.id
-            }), method: :post,
-           class:"btn btn-sm btn-primary float-right"%>
+        <% if current_user != friend%>
+          <% if current_user.friends.include?(friend)%>
+            <%= link_to "Unfriend", friendship_path(
+              Friendship.find_friendship(current_user, friend)
+            ),
+            method: :delete,
+            class:"btn btn-sm btn-silver float-right"%>
+          <% elsif current_user.pending_request?(friend)%>
+            <%= link_to "Request sent", "#", class: "btn btn-sm request-sent float-right" %>
+          <%else%>
+            <%= link_to "Add friend", 
+            friend_requests_path(
+              friend_request: {
+                requestee_id: friend.id,
+                requester_id: current_user.id
+              }), method: :post,
+            class:"btn btn-sm btn-primary float-right"%>
+          <%end%>
         <%end%>
       </li>
     <%end%>

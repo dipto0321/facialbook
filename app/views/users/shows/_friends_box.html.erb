@@ -1,13 +1,14 @@
 <div class="card m-1">
   <div class="card-body">
     <% if @user.friends.any? %>
-      <div>
-      <%= link_to  "Friends #{@user.friends.count}", user_all_friends_path(@user), id: "mutual_friends_count" %>
+      <div class="">
+      <%= link_to  "Friends #{@user.friends.count}", user_all_friends_path(@user), id: "all_friends_count", class:"ml-1" %>
         <% if current_user != @user && current_user.mutual_friends(@user).any?%>
-          <%= link_to  "Mutual Friends #{current_user.mutual_friends(@user).count}", user_mutual_friends_path(@user), id: "mutual_friends_count" %>
+          <%= link_to  "Mutual Friends #{current_user.mutual_friends(@user).count}", user_mutual_friends_path(@user), id: "mutual_friends_count",
+          class:"ml-1" %>
         <% end %>
       </div>
-      <ul id="partial-friends-list" class="row">
+      <ul id="partial-friends-list" class="row pl-3 pr-2">
         <% @user.friends.take(9).each do |friend| %>
             <li class="col-4 px-0 mt-1">
               <% image = friend.profile.profile_picture? ? friend.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
