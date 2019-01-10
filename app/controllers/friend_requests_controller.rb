@@ -14,7 +14,7 @@ class FriendRequestsController < ApplicationController
       flash[:danger] = 'You already sent a request'
       redirect_back(fallback_location: root_path)
     else
-      flash[:success] = 'You are now friends'
+      flash[:info] = "You added #{@requestee.profile.first_name} as friend. Wait for him/her to respond"
       redirect_back(fallback_location: user_path(@requester))
     end
   end
