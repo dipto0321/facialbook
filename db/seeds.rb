@@ -82,3 +82,16 @@ end
     friend_id: User.last.id
   )
 end
+
+users = User.take(10)
+
+users.each do |user|
+  5.times do
+    Post.create(
+    author_id: user.id,
+    postable_id: User.all.sample.id,
+    postable_type: "User",
+    body: Faker::Lorem.paragraph(10)
+  )
+  end
+end
