@@ -2,16 +2,23 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe 'User and timeline associations' do
-    it { should belong_to(:user) }
-    it { should belong_to(:timeline) }
+    it { should belong_to(:author).class_name('User') }
+    it { should belong_to(:postable) }
   end
 
-  describe 'factories' do
+  describe 'factories and instance method' do
     it 'has a valid factory' do
       user = create(:user)
-      user.build_timeline.save
-      timeline = Timeline.last
-      expect(build(:timeline_post, user_id: user.id, timeline_id: timeline.id)).to be_valid
+      friend = create(:user)
+      expect(build(:user_post, postable_id: friend.id, author_id: user.id)).to be_valid
+    end
+
+    it 'has a build post instance method' do
+      @user = create(:user)
+      @friend = create(:user)
+
+      @post = @user.build_post(@friend)
+      expect(@post).to be_valid
     end
   end
 end

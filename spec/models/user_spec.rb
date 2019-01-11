@@ -43,11 +43,10 @@ RSpec.describe User, type: :model do
     it { should accept_nested_attributes_for(:profile).allow_destroy(true) }
   end
 
-  describe 'Timeline association' do
-    it { should have_one(:timeline).with_foreign_key(:owner_id)}
-  end
 
   describe 'Post association' do
-    it { should have_many(:posts).dependent(:destroy) }
+    it { should have_many(:posts).with_foreign_key(:author_id).dependent(:destroy) }
+
+    # it { should have_many(:posts).dependent(:destroy) }
   end
 end
