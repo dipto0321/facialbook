@@ -88,8 +88,8 @@ users = User.take(10)
 users.each do |user|
   5.times do
     Post.create(
-    author_id: user.id,
-    postable_id: User.all.sample.id,
+    author_id: User.all.sample.id,
+    postable_id: user.id,
     postable_type: "User",
     body: Faker::Lorem.paragraph(10)
   )
