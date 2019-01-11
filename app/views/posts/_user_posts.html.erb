@@ -11,6 +11,12 @@
               <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
               <h5 class="card-title d-inline"><%= post.postable.profile.full_name %></h5>
             </a>
+            <% if post.postable != post.author%>
+              > <%= link_to post.postable.profile.full_name, user_path(post.postable)%>
+              <% else %>
+              shared
+            <% end%>
+            
             <p><%= time_ago_in_words(post.created_at)%> ago</p>
             <p class="card-text"><%= post.body %></p>
           </div>
