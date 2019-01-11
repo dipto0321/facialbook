@@ -12,8 +12,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @postable = User.find_by(params[:post][:postable_id])
-    @author = User.find_by(params[:post][:author_id])
+    @postable = User.find_by(id: params[:post][:postable_id])
+    @author = User.find_by(id: params[:post][:author_id])
     @post = @postable.build_post(@author)
     @post.body = params[:post][:body]
     @post.post_pic = params[:post][:post_pic]

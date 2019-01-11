@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <section>
-    <%= render  "posts/post_form", postable: current_user %>
+    <%= render partial:"posts/post_form", locals:{postable: current_user, author: current_user} %>
   </section>
   <%= render "posts/user_posts", viewer: current_user %>
 <% else %>

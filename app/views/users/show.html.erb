@@ -4,6 +4,7 @@
     <%= render  "users/shows/friends_box" %>
   </div>
   <div class="col-md-9">
+    <%= render  partial:"posts/post_form", locals:{author: current_user,postable: @user} %>
     <%= render "posts/user_posts", viewer: @user%>
   </div>
 </section>
