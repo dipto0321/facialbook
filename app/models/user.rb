@@ -54,4 +54,8 @@ class User < ApplicationRecord
   def pending_passive_requests
     passive_requests.where('responded=?', false)
   end
+
+  def build_post(postable)
+    postable.posts.build(author_id: id)
+  end
 end
