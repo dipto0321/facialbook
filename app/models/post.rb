@@ -7,7 +7,8 @@ class Post < ApplicationRecord
     Post.where("postable_id=?",postable.id)
   end
 
-  def self.newsfeed_posts(postable)
-    
+  def self.user_newsfeed_posts(postable)
+    friend_ids = postable.friends.map {|friend| friend.id}
+    Post.where("postable_id IN (?)", friend_ids + [postable.id])
   end
 end
