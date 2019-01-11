@@ -1,7 +1,19 @@
-<% if Post.timeline_posts(postable).any?%>
-    <h4>Timeline</h4>
-    <%Post.timeline_posts(postable).each do |post|%>
-    <%= post.body %>
-    <hr>
-  <%end%>
-<%end%>
+<section>
+  <h4>Timeline</h4>
+  <hr>
+  <% if Post.timeline_posts(postable).any?%>
+      <% Post.timeline_posts(postable).each do |post| %>
+        <div class="card my-3">
+          <div class="card-body">
+          <% image_url = postable.profile.profile_picture? ? postable.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+            <a href="<%= user_path(postable)%>">
+              <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
+              <h5 class="card-title d-inline"><%= postable.profile.full_name %></h5>
+            </a>
+            <p><%= time_ago_in_words(post.created_at)%> ago</p>
+            <p class="card-text"><%= post.body %></p>
+          </div>
+        </div>
+      <% end %>
+  <% end %>
+</section>
