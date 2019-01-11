@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :all_friends, only: :index, module: :users
     resources :mutual_friends, only: :index, module: :users
+    resources :posts
   end
 
   resources :posts
