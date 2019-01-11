@@ -1,6 +1,10 @@
-<%= simple_form_for([postable, Post.new]) do |f| %>
-  <%=f.input :body %>
-  <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
-  <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
-  <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
-<% end %>
+<section class="card">
+  <div class="card-body">
+    <%= simple_form_for([postable, Post.new]) do |f| %>
+      <%=f.input :body, input_html: {rows:5} %>
+      <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
+      <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
+      <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
+    <% end %>
+  </div>
+</section>
