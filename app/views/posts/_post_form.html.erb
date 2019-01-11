@@ -1,5 +1,6 @@
 <%= simple_form_for([postable, Post.new]) do |f| %>
   <%=f.input :body %>
   <%=f.input :author_id, as: :hidden %>
-  <%=f.input :author_id, as: :hidden %>
+  <%=f.input :postable_id, as: :hidden %>
+  <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
 <% end %>

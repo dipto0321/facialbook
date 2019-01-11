@@ -1,6 +1,4 @@
 <section>
-  <h4>Timeline</h4>
-  <hr>
   <% posts = params[:controller] == "users" ? Post.timeline_posts(viewer) : Post.user_newsfeed_posts(viewer)%>
   <% if posts.any?%>
       <% posts.each do |post| %>
