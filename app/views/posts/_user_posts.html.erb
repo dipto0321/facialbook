@@ -5,7 +5,7 @@
         <div class="card my-3">
           <div class="card-body">
           <% image_url = viewer.profile.profile_picture? ? viewer.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
-            <a href="<%= user_path(viewer)%>">
+            <a href="<%= user_path(post.author)%>">
               <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
               <h6 class="d-inline"><%= post.author.profile.full_name %></h6>
             </a>
