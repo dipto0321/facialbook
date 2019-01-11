@@ -1,6 +1,6 @@
-<% if Post.timeline_post(User.find(92)).any?%>
+<% if Post.timeline_posts(postable).any?%>
     <h4>Timeline</h4>
-    <%Post.timeline_post(@user).each do |post|%>
+    <%Post.timeline_posts(postable).each do |post|%>
     <%= post.body %>
     <hr>
   <%end%>

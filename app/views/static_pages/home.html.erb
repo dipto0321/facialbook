@@ -1,4 +1,5 @@
 <% if user_signed_in? %>
+  <%= render "posts/user_posts", postable: current_user %>
 <% else %>
 <section class="row mt-5">
   <div class="col-md-7">
