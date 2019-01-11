@@ -9,7 +9,7 @@
           <% image_url = viewer.profile.profile_picture? ? viewer.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
             <a href="<%= user_path(viewer)%>">
               <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
-              <h5 class="card-title d-inline"><%= post.postable.profile.full_name %></h5>
+              <h5 class="card-title d-inline"><%= post.author.profile.full_name %></h5>
             </a>
             <% if post.postable != post.author%>
               > <%= link_to post.postable.profile.full_name, user_path(post.postable)%>
