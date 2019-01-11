@@ -3,10 +3,10 @@ class CreatePosts < ActiveRecord::Migration[5.2]
     create_table :posts do |t|
       t.text :body
       t.string :post_pic
-      t.references :user, foreign_key: true
-      t.references :timeline, foreign_key: true
-
+      t.references :postable, polymorphic: true
+      t.references :author
       t.timestamps
     end
+     add_foreign_key :posts, :users, column: :author_id
   end
 end

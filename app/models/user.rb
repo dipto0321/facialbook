@@ -8,9 +8,11 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  has_one :timeline, foreign_key: :owner_id
+  # User is post author
+  has_many :posts, foreign_key: :author_id,dependent: :destroy
 
-  has_many :posts, dependent: :destroy
+  # User is post receiver
+  has_many :posts, as: :postable, dependent: :destroy
 
   has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
 

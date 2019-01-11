@@ -12,8 +12,6 @@ FactoryBot.define do
                                  last_name: Faker::Name.last_name,
                                  gender: 'male',
                                  birthday: Faker::Date.birthday(18, 65))
-      user.build_timeline
-      user.timeline.posts.build(user_id: user.id, body: Faker::Lorem.paragraph(10))
     end
   end
 
