@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'posts/new'
-  get 'posts/edit'
+  # get 'posts/new'
+  # get 'posts/edit'
   namespace :users do
     get 'mutual_friends/index'
   end
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :all_friends, only: :index, module: :users
     resources :mutual_friends, only: :index, module: :users
   end
+
+  resources :posts
 
   resources :friendships, only: %i[create destroy]
 
