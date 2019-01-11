@@ -40,12 +40,13 @@ ActiveRecord::Schema.define(version: 2019_01_10_081112) do
   create_table "posts", force: :cascade do |t|
     t.text "body"
     t.string "post_pic"
-    t.bigint "user_id"
-    t.bigint "timeline_id"
+    t.string "postable_type"
+    t.bigint "postable_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["timeline_id"], name: "index_posts_on_timeline_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -59,13 +60,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_081112) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
-
-  create_table "timelines", force: :cascade do |t|
-    t.bigint "owner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_timelines_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,8 +83,6 @@ ActiveRecord::Schema.define(version: 2019_01_10_081112) do
   add_foreign_key "friend_requests", "users", column: "requester_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "posts", "timelines"
-  add_foreign_key "posts", "users"
+  add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "profiles", "users"
-  add_foreign_key "timelines", "users", column: "owner_id"
 end

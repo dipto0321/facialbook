@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-  belongs_to :user
-  belongs_to :timeline
+  belongs_to :author, class_name: "User"
+  belongs_to :postable, polymorphic: true
 end
