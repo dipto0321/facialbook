@@ -9,7 +9,7 @@ feature "visiting user's profile" do
     @friend2 = create(:user)
 
     # First log in
-    visit new_user_session_path
+    visit login_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
     click_on('Log in')
