@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   default_scope { order(updated_at: :desc) }
   
   def self.timeline_posts(postable)
-    Post.where("postable_id=?",postable.id)
+    Post.where("postable_id=? OR author_id=?",postable.id, postable.id)
   end
 
   def self.user_newsfeed_posts(postable)
