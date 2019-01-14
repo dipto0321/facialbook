@@ -26,6 +26,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find_by(id: params[:id])
+    begin
+      @post.delete
+    rescue => exception
+      flash[:danger] = "Post already deleted or never existed"
+    else
+      flash[:info] = "Post deleted"
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   private
