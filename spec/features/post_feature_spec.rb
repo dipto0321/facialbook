@@ -179,3 +179,24 @@ feature "Edit post" do
     end
   end
 end
+
+feature "Deleting post" do
+  context "deleting a post from newsfeed" do
+    before :each do
+      @user = create(:user)
+      @post = create(:user_post, author_id: @user.id, postable_id: @user.id) 
+      # First log in
+      visit login_path
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: 'password'
+      click_on('Log in')
+      click_on("Delete")
+    end
+
+    it "removes the post from the newsfeed" do
+      expect(page).to_not have_content(@post)
+    end
+  end
+  context "deleting a post from own timeline"
+  context "deleting a post from friend's timeline"
+end
