@@ -2,7 +2,7 @@
   <div class="card-body">
     <p>Create post</p>
     <% #debugger %>
-    <%= simple_form_for([postable, @post]) do |f| %>
+    <%= simple_form_for([postable, post]) do |f| %>
       <%=f.input :body, label: false %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>

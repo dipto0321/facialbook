@@ -5,12 +5,6 @@ class PostsController < ApplicationController
     @post = Post.find_by(id:params[:id])
   end
 
-  def new
-    @postable = User.find_by(id: params[:post][:postable_id])
-    @author = User.find_by(id: params[:post][:author_id])
-    @post = @author.build_post(@postable)
-  end
-
   def edit
     # @posts = 
     @post = Post.find_by(id:params[:id])
