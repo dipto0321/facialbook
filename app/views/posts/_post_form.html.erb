@@ -7,9 +7,12 @@
       <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
     <% end %>
     <% if params[:action] == "edit" %>
-      <div>
-        <%= link_to  "Cancel", "#" %>
-        <%= link_to  "Delete", "#" %>
+      <div class="float-right mr-2" id="delete-cancel">
+        <a href="<%= session[:return_to]%>">Cancel</a>
+        <%= link_to  "Delete",
+         post_path(post),
+         method: :delete,
+         class: "ml-2" %>
       </div>
     <% end %>
   </div>
