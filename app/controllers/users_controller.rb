@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index; end
 
   def show
+    session[:return_to] = request.referrer
     @profile = @user.profile
   end
 

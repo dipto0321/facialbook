@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referrer
     @post = Post.find_by(id: params[:id])
   end
 
@@ -45,15 +45,18 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    debugger
     @post = Post.find_by(id: params[:id])
     begin
       @post.delete
     rescue StandardError => exception
       flash[:danger] = 'Post already deleted or never existed'
+      redirect_to root_path
     else
       flash[:info] = 'Post deleted'
+      redirect_to session[:return_to]
+      session.delete(:return_to)
     end
-    redirect_to session.delete(:return_to)
   end
 
   private

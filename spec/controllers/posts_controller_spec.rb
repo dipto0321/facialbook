@@ -101,6 +101,7 @@ RSpec.describe PostsController, type: :controller do
     it 'removes post from the database' do
       author = create(:user)
       postable = author
+      session[:return_to] = root_path
       sign_in(author)
       post = create(:user_post, author_id: author.id, postable_id: postable.id)
       expect do
