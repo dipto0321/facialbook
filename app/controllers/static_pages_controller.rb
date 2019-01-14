@@ -2,6 +2,6 @@
 
 class StaticPagesController < ApplicationController
   def home
-    session[:return_to] = request.referrer
+    session[:return_to] = request.url
   end
 end

@@ -45,7 +45,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    debugger
     @post = Post.find_by(id: params[:id])
     begin
       @post.delete
