@@ -17,7 +17,12 @@ class PostsController < ApplicationController
     @post.body = params[:post][:body]
     @post.post_pic = params[:post][:post_pic]
 
-    @post.save
+    if @post.save
+      flash[:success] = "Post created!"
+    else
+      flash[:danger] = "Post not created!"
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   def update
