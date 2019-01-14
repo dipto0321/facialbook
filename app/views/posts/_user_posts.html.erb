@@ -4,9 +4,7 @@
       <% posts.each do |post| %>
         <div class="card my-3">
           <div class="card-body">
-          <div class="post_options float-right">
-            ...
-          </div>
+          <%= render  "posts/post_actions", post: post %>
           <% image_url = viewer.profile.profile_picture? ? viewer.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
             <a href="<%= user_path(post.author)%>">
               <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
