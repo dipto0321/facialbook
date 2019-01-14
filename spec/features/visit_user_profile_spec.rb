@@ -38,19 +38,19 @@ feature "visiting user's profile" do
     end
   end
 
-  it "shows a create post form" do
+  it 'shows a create post form' do
     expect(page).to have_selector("textarea[name='post[body]']")
   end
 
-  it "shows a share button" do
-    expect(page).to have_selector(:link_or_button, "Share")
+  it 'shows a share button' do
+    expect(page).to have_selector(:link_or_button, 'Share')
   end
 
-  it "shows all the posts that user has created" do
+  it 'shows all the posts that user has created' do
     expect(page).to have_content(@share_by_friend.body)
   end
 
-  it "shows all posts that the user received from other users" do
+  it 'shows all posts that the user received from other users' do
     expect(page).to have_content(@post_by_user_to_friend.body)
   end
 

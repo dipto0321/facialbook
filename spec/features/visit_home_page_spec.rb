@@ -1,24 +1,26 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 feature 'visit home page without login' do
   before(:each) do
     visit root_path
   end
 
-  it "shows login button" do
-    expect(page).to have_selector(:link_or_button, "Log in")
+  it 'shows login button' do
+    expect(page).to have_selector(:link_or_button, 'Log in')
   end
-  
-  it "shows login button" do
-    expect(page).to have_selector(:link_or_button, "Sign up")
+
+  it 'shows login button' do
+    expect(page).to have_selector(:link_or_button, 'Sign up')
   end
-  
-  it "shows 2 email input boxes (one for login and one for signup)" do
-    expect(page).to have_selector("input[type='email']",count: 2)
+
+  it 'shows 2 email input boxes (one for login and one for signup)' do
+    expect(page).to have_selector("input[type='email']", count: 2)
   end
-  
-  it "shows 2 password boxes (one for login and 2 for signup)" do
-    expect(page).to have_selector("input[type='password']",count: 3)
+
+  it 'shows 2 password boxes (one for login and 2 for signup)' do
+    expect(page).to have_selector("input[type='password']", count: 3)
   end
 
   it 'shows first name field' do
@@ -47,10 +49,9 @@ feature 'visit home page without login' do
     expect(page).to have_selector('label', text: 'Male')
   end
 
-  it "shows a tagline" do
-    expect(page).to have_selector("h3#tagline")
+  it 'shows a tagline' do
+    expect(page).to have_selector('h3#tagline')
   end
-
 end
 
 feature 'visit home page with login' do
@@ -59,24 +60,23 @@ feature 'visit home page with login' do
     @friend_posted_on = create(:user)
     @friend_who_posted = create(:user)
 
-    @share = create(:user_post, author_id:@current_user.id, postable_id:@current_user.id)
+    @share = create(:user_post, author_id: @current_user.id, postable_id: @current_user.id)
 
-    @post_on_current_user = create(:user_post, author_id:@friend_who_posted.id, postable_id:@current_user.id)
+    @post_on_current_user = create(:user_post, author_id: @friend_who_posted.id, postable_id: @current_user.id)
 
-    @post_by_current_user_to_another = create(:user_post, author_id:@current_user.id, postable_id:@friend_posted_on.id)
+    @post_by_current_user_to_another = create(:user_post, author_id: @current_user.id, postable_id: @friend_posted_on.id)
 
     visit root_path
-    within "div.nav-sign-in" do
-      fill_in "Email", with: @current_user.email
+    within 'div.nav-sign-in' do
+      fill_in 'Email', with: @current_user.email
 
-      fill_in "Password", with: @current_user.password
+      fill_in 'Password', with: @current_user.password
 
-      click_on("Log in")
+      click_on('Log in')
     end
-  
   end
 
-  it "shows a search box" do
+  it 'shows a search box' do
     expect(page).to have_selector("input[type='search']")
   end
 
@@ -84,32 +84,31 @@ feature 'visit home page with login' do
     expect(page).to have_link(@current_user.profile.first_name, href: user_path(@current_user))
   end
 
-  it "shows 2 links to home page in the nav" do
+  it 'shows 2 links to home page in the nav' do
     expect(page).to have_selector("a[href='/']", count: 2)
   end
 
-  it "shows a dropdown link for friend requests" do
-    expect(page).to have_selector("li#friend_request")
+  it 'shows a dropdown link for friend requests' do
+    expect(page).to have_selector('li#friend_request')
   end
 
-  it "shows a dropdown for profile options in the nav" do
-    expect(page).to have_selector("li#profile_options")
+  it 'shows a dropdown for profile options in the nav' do
+    expect(page).to have_selector('li#profile_options')
   end
 
-  it "shows a create post form" do
+  it 'shows a create post form' do
     expect(page).to have_selector("textarea[name='post[body]']")
   end
 
-  it "shows post shared by current_user in his/her own timeline" do
+  it 'shows post shared by current_user in his/her own timeline' do
     expect(page).to have_content(@share.body)
   end
 
   it "shows posts by current_user's friend to current_user's timeline" do
     expect(page).to have_content(@post_on_current_user.body)
   end
-  
+
   it "shows posts by current_user to his/her friends' timelines" do
     expect(page).to have_content(@post_by_current_user_to_another.body)
   end
-
 end

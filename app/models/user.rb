@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
 
   # User is post author
-  has_many :posts, foreign_key: :author_id,dependent: :destroy
+  has_many :posts, foreign_key: :author_id, dependent: :destroy
 
   # User is post receiver
   has_many :posts, as: :postable, dependent: :destroy

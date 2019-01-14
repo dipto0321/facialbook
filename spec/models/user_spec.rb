@@ -43,7 +43,6 @@ RSpec.describe User, type: :model do
     it { should accept_nested_attributes_for(:profile).allow_destroy(true) }
   end
 
-
   describe 'Post association' do
     # it { should have_many(:posts).with_foreign_key(:author_id).dependent(:destroy) }
     before :each do
@@ -51,8 +50,8 @@ RSpec.describe User, type: :model do
       @postable = create(:user)
       @post = create(:user_post, author_id: @author.id, postable_id: @postable.id)
     end
-    it "associates a postable user to the post" do
-    expect(@postable.posts.last).to eq(@post)
+    it 'associates a postable user to the post' do
+      expect(@postable.posts.last).to eq(@post)
     end
 
     it "associates the post's author to the user that created it" do
