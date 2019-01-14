@@ -64,4 +64,18 @@ RSpec.describe PostsController, type: :controller do
     
   end
 
+  describe "DELETE #destroy" do
+    it "removes post from the database" do
+      author = create(:user)
+      postable = author
+      sign_in(author)
+      post = create(:user_post, author_id: author.id, postable_id: postable.id)
+      expect{
+        delete :destroy, params:{
+          id: post.id
+        }
+      }.to change(Post, :count).by(-1)
+    end
+  end
+
 end
