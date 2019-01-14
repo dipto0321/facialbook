@@ -6,7 +6,10 @@
       </button>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionButton">
         <%= link_to  "Edit", "#", class: "dropdown-item" if current_user == post.author %>
-        <%= link_to  "Delete", "#", class: "dropdown-item" %>
+        <%= link_to  "Delete",
+         post_path(post),
+         method: :delete, 
+         class: "dropdown-item" %>
       </div>
     </div>
   </div>
