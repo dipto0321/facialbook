@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    session[:return_to] ||= request.referer
     @post = Post.find_by(id:params[:id])
   end
 
@@ -17,7 +18,6 @@ class PostsController < ApplicationController
     @post.post_pic = params[:post][:post_pic]
 
     @post.save
-    redirect_back(fallback_location: root_path)
   end
 
   def update
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:success] = "Post updated"
-      redirect_back(fallback_location: root_path)
+      redirect_to session.delete(:return_to)
     else
       render "edit"
     end
