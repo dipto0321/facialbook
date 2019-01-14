@@ -1,8 +1,7 @@
 <section class="card">
   <div class="card-body">
-    <p>Create post</p>
     <%= simple_form_for([postable, post]) do |f| %>
-      <%=f.input :body, label: false %>
+      <%=f.input :body, label: "Create post" %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
       <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>

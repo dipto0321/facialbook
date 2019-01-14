@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:success] = "Post updated"
+      # debugger
       redirect_to session.delete(:return_to)
     else
       render "edit"

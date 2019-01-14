@@ -89,6 +89,7 @@ RSpec.describe PostsController, type: :controller do
         body: "This post has been changed"
       }}}
       sign_in(@author)
+      session[:return_to] = root_path
       patch :update, parameters
     end
     it "updates the post in the database" do
