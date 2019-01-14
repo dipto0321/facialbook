@@ -6,5 +6,12 @@
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
       <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
     <% end %>
+    <% if params[:action] == "edit" %>
+      <div>
+        <%= link_to  "Cancel", "#" %>
+        <%= link_to  "Delete", "#" %>
+      </div>
+    <% end %>
   </div>
+
 </section>
