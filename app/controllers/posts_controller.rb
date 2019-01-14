@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @posts = 
+    @post = Post.find_by(id:params[:id])
   end
 
   def create
@@ -23,6 +25,19 @@ class PostsController < ApplicationController
   end
 
   def update
+    @postable = User.find_by(id: params[:post][:postable_id])
+    @author = User.find_by(id: params[:post][:author_id])
+    @post = Post.find_by(id: params[:id])
+
+    @post.body = params[:post][:body]
+    @post.post_pic = params[:post][:post_pic]
+
+    if @post.save
+      flash[:success] = "Post updated"
+      redirect_back(fallback_location: root_path)
+    else
+      render "edit"
+    end
   end
 
   def destroy

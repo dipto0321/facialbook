@@ -16,9 +16,12 @@
               <% else %>
               shared
             <% end%>
-            
-            <p><%= time_ago_in_words(post.created_at)%> ago</p>
-            <p class="card-text"><%= post.body %></p>
+            <% if post != @post %>
+              <p><%= time_ago_in_words(post.created_at)%> ago</p>
+              <p class="card-text"><%= post.body %></p>
+            <% else%>
+              <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
+            <%end%>
           </div>
         </div>
       <% end %>

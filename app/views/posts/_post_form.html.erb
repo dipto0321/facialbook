@@ -1,7 +1,8 @@
 <section class="card">
   <div class="card-body">
     <p>Create post</p>
-    <%= simple_form_for([postable, Post.new]) do |f| %>
+    <% new_or_edit = params[:action] == "new" ? Post.new : @post %>
+    <%= simple_form_for([postable, new_or_edit]) do |f| %>
       <%=f.input :body, label: false %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>

@@ -5,7 +5,7 @@
         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionButton">
-        <%= link_to  "Edit", "#", class: "dropdown-item" if current_user == post.author %>
+        <%= link_to  "Edit", edit_user_post_path(current_user,post), class: "dropdown-item" if current_user == post.author %>
         <%= link_to  "Delete",
          post_path(post),
          method: :delete, 
