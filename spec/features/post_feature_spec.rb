@@ -114,7 +114,29 @@ feature 'Create a new post' do
 end
 
 feature 'Edit post' do
-  context 'editing post in newsfeed' do
+
+  context "visiting edit post" do
+    before(:each) do
+      @user = create(:user)
+      @post = create(:user_post, author_id: @user.id, postable_id: @user.id)
+      # First log in
+      visit login_path
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: 'password'
+      click_on('Log in')
+      click_on('Edit')
+    end
+
+    it "has a cancel button that redirects back to " do
+      expect(page).to have_link("Cancel", href: root_url)
+    end
+
+    it "has a delete button" do
+      expect(page).to have_link("Delete", href: post_path(@post))
+    end
+  end
+
+  context 'updating post in newsfeed' do
     before(:each) do
       @user = create(:user)
       @post = create(:user_post, author_id: @user.id, postable_id: @user.id)
@@ -129,12 +151,12 @@ feature 'Edit post' do
       click_on('Share')
     end
 
-    it "should change the post's content" do
+    it "changes the post's content" do
       expect(page).to have_content(@body)
     end
   end
 
-  context 'editing post in own timeline' do
+  context 'updating post in own timeline' do
     before :each do
       @user = create(:user)
       @post = create(:user_post, author_id: @user.id, postable_id: @user.id)
@@ -155,7 +177,7 @@ feature 'Edit post' do
     end
   end
 
-  context "editing post in friend's timeline" do
+  context "updating post in friend's timeline" do
     before :each do
       @user = create(:user)
       @friend = create(:user)
