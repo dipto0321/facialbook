@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
     @post = Post.find_by(id:params[:id])
   end
 

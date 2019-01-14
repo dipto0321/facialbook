@@ -61,7 +61,40 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "GET #edit" do
-    
+    before :each do
+      @author = create(:user)
+      @postable_user = create(:user)
+      @post = create(:user_post, author_id: @author.id, postable_id: @postable_user.id)
+      sign_in(@author)
+      get :edit, params:{
+        id: @post.id,
+        user_id: @postable_user.id
+      }
+    end
+
+    it "assigns to @post" do
+      expect(assigns(:post)).to eq(@post)
+    end
+  end
+
+
+  describe "PATCH #update" do
+    before :each do
+      @author = create(:user)
+      @postable_user = create(:user)
+      @post = create(:user_post, author_id: @author.id, postable_id: @postable_user.id)
+      parameters = {params:{id: @post.id, user_id:@postable_user.id, post:{
+        postable_id: @postable_user.id,
+        author_id: @author.id,
+        body: "This post has been changed"
+      }}}
+      sign_in(@author)
+      patch :update, parameters
+    end
+    it "updates the post in the database" do
+      @post.reload
+      expect(@post.body).to include("This post has been changed")
+    end
   end
 
   describe "DELETE #destroy" do
