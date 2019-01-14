@@ -1,7 +1,6 @@
 <section class="card">
   <div class="card-body">
     <p>Create post</p>
-    <% #debugger %>
     <%= simple_form_for([postable, post]) do |f| %>
       <%=f.input :body, label: false %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>

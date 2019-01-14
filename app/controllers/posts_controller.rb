@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    # @posts = 
     @post = Post.find_by(id:params[:id])
   end
 
