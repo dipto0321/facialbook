@@ -12,6 +12,7 @@
 <!-- Modal -->
 <div class="modal fade" id="postFormModal" tabindex="-1" role="dialog" aria-labelledby="postFormModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <%= render partial:"posts/post_form", locals:{postable: current_user, author: current_user, post: Post.new} %>
+    <% postable = params[:controller] == 'static_pages' ? current_user : @user %>
+    <%= render partial:"posts/post_form", locals:{postable: postable, author: current_user, post: Post.new} %>
   </div>
-</div>
+</div> 
