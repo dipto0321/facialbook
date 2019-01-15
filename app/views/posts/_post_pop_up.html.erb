@@ -12,14 +12,6 @@
 <!-- Modal -->
 <div class="modal fade" id="postFormModal" tabindex="-1" role="dialog" aria-labelledby="postFormModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="postFormModalLabel"><%= params[:action] %> Post</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- Need to render there-->
-    </div>
+    <%= render partial:"posts/post_form", locals:{postable: current_user, author: current_user, post: Post.new} %>
   </div>
 </div>

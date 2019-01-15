@@ -5,7 +5,7 @@
   </div>
   <div class="col-md-9">
     <% new_or_edit = params[:action] == "show" ? Post.new : @post %>
-    <%= render  partial:"posts/post_form", locals:{author: current_user,postable: @user, post: new_or_edit} %>
+    <%= render  partial:"posts/post_pop_up", locals:{author: current_user,postable: @user, post: new_or_edit} %>
     <%= render "posts/user_posts", viewer: @user%>
   </div>
 </section>
