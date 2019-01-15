@@ -1,22 +1,21 @@
-<div class="modal-content">
-
-  <%= simple_form_for([postable, post]) do |f| %>
+<%= simple_form_for([postable, post]) do |f| %>
+  <div class="modal-content">
     <div class="modal-body">
       <%=f.input :body, label: "Create post" %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
     </div>
     <div class="modal-footer">
-      <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
-      <a href="<%= session[:return_to]%>", data-dismiss="modal">Cancel</a>
-    </div>
+      <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel">Cancel</a>
       <% if params[:action] == "edit" %>
-        <div class="float-right mr-2" id="delete-cancel">
-          <%= link_to  "Delete",
-              post_path(post),
-              method: :delete,
-            class: "ml-2" %>
-        </div>
-      <% end %>
+      <div class="float-right mr-2 delete-cancel">
+        <%= link_to  "Delete",
+            post_path(post),
+            method: :delete,
+          class: "ml-2" %>
+      </div>
+    <% end %>
+      <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
     </div>
+  </div>
 <% end %>
