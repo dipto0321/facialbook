@@ -1,0 +1,18 @@
+<!-- text trigger modal -->
+
+<section class="card">
+  <div class="card-body">
+    <div class="form-group" data-toggle="modal" data-target="#postFormModal">
+      <label for="">Create post</label>
+      <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="postFormModal" tabindex="-1" role="dialog" aria-labelledby="postFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <% postable = params[:controller] == 'static_pages' ? current_user : @user %>
+    <%= render partial:"posts/post_form", locals:{postable: postable, author: current_user, post: Post.new} %>
+  </div>
+</div> 

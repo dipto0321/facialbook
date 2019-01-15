@@ -12,8 +12,10 @@ feature 'Create a new post' do
       fill_in 'Password', with: 'password'
       click_on('Log in')
       @body = Faker::Lorem.paragraph(5)
-      fill_in 'Create post', with: @body
-      click_on('Share')
+      within "#postFormModal" do
+        fill_in 'Create post', with: @body
+        click_on('Share')
+      end
     end
 
     it 'should create a post' do
@@ -47,8 +49,10 @@ feature 'Create a new post' do
       click_on('Log in')
       visit user_path(@current_user)
       @another_body = Faker::Lorem.paragraph(5)
-      fill_in 'Create post', with: @another_body
-      click_on('Share')
+      within "#postFormModal" do
+        fill_in 'Create post', with: @another_body
+        click_on('Share')
+      end
     end
 
     it 'creates the post' do
@@ -85,8 +89,10 @@ feature 'Create a new post' do
       click_on('Log in')
       visit user_path(@friend)
       @greeting = Faker::Lorem.paragraph(5)
-      fill_in 'Create post', with: @greeting
-      click_on('Share')
+      within "#postFormModal" do
+        fill_in 'Create post', with: @greeting
+        click_on('Share')
+      end
     end
 
     it "allows the user to post in his/her friend's timeline" do
@@ -234,40 +240,40 @@ feature 'Deleting post' do
     it 'removes the post from the timeline' do
       expect(page).to_not have_content(@post)
     end
-    # it "shows the friend's info box" do
-    #   within 'div#profile-card' do
-    #     expect(page).to have_selector('h1', text: @user.profile.full_name)
-    #   end
-    # end
+    it "shows the friend's info box" do
+      within 'div#profile-card' do
+        expect(page).to have_selector('h1', text: @user.profile.full_name)
+      end
+    end
 
-    # it 'shows flash message' do
-    #   expect(page).to have_selector('div.alert.alert-info', text: 'Post deleted')
-    # end
+    it 'shows flash message' do
+      expect(page).to have_selector('div.alert.alert-info', text: 'Post deleted')
+    end
   end
-  # context "deleting a post from friend's timeline" do
-  #   before :each do
-  #     @user = create(:user)
-  #     @friend = create(:user)
-  #     @post = create(:user_post, author_id: @user.id, postable_id: @friend.id)
-  #     # First log in
-  #     visit login_path
-  #     fill_in 'Email', with: @user.email
-  #     fill_in 'Password', with: 'password'
-  #     click_on('Log in')
-  #     visit user_path(@friend)
-  #     click_on('Delete')
-  #   end
-  #   it 'removes the post from the friend timeline' do
-  #     expect(page).to_not have_content(@post)
-  #   end
-  #   it "shows the friend's info box" do
-  #     within 'div#profile-card' do
-  #       expect(page).to have_selector('h1', text: @friend.profile.full_name)
-  #     end
-  #   end
+  context "deleting a post from friend's timeline" do
+    before :each do
+      @user = create(:user)
+      @friend = create(:user)
+      @post = create(:user_post, author_id: @user.id, postable_id: @friend.id)
+      # First log in
+      visit login_path
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: 'password'
+      click_on('Log in')
+      visit user_path(@friend)
+      click_on('Delete')
+    end
+    it 'removes the post from the friend timeline' do
+      expect(page).to_not have_content(@post)
+    end
+    it "shows the friend's info box" do
+      within 'div#profile-card' do
+        expect(page).to have_selector('h1', text: @friend.profile.full_name)
+      end
+    end
 
-  #   it 'shows flash message' do
-  #     expect(page).to have_selector('div.alert.alert-info', text: 'Post deleted')
-  #   end
-  # end
+    it 'shows flash message' do
+      expect(page).to have_selector('div.alert.alert-info', text: 'Post deleted')
+    end
+  end
 end

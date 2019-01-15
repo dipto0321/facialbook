@@ -1,7 +1,6 @@
 <section class="mt-3">
 <% if user_signed_in? %>
-  <% new_or_edit = params ? Post.new : @post %>
-  <%= render partial:"posts/post_form", locals:{postable: current_user, author: current_user, post: new_or_edit} %>
+  <%= render  "posts/post_pop_up" %>
   <%= render "posts/user_posts", viewer: current_user %>
 <% else %>
 <section class="row mt-5">
