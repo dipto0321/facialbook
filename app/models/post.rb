@@ -3,6 +3,7 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :postable, polymorphic: true
+  has_many :comments, as: :commentable
   default_scope { order(updated_at: :desc) }
   mount_uploader :post_pic, PostPicUploader
   validate :post_pic_size
