@@ -20,6 +20,7 @@
             <% if post != @post %>
               <p><%= time_ago_in_words(post.created_at)%> ago</p>
               <p class="card-text"><%= post.body %></p>
+              <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
             <% else%>
               <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
             <%end%>
