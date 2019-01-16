@@ -10,7 +10,8 @@ class CommentsController < ApplicationController
     else
       flash[:danger] = "Comment not submitted"
     end
-    redirect_to request.referrer
+    redirect_to session[:return_to]
+    session.delete(:return_to)
   end
 
   private 
