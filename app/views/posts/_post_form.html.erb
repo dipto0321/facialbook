@@ -4,6 +4,10 @@
       <%=f.input :body, label: "Create post" %>
       <%=f.input :author_id, as: :hidden, input_html:{value: author.id} %>
       <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
+      <div class="upload-btn-wrapper">
+        <button class="file-btn"><i class="fa fa-upload" aria-hidden="true"></i></button>
+        <%=f.input :post_pic, label: false%>
+      </div>
     </div>
     <div class="modal-footer">
       <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel">Cancel</a>
@@ -15,9 +19,6 @@
           class: "ml-2" %>
       </div>
     <% end %>
-      <span>
-        <%= f.input :post_pic, label: false %>
-      </span>
       <%= f.button :submit, "Share", class:"btn-sm btn-primary float-right"%>
     </div>
   </div>
