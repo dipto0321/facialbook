@@ -14,10 +14,10 @@ class Profile < ApplicationRecord
   end
 
   private
+
   def profile_picture_size
     if profile_picture.size > 5.megabytes
-      errors.add(:profile_picture, "should be less than 5MB")
+      errors.add(:profile_picture, 'should be less than 5MB')
     end
-
   end
 end

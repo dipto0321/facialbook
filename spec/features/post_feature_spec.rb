@@ -12,7 +12,7 @@ feature 'Create a new post' do
       fill_in 'Password', with: 'password'
       click_on('Log in')
       @body = Faker::Lorem.paragraph(5)
-      within "#postFormModal" do
+      within '#postFormModal' do
         fill_in 'Create post', with: @body
         click_on('Share')
       end
@@ -49,7 +49,7 @@ feature 'Create a new post' do
       click_on('Log in')
       visit user_path(@current_user)
       @another_body = Faker::Lorem.paragraph(5)
-      within "#postFormModal" do
+      within '#postFormModal' do
         fill_in 'Create post', with: @another_body
         click_on('Share')
       end
@@ -89,7 +89,7 @@ feature 'Create a new post' do
       click_on('Log in')
       visit user_path(@friend)
       @greeting = Faker::Lorem.paragraph(5)
-      within "#postFormModal" do
+      within '#postFormModal' do
         fill_in 'Create post', with: @greeting
         click_on('Share')
       end
@@ -120,8 +120,7 @@ feature 'Create a new post' do
 end
 
 feature 'Edit post' do
-
-  context "visiting edit post" do
+  context 'visiting edit post' do
     before(:each) do
       @user = create(:user)
       @post = create(:user_post, author_id: @user.id, postable_id: @user.id)
@@ -133,12 +132,12 @@ feature 'Edit post' do
       click_on('Edit')
     end
 
-    it "has a cancel button that redirects back to " do
-      expect(page).to have_link("Cancel", href: root_url)
+    it 'has a cancel button that redirects back to ' do
+      expect(page).to have_link('Cancel', href: root_url)
     end
 
-    it "has a delete button" do
-      expect(page).to have_link("Delete", href: post_path(@post))
+    it 'has a delete button' do
+      expect(page).to have_link('Delete', href: post_path(@post))
     end
   end
 
