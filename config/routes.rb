@@ -26,7 +26,13 @@ Rails.application.routes.draw do
     resources :posts
   end
 
-  resources :posts
+  resources :posts do
+    resources :comments, module: :posts
+  end
+
+  resources :comments do
+    resources :comments, module: :comments
+  end
 
   resources :friendships, only: %i[create destroy]
 
