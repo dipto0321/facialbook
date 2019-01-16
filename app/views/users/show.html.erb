@@ -4,7 +4,6 @@
     <%= render  "users/shows/friends_box" %>
   </div>
   <div class="col-md-9">
-    <% new_or_edit = params[:action] == "show" ? Post.new : @post %>
     <%= render "posts/post_pop_up"%>
     <%= render "posts/user_posts", viewer: @user%>
   </div>

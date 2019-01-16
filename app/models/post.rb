@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :postable, polymorphic: true
   default_scope { order(updated_at: :desc) }
+  mount_uploader :post_pic, PostPicUploader
 
   def self.timeline_posts(postable)
     Post.where('postable_id=? OR author_id=?', postable.id, postable.id)

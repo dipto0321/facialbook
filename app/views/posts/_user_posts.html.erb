@@ -16,6 +16,7 @@
               <% else %>
               shared
             <% end%>
+            <!--This is to show a specific post if that post is not the one for edit (for editing)-->
             <% if post != @post %>
               <p><%= time_ago_in_words(post.created_at)%> ago</p>
               <p class="card-text"><%= post.body %></p>
