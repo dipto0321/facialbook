@@ -18,7 +18,6 @@ RSpec.describe Post, type: :model do
     it 'has a build post instance method' do
       @user = create(:user)
       @friend = create(:user)
-
       @post = @user.build_post(@friend)
       expect(@post).to be_valid
     end
