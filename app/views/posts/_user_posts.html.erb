@@ -21,6 +21,23 @@
               <p><%= time_ago_in_words(post.created_at)%> ago</p>
               <p class="card-text"><%= post.body %></p>
               <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
+              <div id="post-interaction-btns">
+                LIKE  |  COMMENT
+              </div>
+              <% if post.comments.any? %>
+                <ul id="comments" class="list-group">
+                  <% post.comments.each do |comment| %>
+                    <li class="list-group-item">
+                    <% commenter_image_url = comment.commenter.profile.profile_picture? ? comment.commenter.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+                      <a href="<%= user_path(comment.commenter)%>">
+                        <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
+                      </a>
+                      <%= link_to comment.commenter.profile.full_name, user_path(comment.commenter)%>
+                      <%= comment.body %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
             <% else%>
               <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
             <%end%>
