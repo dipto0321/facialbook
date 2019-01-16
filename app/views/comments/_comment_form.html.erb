@@ -1,0 +1,5 @@
+<%= simple_form_for([commenable, comment]) do |f| %>
+  <%= f.input :commenter, as: :hidden, input_html:{ value: current_user } %>
+  <%= f.input :body %>
+  <%= f.button :submit %>
+<% end %>
