@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'comments/edit'
-  # get 'posts/new'
-  # get 'posts/edit'
+
   namespace :users do
     get 'mutual_friends/index'
   end
@@ -27,11 +25,11 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments, module: :posts
+    resources :comments, module: :posts, except: %i[index show new edit]
   end
 
-  resources :comments do
-    resources :comments, module: :comments
+  resources :comments, only: :edit do
+    resources :comments, module: :comments, except: %i[index show new edit]
   end
 
   resources :friendships, only: %i[create destroy]
