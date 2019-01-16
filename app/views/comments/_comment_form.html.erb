@@ -1,7 +1,7 @@
 <%= simple_form_for([commentable, comment]) do |f| %>
   <%= f.input :commenter_id, as: :hidden, input_html:{ value: current_user.id} %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
+  <%= f.input :body, label: false, input_html: { placeholder: "Comment", rows: 1} %>
+  <%= f.button :submit, class: "btn-sm btn-outline-primary float-right" %>
 <% end %>
 
 <!--Click enter to submit comment-->

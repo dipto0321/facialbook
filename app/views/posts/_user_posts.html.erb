@@ -24,10 +24,14 @@
               <div id="post-interaction-btns">
                 LIKE  |  COMMENT
               </div>
-              <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
-              <% if post.comments.any? %>
-                <%= render partial:"comments/comments", locals:{comments: post.comments} %>
-              <% end %>
+              <section class="card border-0">
+                <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
+              </section>
+              <section class="mt-2">
+                <% if post.comments.any? %>
+                  <%= render partial:"comments/comments", locals:{comments: post.comments} %>
+                <% end %>
+              </section>
             <% else%>
               <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
             <%end%>
