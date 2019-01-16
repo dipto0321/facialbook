@@ -18,11 +18,11 @@ feature "create new comment on post" do
       within ("div.comment_body") do
         fill_in "comment_body", with: @comment_body
       end
+      click_on "Create Comment"
     end
 
-    it "should comment" do
-      save_and_open_page
-      # expect(page).to have_content(@comment_body)
+    it "shows the comment created in the post" do
+      expect(page).to have_content(@comment_body)
     end
 
   end
