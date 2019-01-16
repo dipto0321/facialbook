@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'comments/edit'
   # get 'posts/new'
   # get 'posts/edit'
   namespace :users do
