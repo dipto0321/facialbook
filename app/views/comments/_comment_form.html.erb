@@ -1,5 +1,15 @@
-<%= simple_form_for([commenable, comment]) do |f| %>
-  <%= f.input :commenter, as: :hidden, input_html:{ value: current_user } %>
+<%= simple_form_for([commentable, comment]) do |f| %>
+  <%= f.input :commenter_id, as: :hidden, input_html:{ value: current_user.id} %>
   <%= f.input :body %>
   <%= f.button :submit %>
 <% end %>
+
+<!--Click enter to submit comment-->
+<script type="text/javascript">
+  $('#comment_body').keypress(function (e) {
+  if (e.which == 13) {
+    $('form#new_comment').submit();
+    return false;
+  }
+});
+</script>

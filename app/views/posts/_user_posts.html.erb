@@ -24,19 +24,9 @@
               <div id="post-interaction-btns">
                 LIKE  |  COMMENT
               </div>
+              <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
               <% if post.comments.any? %>
-                <ul id="comments" class="list-group">
-                  <% post.comments.each do |comment| %>
-                    <li class="list-group-item">
-                    <% commenter_image_url = comment.commenter.profile.profile_picture? ? comment.commenter.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
-                      <a href="<%= user_path(comment.commenter)%>">
-                        <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
-                      </a>
-                      <%= link_to comment.commenter.profile.full_name, user_path(comment.commenter)%>
-                      <%= comment.body %>
-                    </li>
-                  <% end %>
-                </ul>
+                <%= render partial:"comments/comments", locals:{comments: post.comments} %>
               <% end %>
             <% else%>
               <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
