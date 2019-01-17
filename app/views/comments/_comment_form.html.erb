@@ -5,11 +5,3 @@
 <% end %>
 
 <!--Click enter to submit comment-->
-<script type="text/javascript">
-  $('#comment_body').keypress(function (e) {
-  if (e.which == 13) {
-    $('form#new_comment').submit();
-    return false;
-  }
-});
-</script>
