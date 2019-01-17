@@ -14,5 +14,5 @@
     <% end %>
   </li>
 <% else %>
-  <%= render  "comments/comment_form", {commentable: @comment, comment: comment} %>
+  <%= render  "comments/comment_form", {commentable: @comment.commentable, comment: comment} %>
 <% end %>

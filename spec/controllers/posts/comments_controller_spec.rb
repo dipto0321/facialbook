@@ -39,5 +39,34 @@ RSpec.describe Posts::CommentsController do
         expect(response).to redirect_to(root_path)
       end
     end
+
   end
+
+
+  describe "PATCH #update" do
+    before(:each) do
+      @commenter = create(:user)
+      @user = create(:user)
+      @user_post = create(:user_post,author_id: @user.id, postable_id: @user.id)
+      @comment = create(:post_comment, author_id: @commenter.id, commentable_id: @user_post.id)
+      
+      parameters = {params:{
+        comment: {
+          author_id: @commenter.id,
+          body: "Changed comment"
+        }, post_id: @user_post.id, id: @comment.id
+      }}
+      session[:return_to] = root_path
+      sign_in(@commenter)
+      patch :update, parameters
+    end
+
+    context "successful update" do
+      it "updates the comment" do
+        expect(Comment.first.body).to_not eq(@comment.body)
+      end
+    end
+
+  end
+
 end
