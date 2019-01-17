@@ -7,7 +7,10 @@
     <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
     <%= comment.body %>
     <% unless params[:action] == "edit" %>
-      <%= render "comments/comment_actions", comment: comment, post: comment.commentable %>
+      <%= render "shared/actions", actionable: comment, post: comment.commentable, owner: comment.commentable.author,
+      edit_path: edit_post_comment_path(comment.commentable,comment),
+      delete_path: comment_path(comment)
+      %>
     <% end %>
   </li>
 <% else %>

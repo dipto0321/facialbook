@@ -1,13 +1,13 @@
-<% if current_user == comment.author || current_user == comment.commentable.author %>
+<% if current_user == actionable.author || current_user == owner %>
   <div class="post_options float-right">
     <div class="dropdown">
       <button class="btn btn-sm" type="button" id="postActionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
       </button>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionButton">
-        <%= link_to  "Edit", edit_post_comment_path(post,comment), class: "dropdown-item" %>
+        <%= link_to  "Edit", edit_path, class: "dropdown-item"%>
         <%= link_to  "Delete",
-         post_path(post),
+         delete_path,
          method: :delete, 
          class: "dropdown-item" %>
       </div>

@@ -1,7 +1,10 @@
 <div class="card my-3">
   <div class="card-body">
   <% unless params[:action] == "edit" %>
-    <%= render  "posts/post_actions", post: post %>
+    <%= render  "shared/actions", actionable: post, owner: post.postable,
+    edit_path: edit_user_post_path(current_user,post),
+    delete_path: post_path(post)
+    %>
   <% end %>
   <% image_url = post.author.profile.profile_picture? ? post.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
     <a href="<%= user_path(post.author)%>">
