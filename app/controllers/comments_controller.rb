@@ -17,7 +17,22 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find_by(id: params[:id])
-    @comment.update(comment_params)
+    if @comment.update(comment_params)
+      flash[:success] = "Comment updated successfully!"  
+    else
+      flash[:danger] = "Comment update rejected!"
+    end
+    redirect_to session[:return_to]
+    session.delete(:return_to)
+  end
+
+  def destroy
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.delete
+      flash[:warning] = "Comment deleted."
+    else
+      flash[:danger] = "You are trying to delete a non-existing comment"
+    end
     redirect_to session[:return_to]
     session.delete(:return_to)
   end
