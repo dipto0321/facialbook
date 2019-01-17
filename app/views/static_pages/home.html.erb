@@ -1,7 +1,52 @@
 <section class="mt-3">
 <% if user_signed_in? %>
   <%= render  "posts/post_pop_up" %>
-  <%= render "posts/user_posts", viewer: current_user %>
+  
+  <section>
+    <% posts = params[:controller] == "users" ? Post.timeline_posts(current_user) : Post.user_newsfeed_posts(current_user)%>
+    <% if posts.any?%>
+        <% posts.each do |post| %>
+          <div class="card my-3">
+            <div class="card-body">
+            <%= render  "posts/post_actions", post: post unless params[:action] == "edit"%>
+            <% image_url = current_user.profile.profile_picture? ? current_user.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+              <a href="<%= user_path(post.author)%>">
+                <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
+                <h6 class="d-inline"><%= post.author.profile.full_name %></h6>
+              </a>
+              <% if post.postable != post.author%>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i> 
+                <%= link_to post.postable.profile.full_name, user_path(post.postable)%>
+                <% else %>
+                shared
+              <% end%>
+              <!--This is to show a specific post if that post is not the one for edit (for editing)-->
+              <% if post != @post %>
+                <p><%= time_ago_in_words(post.created_at)%> ago</p>
+                <p class="card-text"><%= post.body %></p>
+                <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
+                <div id="post-interaction-btns">
+                  LIKE  |  COMMENT
+                </div>
+                <section class="card border-0">
+                  <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
+                </section>
+                <section class="mt-2">
+                  <% if post.comments.any? %>
+                    <%= render post.comments %>
+                  <% end %>
+                </section>
+              <% else%>
+                <%= render partial:"post_form", locals:{postable: post.postable, post: @post, author: post.author}%>
+              <%end%>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+  </section>
+
+
+
 <% else %>
 <section class="row mt-5">
   <div class="col-md-7">
