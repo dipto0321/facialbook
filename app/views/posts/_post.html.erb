@@ -19,14 +19,16 @@
       <p><%= time_ago_in_words(post.created_at)%> ago</p>
       <p class="card-text"><%= post.body %></p>
       <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
-      <div id="post-interaction-btns">
-        LIKE  |  COMMENT
-      </div>
-      <section class="card border-0">
-        <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
-      </section>
+      <% if params[:controller] != "posts/comments"%>
+        <div id="post-interaction-btns">
+          LIKE  |  COMMENT
+        </div>
+        <section class="card border-0">
+          <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
+        </section>
+      <% end %>
       <section class="mt-2">
-        <% if post.comments.any? %>
+        <% if post.comments.any? && params[:controller] != "posts/comments" %>
           <%= render post.comments %>
         <% end %>
       </section>

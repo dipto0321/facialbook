@@ -101,7 +101,7 @@ posts = Post.take(3)
 posts.each do |post|
   3.times do
     Comment.create(
-      commenter_id: User.all.sample.id,
+      author_id: User.all.sample.id,
       commentable_id: post.id,
       commentable_type: "Post",
       body: Faker::Lorem.paragraph(2)

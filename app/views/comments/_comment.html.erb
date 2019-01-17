@@ -5,12 +5,11 @@
       <%= image_tag( author_image_url, class:"img-fluid post-user-profile-pic")%>
     </a>
     <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
-    <%= comment == @comment %>
     <%= comment.body %>
     <% unless params[:action] == "edit" %>
-      
+      <%= render "comments/comment_actions", comment: comment, post: comment.commentable %>
     <% end %>
   </li>
 <% else %>
-  <%= render  "comments/comment_form", {commentable: @comment, comment: Comment.new} %>
+  <%= render  "comments/comment_form", {commentable: @comment, comment: comment} %>
 <% end %>
