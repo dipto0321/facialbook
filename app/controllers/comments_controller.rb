@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   def edit
+    @comment = Comment.find_by(id: params[:id])
   end
 
   def create

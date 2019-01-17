@@ -25,11 +25,11 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments, module: :posts, except: %i[index show new edit]
+    resources :comments, module: :posts, except: %i[index show new]
   end
 
-  resources :comments, only: :edit do
-    resources :comments, module: :comments, except: %i[index show new edit]
+  resources :comments do
+    resources :comments, module: :comments, except: %i[index show new]
   end
 
   resources :friendships, only: %i[create destroy]
