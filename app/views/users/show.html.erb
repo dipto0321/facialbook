@@ -7,8 +7,9 @@
     <%= render "posts/post_pop_up"%>
 
   <section>
-    <% if @user.posts.any? %>
-      <%= render @user.posts %>
+    <% posts = Post.timeline_posts(@user)%>
+    <% if posts.any? %>
+      <%= render posts %>
     <% end %>
   </section>
   </div>

@@ -3,10 +3,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
 
-  def show
-    @post = Post.find_by(id: params[:id])
-  end
-
   def edit
     session[:return_to] = request.referrer
     @post = Post.find_by(id: params[:id])

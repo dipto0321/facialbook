@@ -3,9 +3,9 @@
   <%= render  "posts/post_pop_up" %>
   
   <section>
-    <% posts = params[:controller] == "users" ? Post.timeline_posts(current_user) : Post.user_newsfeed_posts(current_user)%>
+    <% posts = Post.user_newsfeed_posts(current_user)%>
     <% if posts.any?%>
-      <%= render  posts %>
+      <%= render posts %>
     <% end %>
   </section>
 
