@@ -11,7 +11,7 @@ RSpec.describe Posts::CommentsController do
       expect{
         post :create, params: {
           comment:{
-            commenter_id: commenter.id,
+            author_id: commenter.id,
             body: Faker::Lorem.paragraph(2)
           }, post_id: user_post.id
         }
@@ -23,7 +23,7 @@ RSpec.describe Posts::CommentsController do
         @commenter = create(:user)
         @user_post = create(:user_post,author_id: @commenter.id, postable_id: @commenter.id)
         parameters = {params: {
-            comment: attributes_for(:post_comment, commenter_id: @commenter.id), post_id: @user_post.id
+            comment: attributes_for(:post_comment, author_id: @commenter.id), post_id: @user_post.id
           }
         }
         session[:return_to] = root_path

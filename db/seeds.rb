@@ -114,7 +114,7 @@ comments = Comment.take(5)
 comments.each do |comment|
   3.times do
     Comment.create(
-      commenter_id: User.all.sample.id,
+      author_id: User.all.sample.id,
       commentable_id: comment.id,
       commentable_type: "Comment",
       body: Faker::Lorem.paragraph(2)
