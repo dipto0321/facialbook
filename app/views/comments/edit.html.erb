@@ -1,2 +1,7 @@
 <%= render "posts/post", post: @commentable%>
-<%=render "comments/comment", comment: @comment %>
+<section class="card">
+  <div class="card-body">
+    <%=render "comments/comment", comment: @comment %>
+  </div>
+</section>
+
