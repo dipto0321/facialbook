@@ -28,10 +28,12 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    if @comment.delete
-      flash[:warning] = "Comment deleted."
-    else
+    begin
+      @comment.delete
+    rescue => exception
       flash[:danger] = "You are trying to delete a non-existing comment"
+    else
+      flash[:warning] = "Comment deleted."
     end
     redirect_to session[:return_to]
     session.delete(:return_to)

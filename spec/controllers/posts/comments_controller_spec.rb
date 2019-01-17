@@ -49,6 +49,8 @@ RSpec.describe Posts::CommentsController do
       @user = create(:user)
       @user_post = create(:user_post,author_id: @user.id, postable_id: @user.id)
       @comment = create(:post_comment, author_id: @commenter.id, commentable_id: @user_post.id, body: "Wowowee")
+      session[:return_to] = root_path
+      sign_in(@commenter)
     end
 
     context "successful update" do
@@ -59,8 +61,6 @@ RSpec.describe Posts::CommentsController do
           body: "Changed comment"
         }, post_id: @user_post.id, id: @comment.id
         }}
-        session[:return_to] = root_path
-        sign_in(@commenter)
         patch :update, parameters
       end
 
@@ -80,8 +80,6 @@ RSpec.describe Posts::CommentsController do
           body: nil
         }, post_id: @user_post.id, id: @comment.id
         }}
-        session[:return_to] = root_path
-        sign_in(@commenter)
         patch :update, parameters
       end
 
@@ -95,6 +93,21 @@ RSpec.describe Posts::CommentsController do
 
     end
 
+  end
+
+  describe "DELETE #destroy" do
+    it "removes the comment from the database" do
+      @commenter = create(:user)
+      @user = create(:user)
+      @user_post = create(:user_post,author_id: @user.id, postable_id: @user.id)
+      @comment = create(:post_comment, author_id: @commenter.id, commentable_id: @user_post.id)
+      session[:return_to] = root_path
+      sign_in(@commenter)
+      expect{
+        delete :destroy, params:{id:@comment.id}
+    }.to change(Comment, :count).by(-1)
+    end
+    
   end
 
 end
