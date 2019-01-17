@@ -18,13 +18,13 @@ ActiveRecord::Schema.define(version: 2019_01_16_035043) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
     t.bigint "commentable_id"
-    t.bigint "commenter_id"
+    t.bigint "author_id"
     t.text "body"
     t.string "comment_pic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
-    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2019_01_16_035043) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "users", column: "commenter_id"
+  add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "friend_requests", "users", column: "requestee_id"
   add_foreign_key "friend_requests", "users", column: "requester_id"
   add_foreign_key "friendships", "users"

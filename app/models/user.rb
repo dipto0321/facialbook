@@ -14,7 +14,7 @@ class User < ApplicationRecord
   # User is post receiver
   has_many :posts, as: :postable, dependent: :destroy
 
-  has_many :comments, foreign_key: :commenter_id, dependent: :destroy
+  has_many :comments, foreign_key: :author_id, dependent: :destroy
 
   has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
 

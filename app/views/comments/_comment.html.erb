@@ -1,12 +1,15 @@
 <% if comment != @comment %>
   <li class="list-group-item">
-  <% commenter_image_url = comment.commenter.profile.profile_picture? ? comment.commenter.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
-    <a href="<%= user_path(comment.commenter)%>">
-      <%= image_tag( commenter_image_url, class:"img-fluid post-user-profile-pic")%>
+  <% author_image_url = comment.author.profile.profile_picture? ? comment.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+    <a href="<%= user_path(comment.author)%>">
+      <%= image_tag( author_image_url, class:"img-fluid post-user-profile-pic")%>
     </a>
-    <%= link_to comment.commenter.profile.full_name, user_path(comment.commenter)%>
+    <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
     <%= comment == @comment %>
     <%= comment.body %>
+    <% unless params[:action] == "edit" %>
+      
+    <% end %>
   </li>
 <% else %>
   <%= render  "comments/comment_form", {commentable: @comment, comment: Comment.new} %>

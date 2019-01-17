@@ -7,7 +7,7 @@ feature "show comments in post" do
     @commenter1 = create(:user)
     @commenter2 = create(:user)
     @post = create(:user_post, postable_id: @current_user.id, author_id: @current_user.id)
-    @comment1 = create(:post_comment, commenter_id: @commenter1.id, commentable_id: @post.id)
+    @comment1 = create(:post_comment, author_id: @commenter1.id, commentable_id: @post.id)
 
     visit login_path
     fill_in "Email", with: @current_user.email
