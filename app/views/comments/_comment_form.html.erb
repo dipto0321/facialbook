@@ -6,6 +6,22 @@
     </div>
     <div class="col-md-2">
       <%= f.button :submit, action_type, class: "btn-sm btn-outline-primary mt-1" %>
+
+      <% if params[:action] == "edit" %>
+        <div class="comment-edit-actions">
+          <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel ml-2">Cancel</a>
+          <div class="float-left delete-cancel">
+            <%= link_to  "Delete",
+                comment_comment_path(comment),
+                method: :delete%>
+          </div>
+        </div>
+      <% end %>
+
+
+
+
+
     </div>
   </div>
   <%= f.input :author_id, as: :hidden, input_html:{ value: current_user.id} %>
