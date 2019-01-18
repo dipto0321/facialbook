@@ -1,5 +1,5 @@
 <% if comment != @comment %>
-  <li class="list-group-item rounded-pill comment-bg my-1">
+  <li class="list-group-item rounded-pill comment-bg my-1 p-2">
   <% author_image_url = comment.author.profile.profile_picture? ? comment.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
     <a href="<%= user_path(comment.author)%>">
       <%= image_tag( author_image_url, class:"img-fluid comment-pro-pic")%>
