@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Roboto:700');
+@import url('https://fonts.googleapis.com/css?family=Staatliches');
 
 body {
   background: #EDF0F5;
@@ -193,4 +194,9 @@ li#friend_request {
 
 .delete-cancel {
   font-size: 0.8rem;
+}
+
+.arrow {
+  font-family: 'Staatliches', cursive;
+  color: #2c3e50;
 }

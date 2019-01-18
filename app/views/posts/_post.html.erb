@@ -12,7 +12,7 @@
       <h6 class="d-inline"><%= post.author.profile.full_name %></h6>
     </a>
     <% if post.postable != post.author%>
-      <i class="fa fa-arrow-right" aria-hidden="true"></i> 
+      <span class="arrow">></span> 
       <%= link_to post.postable.profile.full_name, user_path(post.postable)%>
       <% else %>
       shared
