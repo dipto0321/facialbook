@@ -1,18 +1,23 @@
 <% if comment != @comment %>
-  <li class="list-group-item rounded-pill comment-bg my-1 p-2">
+  <li class="list-group-item rounded-pill comment-bg my-1 py-2 px-3">
   <% author_image_url = comment.author.profile.profile_picture? ? comment.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
     <a href="<%= user_path(comment.author)%>">
       <%= image_tag( author_image_url, class:"img-fluid comment-pro-pic")%>
     </a>
     <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
     <%= comment.body %>
+    <%= link_to "Like", "#", class:"like-reply-btn ml-1"%>
+    <button class="btn-link btn-sm btn like-reply-btn" id="reply-<%=comment.id%>">Reply</button>
     <% unless params[:action] == "edit" %>
       <%= render "shared/actions", actionable: comment, post: comment.commentable, owner: comment.commentable.author,
       edit_path: edit_post_comment_path(comment.commentable,comment),
       delete_path: post_comment_path(comment.commentable,comment)
       %>
     <% end %>
+    <div id="reply-box-<%=comment.id%>" class=" ">
+      <%= render  "comments/comment_form", {commentable: comment, comment: Comment.new} %>
+    </div>
   </li>
 <% else %>
-  <%= render  "comments/comment_form", {commentable: @comment.commentable, comment: comment} %>
+  <%= render  "comments/comment_form", {commentable: comment.commentable, comment: comment} %>
 <% end %>
