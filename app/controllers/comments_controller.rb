@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.build(comment_params)
+    # debugger
     if @comment.save
       flash[:success] = 'Coment submitted'
     else
