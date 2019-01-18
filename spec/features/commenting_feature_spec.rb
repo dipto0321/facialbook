@@ -37,3 +37,29 @@ feature 'create new comment on post' do
     end
   end
 end
+
+feature "editing a comment" do
+  before :each do
+    @current_user = create(:user)
+    @commenter = create(:user)
+    @user_post = create(:user_post, author_id: @current_user.id, postable_id: @current_user.id)
+    visit login_path
+    @comment = create(:post_comment, author_id: @commenter.id, commentable_id: @user_post.id)
+    @reply = create(:comment_reply, author_id: @commenter.id, commentable_id: @comment.id)
+
+    fill_in "Email", with: @commenter.email
+    fill_in "Password", with: @commenter.password
+    click_on "Log in"
+    visit user_path(@current_user)
+    all(:link, "Edit")[1].click
+  end
+
+  context "editing a post comment" do
+    it "opens edit path" do
+      expect(page).to have_selector("textarea")
+    end
+  end
+
+  scenario "editing a reply to a comment" do
+  end
+end
