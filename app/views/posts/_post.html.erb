@@ -7,7 +7,7 @@
     %>
   <% end %>
     <a href="<%= user_path(post.author)%>">
-      <%= image_tag image_url(post.author), class:"img-fluid post-user-profile-pic"%>
+      <%= image_tag image_url(post.author.profile), class:"img-fluid post-user-profile-pic"%>
       <h6 class="d-inline"><%= post.author.profile.full_name %></h6>
     </a>
     <% if post.postable != post.author%>

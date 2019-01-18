@@ -1,8 +1,7 @@
 <h1>Profiles#edit</h1>
 <%= simple_form_for @profile do |f|%>
   <%= f.input :profile_picture %>
-  <% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"%>
-  <%= image_tag image_url, class:"profile-picture"%>
+  <%= image_tag image_url(@profile), class:"profile-picture"%>
 
   <%= f.input :first_name %>
   <%= f.input :last_name %>
