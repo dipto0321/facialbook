@@ -1,11 +1,10 @@
 <%= simple_form_for([commentable, comment]) do |f| %>
-  <% action_type = commentable.class == Post ? "Comment" : "Reply "%>
   <div class="form-row">
     <div class="col-md-9">
-      <%= f.input :body, label: false, input_html: { placeholder: action_type, rows: 1} %>
+      <%= f.input :body, label: false, input_html: { placeholder: action_type(commentable), rows: 1} %>
     </div>
     <div class="col-md-3">
-      <%= f.button :submit, action_type, class: "btn-sm btn-outline-primary mt-1" %>
+      <%= f.button :submit, action_type(commentable), class: "btn-sm btn-outline-primary mt-1" %>
 
       <% if params[:action] == "edit" %>
         <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel mr-2">Cancel</a>
