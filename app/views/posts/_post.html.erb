@@ -6,9 +6,8 @@
     delete_path: post_path(post)
     %>
   <% end %>
-  <% image_url = post.author.profile.profile_picture? ? post.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
     <a href="<%= user_path(post.author)%>">
-      <%= image_tag image_url, class:"img-fluid post-user-profile-pic"%>
+      <%= image_tag image_url(post), class:"img-fluid post-user-profile-pic"%>
       <h6 class="d-inline"><%= post.author.profile.full_name %></h6>
     </a>
     <% if post.postable != post.author%>
