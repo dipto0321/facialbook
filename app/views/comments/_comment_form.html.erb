@@ -1,8 +1,14 @@
 <%= simple_form_for([commentable, comment]) do |f| %>
   <% action_type = commentable.class == Post ? "Comment" : "Reply "%>
+  <div class="form-row">
+    <div class="col-md-10">
+      <%= f.input :body, label: false, input_html: { placeholder: action_type, rows: 1} %>
+    </div>
+    <div class="col-md-2">
+      <%= f.button :submit, action_type, class: "btn-sm btn-outline-primary mt-1" %>
+    </div>
+  </div>
   <%= f.input :author_id, as: :hidden, input_html:{ value: current_user.id} %>
-  <%= f.input :body, label: false, input_html: { placeholder: action_type, rows: 1} %>
-  <%= f.button :submit, action_type, class: "btn-sm btn-outline-primary float-right" %>
 <% end %>
 
 <!--Click enter to submit comment-->

@@ -20,7 +20,7 @@ feature 'create new comment on post' do
     before :each do
       @comment_body = Faker::Lorem.paragraph(2)
       fill_in 'comment_body', with: @comment_body
-      click_on 'Create Comment'
+      click_on 'Comment'
     end
 
     it 'shows the comment created in the post' do
@@ -33,7 +33,7 @@ feature 'create new comment on post' do
       visit user_path(@friend)
       @comment_body = Faker::Lorem.paragraph(2)
       fill_in 'comment_body', with: @comment_body
-      click_on 'Create Comment'
+      click_on 'Comment'
     end
   end
 end
