@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-feature "show comments in post" do
+feature 'show comments in post' do
   before :each do
     @current_user = create(:user)
     @commenter1 = create(:user)
@@ -10,16 +11,16 @@ feature "show comments in post" do
     @comment1 = create(:post_comment, author_id: @commenter1.id, commentable_id: @post.id)
 
     visit login_path
-    fill_in "Email", with: @current_user.email
-    fill_in "Password", with: @current_user.password
-    click_on "Log in"
+    fill_in 'Email', with: @current_user.email
+    fill_in 'Password', with: @current_user.password
+    click_on 'Log in'
   end
 
   it "shows the commenter's full name" do
     expect(page).to have_selector(:link_or_button, @commenter1.profile.full_name)
   end
 
-  it "shows the comment body" do
+  it 'shows the comment body' do
     expect(page).to have_content(@comment1.body)
   end
 end

@@ -103,7 +103,7 @@ posts.each do |post|
     Comment.create(
       author_id: User.all.sample.id,
       commentable_id: post.id,
-      commentable_type: "Post",
+      commentable_type: 'Post',
       body: Faker::Lorem.paragraph(2)
     )
   end
@@ -116,9 +116,8 @@ comments.each do |comment|
     Comment.create(
       author_id: User.all.sample.id,
       commentable_id: comment.id,
-      commentable_type: "Comment",
+      commentable_type: 'Comment',
       body: Faker::Lorem.paragraph(2)
     )
   end
 end
-
