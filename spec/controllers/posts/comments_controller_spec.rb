@@ -104,7 +104,7 @@ RSpec.describe Posts::CommentsController do
       session[:return_to] = root_path
       sign_in(@commenter)
       expect{
-        delete :destroy, params:{id:@comment.id}
+        delete :destroy, params:{id:@comment.id, post_id: @user_post.id}
     }.to change(Comment, :count).by(-1)
     end
     

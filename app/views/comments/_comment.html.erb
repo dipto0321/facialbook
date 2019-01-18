@@ -9,7 +9,7 @@
     <% unless params[:action] == "edit" %>
       <%= render "shared/actions", actionable: comment, post: comment.commentable, owner: comment.commentable.author,
       edit_path: edit_post_comment_path(comment.commentable,comment),
-      delete_path: comment_path(comment)
+      delete_path: post_comment_path(comment.commentable,comment)
       %>
     <% end %>
   </li>
