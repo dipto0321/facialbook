@@ -21,11 +21,11 @@
         <%= render  "comments/comment_form", {commentable: comment, comment: Comment.new} %>
       </div>
     <% end %>
-    <section class="mt-2">
-      <% if comment.comments.any? && params[:controller] != "comments/comments" %>
-        <%= render comment.comments %>
-      <% end %>
-    </section>
+     <% if comment.comments.any? && params[:controller] != "comments/comments" %>
+        <section class="mt-2 p-2 border replies-section">
+          <%= render comment.comments %>
+      </section>
+    <% end %>
   </li>
 <% else %>
   <%= render  "comments/comment_form", {commentable: comment.commentable, comment: comment} %>
