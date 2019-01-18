@@ -1,21 +1,17 @@
 <%= simple_form_for([commentable, comment]) do |f| %>
   <% action_type = commentable.class == Post ? "Comment" : "Reply "%>
   <div class="form-row">
-    <div class="col-md-10">
+    <div class="col-md-9">
       <%= f.input :body, label: false, input_html: { placeholder: action_type, rows: 1} %>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <%= f.button :submit, action_type, class: "btn-sm btn-outline-primary mt-1" %>
 
       <% if params[:action] == "edit" %>
-        <div class="comment-edit-actions">
-          <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel ml-2">Cancel</a>
-          <div class="float-left delete-cancel">
-            <%= link_to  "Delete",
+        <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel mr-2">Cancel</a>
+        <%= link_to  "Delete",
                 comment_comment_path(comment),
-                method: :delete%>
-          </div>
-        </div>
+                method: :delete, class: "delete-cancel"%>
       <% end %>
 
 
