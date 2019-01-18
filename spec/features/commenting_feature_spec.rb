@@ -51,15 +51,29 @@ feature "editing a comment" do
     fill_in "Password", with: @commenter.password
     click_on "Log in"
     visit user_path(@current_user)
-    all(:link, "Edit")[1].click
   end
 
   context "editing a post comment" do
     it "opens edit path" do
+      all(:link, "Edit")[0].click
       expect(page).to have_selector("textarea")
+    end
+    it "updating the comment" do
+      visit edit_post_comment_path(@comment.commentable, @reply)
+      fill_in "comment_body", with: "Update reply comment"
+      click_on "Reply"
     end
   end
 
-  scenario "editing a reply to a comment" do
+  context "editing a reply to a comment" do
+    it "opens edit path" do
+      all(:link, "Edit")[1].click
+      expect(page).to have_selector("textarea")
+    end
+    it "updating the comment" do
+      visit edit_post_comment_path(@comment.commentable, @comment)
+      fill_in "comment_body", with: "Update comment"
+      click_on "Comment"
+    end
   end
 end
