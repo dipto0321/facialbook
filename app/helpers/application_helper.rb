@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def image_url(resource)
-    image_url = resource.author.profile.profile_picture? ? resource.author.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
+    image_url = resource.profile.profile_picture? ? resource.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
   end
 
 end

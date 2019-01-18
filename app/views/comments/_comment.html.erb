@@ -2,7 +2,7 @@
   <li class="list-group-item my-1">
     <div class="rounded-pill comment-bg my-1 py-2 px-3">
       <a href="<%= user_path(comment.author)%>">
-        <%= image_tag( image_url(comment), class:"img-fluid comment-pro-pic")%>
+        <%= image_tag( image_url(comment.author), class:"img-fluid comment-pro-pic")%>
       </a>
       <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
       <%= comment.body %>
