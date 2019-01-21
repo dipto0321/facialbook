@@ -20,6 +20,9 @@
     <% if post != @post %>
       <p><%= time_ago_in_words(post.created_at)%> ago</p>
       <p class="card-text"><%= post.body %></p>
+      <% if post.likes.any? %>
+        <%= link_to pluralize(post.likes.count, "like"), "#"%>
+      <% end %>
       <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
       <% if params[:controller] != "posts/comments"%>
         <div id="post-interaction-btns">
