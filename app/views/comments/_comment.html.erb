@@ -7,7 +7,7 @@
       <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
       <%= comment.body %>
       <% if comment.likes.any? %>
-        <%= link_to pluralize(comment.likes.count, "like")%>
+        <%= link_to pluralize(comment.likes.count, "like"),  comment_likes_path(comment)%>
       <% end %>
 
       <% if !current_user.liked_comment.include? comment %>

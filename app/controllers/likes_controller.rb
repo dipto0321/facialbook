@@ -2,6 +2,11 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
+
+  def index
+    @likes = @likeable.likes
+  end
+
   def create
     @like = @likeable.likes.build
 

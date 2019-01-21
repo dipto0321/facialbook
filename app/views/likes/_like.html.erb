@@ -1,0 +1,8 @@
+<%likes.each do |like|%>
+  <div class="list-group-item">
+    <a href="<%=user_path(like.liker)%>">
+    <%= image_tag image_url(like.liker.profile), class: "img-fluid profile-picture"%>
+    </a>
+    <%= link_to like.liker.profile.full_name, user_path(like.liker) %>
+  </div>
+<% end%>
