@@ -26,11 +26,16 @@
       <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
       <% if params[:controller] != "posts/comments"%>
         <div id="post-interaction-btns">
+          <% if !current_user.liked_post.include? post %>
           <%=link_to "LIKE", 
           post_likes_path(post),
           method: :post
           %>  
-          
+          <% else%>
+          <%=link_to "UNLIKE", 
+          post_like_path(post.id)
+          %>
+          <% end %>
           |  COMMENT
         </div>
         <section class="card border-0">

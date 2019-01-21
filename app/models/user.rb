@@ -62,4 +62,8 @@ class User < ApplicationRecord
   def build_post(postable)
     postable.posts.build(author_id: id)
   end
+
+  def liked_post
+    Post.joins(:likes).where("liker_id=?", id)
+  end
 end
