@@ -25,10 +25,10 @@
         <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
         <% if params[:controller] != "posts/comments"%>
           <% if !current_user.liked_post.include? post %>
-            <%= link_to "Like", post_likes_path(post), method: :post, class: "btn btn-sm btn-link" %>  
+            <%= link_to "Like", post_likes_path(post), method: :post, class: "btn btn-sm btn-link px-0" %>  
           <% else%>
             <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, post.id)[0]%>
-            <%=link_to "Unlike", post_like_path(post,like), method: :delete, class: "btn btn-sm btn-link" %>
+            <%=link_to "Unlike", post_like_path(post,like), method: :delete, class: "btn btn-sm btn-link px-0" %>
           <% end %>
         <!-- Post likes views-->
         <% if post.likes.any? %>
