@@ -3,6 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe Posts::LikesController do
+  describe "GET #index" do
+    before :each do
+      @user = create(:user)
+      @user_post = create(:user_post, author_id: @user.id, postable_id: @user.id)
+      @liker = create(:user)
+      @like1 = create(:post_like, liker_id: @liker.id, likeable_id: @user_post.id)
+      @like2 = create(:post_like, liker_id: @user.id, likeable_id: @user_post.id)
+      sign_in(@user)
+      get :index, params:{post_id: @user_post.id}
+    end
+
+    it "assigns to @likes" do
+      expect(assigns(:likes)).to eq(@user_post.likes)
+    end
+
+    it "shows an accurate likes count" do
+      expect(assigns(:likes).count).to eq(@user_post.likes.count)
+    end
+  end
+
   describe 'POST #create' do
     it 'saves to the database' do
       user = create(:user)
