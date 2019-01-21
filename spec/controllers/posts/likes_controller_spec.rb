@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Posts::LikesController do
   describe "GET #index" do
-    before :each do
+    it "assigns to @likes" do
       @user = create(:user)
       @user_post = create(:user_post, author_id: @user.id, postable_id: @user.id)
       @liker = create(:user)
@@ -12,9 +12,6 @@ RSpec.describe Posts::LikesController do
       @like2 = create(:post_like, liker_id: @user.id, likeable_id: @user_post.id)
       sign_in(@user)
       get :index, params:{post_id: @user_post.id}
-    end
-
-    it "assigns to @likes" do
       expect(assigns(:likes)).to eq(@user_post.likes)
     end
 
