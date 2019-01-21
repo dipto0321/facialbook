@@ -10,18 +10,18 @@ RSpec.describe Comments::CommentsController do
       comment = create(:post_comment, commentable_id: user_post.id, author_id: commenter.id)
       session[:return_to] = root_path
       sign_in(commenter)
-      expect{
+      expect do
         post :create, params: {
-          comment:{
+          comment: {
             author_id: commenter.id,
-            body: "This is a demo"
+            body: 'This is a demo'
           },
           comment_id: comment.id
         }
-      }.to change(Comment, :count).by(1)
+      end.to change(Comment, :count).by(1)
     end
 
-    context "instance variable assingment and redirection" do
+    context 'instance variable assingment and redirection' do
       before(:each) do
         @commenter = create(:user)
         @user_post = create(:user_post, author_id: @commenter.id, postable_id: @commenter.id)
@@ -48,7 +48,7 @@ RSpec.describe Comments::CommentsController do
       @commenter = create(:user)
       @user_post = create(:user_post, author_id: @commenter.id, postable_id: @commenter.id)
       @comment = create(:post_comment, commentable_id: @user_post.id, author_id: @commenter.id)
-      @comment_reply = create(:comment_reply,commentable_id: @comment.id, author_id: @commenter.id,body: "This is a comment reply" )
+      @comment_reply = create(:comment_reply, commentable_id: @comment.id, author_id: @commenter.id, body: 'This is a comment reply')
       session[:return_to] = root_path
       sign_in(@commenter)
     end
@@ -93,13 +93,13 @@ RSpec.describe Comments::CommentsController do
     end
   end
 
-  describe "delete#destroy" do
+  describe 'delete#destroy' do
     it 'removes the comment from the database' do
       @commenter = create(:user)
       @user = create(:user)
       @user_post = create(:user_post, author_id: @user.id, postable_id: @user.id)
       @comment = create(:post_comment, author_id: @commenter.id, commentable_id: @user_post.id)
-      @comment_reply = create(:comment_reply,commentable_id: @comment.id, author_id: @commenter.id)
+      @comment_reply = create(:comment_reply, commentable_id: @comment.id, author_id: @commenter.id)
       session[:return_to] = root_path
       sign_in(@commenter)
       expect do

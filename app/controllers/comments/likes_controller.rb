@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Comments::LikesController < LikesController
   before_action :set_likeable
 

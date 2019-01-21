@@ -66,11 +66,11 @@ feature 'visit home page with login' do
 
     @post_by_current_user_to_another = create(:user_post, author_id: @current_user.id, postable_id: @friend_posted_on.id)
 
-    @post_like = create(:post_like, likeable_id: @post_on_current_user.id,liker_id: @friend_who_posted.id)
+    @post_like = create(:post_like, likeable_id: @post_on_current_user.id, liker_id: @friend_who_posted.id)
 
     @post_comment = create(:post_comment, commentable_id: @post_on_current_user.id, author_id: @current_user.id)
 
-    @comment_like = create(:comment_like, likeable_id: @post_comment.id,liker_id: @friend_who_posted.id)
+    @comment_like = create(:comment_like, likeable_id: @post_comment.id, liker_id: @friend_who_posted.id)
 
     visit root_path
     within 'div.nav-sign-in' do
@@ -118,11 +118,11 @@ feature 'visit home page with login' do
     expect(page).to have_content(@post_by_current_user_to_another.body)
   end
 
-  it "shows likes by @friend_who_posted on @post_by_current_user" do
+  it 'shows likes by @friend_who_posted on @post_by_current_user' do
     expect(page).to have_selector(:link_or_button,  "#{@post_on_current_user.likes.count} like")
   end
 
-  it "shows likes on comments" do
+  it 'shows likes on comments' do
     expect(page).to have_selector(:link_or_button,  "#{@post_comment.likes.count} like")
   end
 end

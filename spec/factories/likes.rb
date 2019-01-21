@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :post_like, class: "Like" do
+  factory :post_like, class: 'Like' do
     likeable_id { 1 }
-    likeable_type { "Post" }
+    likeable_type { 'Post' }
     liker_id { 1 }
   end
 
-  factory :comment_like, class: "Like" do
+  factory :comment_like, class: 'Like' do
     likeable_id { 1 }
-    likeable_type { "Comment" }
+    likeable_type { 'Comment' }
     liker_id { 1 }
   end
 end

@@ -64,6 +64,10 @@ class User < ApplicationRecord
   end
 
   def liked_post
-    Post.joins(:likes).where("liker_id=?", id)
+    Post.joins(:likes).where('liker_id=?', id)
+  end
+
+  def liked_comment
+    Comment.joins(:likes).where('liker_id=?', id)
   end
 end

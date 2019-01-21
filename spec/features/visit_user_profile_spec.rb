@@ -26,7 +26,7 @@ feature "visiting user's profile" do
 
     @post_comment = create(:post_comment, commentable_id: @post_by_user_to_friend.id, author_id: @user.id)
 
-    @comment_like = create(:comment_like, likeable_id: @post_comment.id,liker_id: @friend.id)
+    @comment_like = create(:comment_like, likeable_id: @post_comment.id, liker_id: @friend.id)
 
     visit user_path(@friend)
   end
@@ -64,12 +64,11 @@ feature "visiting user's profile" do
     expect(page).to have_content(@post_by_friend_to_friend2.body)
   end
 
-  it "shows likes by @friend_who_posted on @post_by_current_user" do
+  it 'shows likes by @friend_who_posted on @post_by_current_user' do
     expect(page).to have_selector(:link_or_button,  "#{@share_by_friend.likes.count} like")
   end
 
-  it "shows likes on comments" do
+  it 'shows likes on comments' do
     expect(page).to have_selector(:link_or_button,  "#{@post_comment.likes.count} like")
   end
-
 end
