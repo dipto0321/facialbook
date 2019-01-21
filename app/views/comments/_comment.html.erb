@@ -6,6 +6,9 @@
       </a>
       <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
       <%= comment.body %>
+      <% if comment.likes.any? %>
+        <%= link_to pluralize(comment.likes.count, "like"), "#"%>
+      <% end %>
       <%= link_to "Like", "#", class:"like-reply-btn ml-1"%>
       <button class="btn-link btn-sm btn like-reply-btn" id="reply-<%=comment.id%>">Reply</button>
       <% unless params[:action] == "edit" %>
