@@ -4,6 +4,6 @@ class Comments::LikesController < LikesController
   private
 
   def set_likeable
-    @likeable = Post.find_by(id: params[:post_id])
+    @likeable = Comment.find_by(id: params[:comment_id])
   end
 end

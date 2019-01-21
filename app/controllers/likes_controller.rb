@@ -10,4 +10,8 @@ class LikesController < ApplicationController
     redirect_to session[:return_to]
     session.delete(:return_to)
   end
+
+  def destroy
+    
+  end
 end
