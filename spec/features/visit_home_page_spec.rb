@@ -66,6 +66,8 @@ feature 'visit home page with login' do
 
     @post_by_current_user_to_another = create(:user_post, author_id: @current_user.id, postable_id: @friend_posted_on.id)
 
+    @post_like = create(:post_like, likeable_id: @post_on_current_user.id,liker_id: @friend_who_posted.id)
+
     visit root_path
     within 'div.nav-sign-in' do
       fill_in 'Email', with: @current_user.email
@@ -110,5 +112,9 @@ feature 'visit home page with login' do
 
   it "shows posts by current_user to his/her friends' timelines" do
     expect(page).to have_content(@post_by_current_user_to_another.body)
+  end
+
+  it "shows likes by @friend_who_posted on @post_by_current_user" do
+    expect(page).to have_selector(:link_or_button,  "#{@post_on_current_user.likes.count} like")
   end
 end

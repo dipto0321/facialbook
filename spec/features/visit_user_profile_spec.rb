@@ -22,6 +22,8 @@ feature "visiting user's profile" do
 
     @post_by_friend_to_friend2 = create(:user_post, author_id: @friend.id, postable_id: @friend2.id)
 
+    @post_like = create(:post_like, likeable_id: @share_by_friend.id, liker_id: @user.id)
+
     visit user_path(@friend)
   end
 
@@ -56,5 +58,9 @@ feature "visiting user's profile" do
 
   it "shows all posts that the user made on other user's timeline" do
     expect(page).to have_content(@post_by_friend_to_friend2.body)
+  end
+
+  it "shows likes by @friend_who_posted on @post_by_current_user" do
+    expect(page).to have_selector(:link_or_button,  "#{@share_by_friend.likes.count} like")
   end
 end
