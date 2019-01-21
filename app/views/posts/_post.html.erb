@@ -26,7 +26,12 @@
       <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
       <% if params[:controller] != "posts/comments"%>
         <div id="post-interaction-btns">
-          LIKE  |  COMMENT
+          <%=link_to "LIKE", 
+          post_likes_path(post),
+          method: :create
+          %>  
+          
+          |  COMMENT
         </div>
         <section class="card border-0">
           <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
