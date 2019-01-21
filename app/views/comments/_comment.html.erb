@@ -6,22 +6,21 @@
       </a>
       <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
       <%= comment.body %>
-      <% if comment.likes.any? %>
-        <%= link_to pluralize(comment.likes.count, "like"),"#", data: {toggle: "modal", target: "#likesModal"}%>
-        <%= render  "likes/like", likes: comment.likes %>
-      <% end %>
-
-      <% if !current_user.liked_comment.include? comment %>
-          <%= link_to "Like", comment_likes_path(comment), method: :post , class:"like-reply-btn ml-1"%>
+      <div class="d-inline">
+        <!-- Comment like/unlike action-->
+        <% if !current_user.liked_comment.include? comment %>
+            <%= link_to "Like", comment_likes_path(comment), method: :post , class:"like-reply-btn ml-1"%>
           <% else%>
-          <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
-          <%=link_to "UNLIKE", comment_like_path(comment,like), method: :delete
-          %>
-          <% end %>
+            <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
+            <%=link_to "UNLIKE", comment_like_path(comment,like), method: :delete %>
+        <% end %>
+        <!-- Comment likes views-->
+        <% if comment.likes.any? %>
+          <a href="#" data-toggle="modal" data-target="#likesModal" class="ml-1"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <%= comment.likes.count %></a>
+          <%= render  "likes/like", likes: comment.likes %>
+        <% end %>
+      </div>
 
-
-      
-      <button class="btn-link btn-sm btn like-reply-btn" id="reply-<%=comment.id%>">Reply</button>
       <% unless params[:action] == "edit" %>
         <%= render "shared/actions", actionable: comment, post: comment.commentable, owner: comment.commentable.author,
         edit_path: edit_post_comment_path(comment.commentable,comment),

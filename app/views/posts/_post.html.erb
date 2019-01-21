@@ -19,26 +19,22 @@
     <!--This is to show a specific post if that post is not the one for edit (for editing)-->
     <% if post != @post %>
       <p><%= time_ago_in_words(post.created_at)%> ago</p>
-      <p class="card-text"><%= post.body %></p>
-      <% if post.likes.any? %>
-        <%= link_to pluralize(post.likes.count, "like"), "#", data: {toggle: "modal", target: "#likesModal"}%>
-        <%= render  "likes/like", likes: post.likes %>
-      <% end %>
-      <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
-      <% if params[:controller] != "posts/comments"%>
-        <div id="post-interaction-btns">
+      <p class="card-text mb-0"><%= post.body %></p>
+      <div id="post-interaction-btns">
+        <!-- Post like/unlike actions-->
+        <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
+        <% if params[:controller] != "posts/comments"%>
           <% if !current_user.liked_post.include? post %>
-          <%=link_to "LIKE", 
-          post_likes_path(post),
-          method: :post
-          %>  
+            <%= link_to "Like", post_likes_path(post), method: :post, class: "btn btn-sm btn-link" %>  
           <% else%>
-          <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, post.id)[0]%>
-          <%=link_to "UNLIKE", 
-          post_like_path(post,like), method: :delete
-          %>
+            <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, post.id)[0]%>
+            <%=link_to "Unlike", post_like_path(post,like), method: :delete, class: "btn btn-sm btn-link" %>
           <% end %>
-          |  COMMENT
+        <!-- Post likes views-->
+        <% if post.likes.any? %>
+          <a href="#" data-toggle="modal" data-target="#likesModal"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <%= post.likes.count %></a>
+          <%= render  "likes/like", likes: post.likes %>
+        <% end %>
         </div>
         <section class="card border-0">
           <%= render "comments/comment_form", {comment: Comment.new, commentable: post} %>
