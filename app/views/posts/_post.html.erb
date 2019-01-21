@@ -21,7 +21,8 @@
       <p><%= time_ago_in_words(post.created_at)%> ago</p>
       <p class="card-text"><%= post.body %></p>
       <% if post.likes.any? %>
-        <%= link_to pluralize(post.likes.count, "like"), post_likes_path(post)%>
+        <%= link_to pluralize(post.likes.count, "like"), "#", data: {toggle: "modal", target: "#likesModal"}%>
+        <%= render  "likes/like", likes: post.likes %>
       <% end %>
       <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
       <% if params[:controller] != "posts/comments"%>
