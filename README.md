@@ -2,7 +2,7 @@
 
 by [Ryan](https://github.com/rvvergara) and [Dipto](https://github.com/dipto0321)
 
-Facebook clone created using Ruby On Rails. 
+Facebook clone created using Ruby On Rails. [Live Demo](https://facialbook.herokuapp.com)
 
 ### Minimum features:
 
@@ -29,5 +29,3 @@ Other major gems used:
 - Simple form for all forms
 - Carrierwave for image uploading feature
 - FactoryBot for generating spec data
-
-[Live Demo](https://facialbook.herokuapp.com)
