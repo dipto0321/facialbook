@@ -12,7 +12,9 @@
             <%= link_to "Like", comment_likes_path(comment), method: :post , class:"like-reply-btn ml-1"%>
           <% else%>
             <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
-            <%=link_to "UNLIKE", comment_like_path(comment,like), method: :delete %>
+            <%=link_to "Unlike", comment_like_path(comment,like), method: :delete,
+            class:"like-reply-btn ml-1"
+            %>
         <% end %>
         <!-- Comment likes views-->
         <% if comment.likes.any? %>

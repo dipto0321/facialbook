@@ -119,10 +119,10 @@ feature 'visit home page with login' do
   end
 
   it 'shows likes by @friend_who_posted on @post_by_current_user' do
-    expect(page).to have_selector(:link_or_button,  "#{@post_on_current_user.likes.count} like")
+    expect(page).to have_selector(:link_or_button,  "#{@post_on_current_user.likes.count}")
   end
 
   it 'shows likes on comments' do
-    expect(page).to have_selector(:link_or_button,  "#{@post_comment.likes.count} like")
+    expect(page).to have_selector(:link_or_button,  "#{@post_comment.likes.count}")
   end
 end

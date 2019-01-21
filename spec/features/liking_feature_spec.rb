@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'liking' do
+feature 'liking and unliking' do
   before :each do
     @user = create(:user)
     @liker = create(:user)
@@ -15,21 +15,39 @@ feature 'liking' do
     visit user_path(@user)
   end
 
-  context 'Liking post' do
-    it 'likes the post' do
+  context 'Liking and unliking a post' do
+    before :each do
       within 'div#post-interaction-btns' do
-        click_on 'LIKE'
+        click_on 'Like'
       end
-      expect(page).to have_selector(:link_or_button, "#{@post.likes.count} like")
+    end
+
+    it 'likes the post' do
+      expect(page).to have_selector(:link_or_button, "#{@post.likes.count}")
+    end
+
+    it "unlikes a post" do
+      click_on "Unlike"
+      expect(page).to have_selector(:link_or_button, "Like", count: 2)
     end
   end
 
   context 'Liking a comment' do
-    it 'likes the post' do
+    before :each do
       within 'div.comment-bg' do
         click_on 'Like'
       end
-      expect(page).to have_selector(:link_or_button, "#{@comment.likes.count} like")
     end
+
+    it 'likes the post' do
+      expect(page).to have_selector(:link_or_button, "#{@comment.likes.count}")
+    end
+
+    it "unlikes a comment" do
+      click_on "Unlike"
+      expect(page).to have_selector(:link_or_button, "Like", count: 2)
+    end
+
   end
+
 end
