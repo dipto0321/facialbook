@@ -12,7 +12,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = @likeable.likes.where("liker_id=?", current_user.id)[0]
+    @like = Like.find_by(id: params[:id])
     @like.delete
     redirect_to session[:return_to]
     session.delete(:return_to)

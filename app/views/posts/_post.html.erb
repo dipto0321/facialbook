@@ -32,8 +32,9 @@
           method: :post
           %>  
           <% else%>
+          <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, post.id)[0]%>
           <%=link_to "UNLIKE", 
-          post_like_path(post.id)
+          post_like_path(post,like), method: :delete
           %>
           <% end %>
           |  COMMENT
