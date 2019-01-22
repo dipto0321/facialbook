@@ -7,7 +7,7 @@ class FriendRequestsController < ApplicationController
 
     @requester = current_user
 
-    @friend_request = @requester.active_requests.build(requestee_id: @requestee.id)
+    @friend_request = FriendRequest.new(requestee_id: @requestee.id,requester_id: @requester.id)
     begin
       @friend_request.save
     rescue StandardError => exception
