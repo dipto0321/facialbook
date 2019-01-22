@@ -8,6 +8,7 @@ class Profile < ApplicationRecord
   validates :birthday, presence: true
   validates :gender, presence: true
   validate :profile_picture_size
+  default_scope {eager_load(:user)}
 
   def full_name
     "#{first_name} #{last_name}"

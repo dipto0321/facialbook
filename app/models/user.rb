@@ -35,6 +35,8 @@ class User < ApplicationRecord
 
   has_many :requesters, through: :passive_requests
 
+  default_scope {eager_load(:profile)}
+
   accepts_nested_attributes_for :profile, allow_destroy: true
   def friends
     added_friends + adding_friends

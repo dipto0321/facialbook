@@ -5,17 +5,17 @@ class Post < ApplicationRecord
   belongs_to :postable, polymorphic: true
   has_many :comments, as: :commentable
   has_many :likes, as: :likeable
-  default_scope { order(updated_at: :desc) }
+  default_scope { order(updated_at: :desc).eager_load(:author).eager_load(:likes).eager_load(:comments) }
   mount_uploader :post_pic, PostPicUploader
   validate :post_pic_size
 
   def self.timeline_posts(postable)
-    Post.where('postable_id=? OR author_id=?', postable.id, postable.id)
+    Post.where('postable_id=? OR posts.author_id=?', postable.id, postable.id)
   end
 
   def self.user_newsfeed_posts(postable)
     friend_ids = postable.friends.map(&:id)
-    Post.where('postable_id IN (?) OR author_id IN (?)', friend_ids + [postable.id], friend_ids + [postable.id])
+    Post.where('postable_id IN (?) OR posts.author_id IN (?)', friend_ids + [postable.id], friend_ids + [postable.id])
   end
 
   private

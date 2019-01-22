@@ -4,7 +4,7 @@
   
   <section>
     <% posts = Post.user_newsfeed_posts(current_user)%>
-    <% if posts.any?%>
+    <% if posts.eager_load(:author).any?%>
       <%= render posts %>
     <% end %>
   </section>
