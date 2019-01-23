@@ -14,12 +14,5 @@ RSpec.describe Post, type: :model do
       friend = create(:user)
       expect(build(:user_post, postable_id: friend.id, author_id: user.id)).to be_valid
     end
-
-    it 'has a build post instance method' do
-      @user = create(:user)
-      @friend = create(:user)
-      @post = @user.build_post(@friend)
-      expect(@post).to be_valid
-    end
   end
 end
