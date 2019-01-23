@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def show
     session[:return_to] = request.url
     @profile = @user.profile
+    @posts = Post.timeline_posts(@user)
   end
 
   private

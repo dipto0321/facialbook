@@ -3,13 +3,10 @@
   <%= render  "posts/post_pop_up" %>
   
   <section>
-    <% posts = Post.user_newsfeed_posts(current_user)%>
-    <% if posts.eager_load(:author).any?%>
-      <%= render posts %>
+    <% if @posts.any?%>
+      <%= render @posts %>
     <% end %>
   </section>
-
-
 
 <% else %>
 <section class="row mt-5">
