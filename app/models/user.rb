@@ -8,11 +8,11 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
-  # User is post author
-  has_many :posts, foreign_key: :author_id, dependent: :destroy
+  # The post is authored by user
+  has_many :authored_posts, foreign_key: :author_id, class_name: "Post", dependent: :destroy
 
-  # User is post receiver
-  has_many :posts, as: :postable, dependent: :destroy
+  # The post is recieved by the user in his timeline
+  has_many :received_posts, as: :postable, class_name: "Post", dependent: :destroy
 
   has_many :comments, foreign_key: :author_id, dependent: :destroy
 
@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   has_many :requesters, through: :passive_requests
 
-  default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests)}
+  default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests).eager_load(:active_friendships).eager_load(:passive_friendships)}
 
   accepts_nested_attributes_for :profile, allow_destroy: true
   def friends
@@ -61,10 +61,6 @@ class User < ApplicationRecord
 
   def pending_passive_requests
     passive_requests.where('responded=?', false)
-  end
-
-  def build_post(postable)
-    postable.posts.build(author_id: id)
   end
 
   def liked_post
