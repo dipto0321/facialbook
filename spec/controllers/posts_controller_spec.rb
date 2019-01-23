@@ -12,7 +12,7 @@ RSpec.describe PostsController, type: :controller do
         post :create, params: {
           post: {
             postable_id: postable_user.id,
-            author_id: author.id,
+            postable_type: 'User',
             body: Faker::Lorem.paragraph(2)
           }
         }
@@ -26,10 +26,6 @@ RSpec.describe PostsController, type: :controller do
         parameters = { params: { post: attributes_for(:user_post, postable_id: @postable_user.id, author_id: @author.id) } }
         sign_in(@author)
         post :create, parameters
-      end
-
-      it 'assigns to @postable' do
-        expect(assigns(:postable)).to eq(@postable_user)
       end
 
       it 'assigns to @author' do
