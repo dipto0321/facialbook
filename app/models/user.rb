@@ -27,15 +27,17 @@ class User < ApplicationRecord
 
   has_many :adding_friends, through: :passive_friendships, source: :user
 
-  has_many :friend_requests, class_name: 'FriendRequest', foreign_key: :requester_id
+  # All the request send by the user
+  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id
 
-  has_many :friend_requests, class_name: 'FriendRequest', foreign_key: :requestee_id
+  # All the request received by the user
+  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id
 
-  has_many :requestees, through: :friend_requests
+  has_many :requestees, through: :active_requests
 
-  has_many :requesters, through: :friend_requests
+  has_many :requesters, through: :passive_requests
 
-  default_scope {eager_load(:profile).eager_load(:friend_requests)}
+  default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests)}
 
   accepts_nested_attributes_for :profile, allow_destroy: true
   def friends
@@ -51,14 +53,14 @@ class User < ApplicationRecord
   end
 
   def pending_request?(requestee)
-    pending = FriendRequest.where('responded=? AND requestee_id=?', false, requestee.id)[0]
+    pending = active_requests.where('responded=? AND requestee_id=?', false, requestee.id)[0]
     return false if pending.nil?
 
     !pending.responded
   end
 
   def pending_passive_requests
-    friend_requests.where('responded=?', false)
+    passive_requests.where('responded=?', false)
   end
 
   def build_post(postable)
