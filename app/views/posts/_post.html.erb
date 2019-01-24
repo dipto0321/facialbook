@@ -20,9 +20,9 @@
     <% if post != @post %>
       <p><%= time_ago_in_words(post.created_at)%> ago</p>
       <p class="card-text mb-0"><%= post.body %></p>
+      <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
       <div id="post-interaction-btns-<%=post.id%>">
         <!-- Post like/unlike actions-->
-        <%= image_tag post.post_pic.url, class: "img-fluid"  if post.post_pic?%>
         <% if params[:controller] != "posts/comments"%>
           <% if !current_user.liked_post.include? post %>
               <%= render "posts/like_form", post: post%>
