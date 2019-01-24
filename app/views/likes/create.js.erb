@@ -1,0 +1,1 @@
+$("#post-interaction-btns-<%=@likeable.id%>").html("<%= escape_javascript(render('posts/unlike_form', post: @likeable, like: @like))%>");

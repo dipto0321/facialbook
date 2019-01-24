@@ -17,7 +17,7 @@ feature 'liking and unliking' do
 
   context 'Liking and unliking a post' do
     before :each do
-      within 'div#post-interaction-btns' do
+      within "div#post-interaction-btns-#{@post.id}" do
         click_on 'Like'
       end
     end
