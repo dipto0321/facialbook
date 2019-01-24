@@ -7,8 +7,15 @@ class UsersController < ApplicationController
 
   def show
     session[:return_to] = request.url
-    @profile = @user.profile
-    @posts = Post.timeline_posts(@user)
+    begin
+      @user.profile
+    rescue => exception
+      flash[:danger] = "User does not exist"
+      redirect_to root_path
+    else
+      @profile = @user.profile
+      @posts = Post.timeline_posts(@user)
+    end
   end
 
   private
