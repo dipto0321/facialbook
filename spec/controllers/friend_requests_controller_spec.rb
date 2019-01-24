@@ -7,7 +7,7 @@ RSpec.describe FriendRequestsController, type: :controller do
     it 'saves to the database' do
       requestee = create(:user)
       requester = create(:user)
-
+      session[:return_to] = user_path(requestee)
       sign_in(requester)
       expect do
         post :create, params: {
@@ -22,7 +22,7 @@ RSpec.describe FriendRequestsController, type: :controller do
         @requester = create(:user)
 
         parameters = { params: { friend_request: attributes_for(:friend_request, requester_id: @requester.id, requestee_id: @requestee.id) } }
-
+        session[:return_to] = user_path(@requestee)
         sign_in(@requester)
         post :create, parameters
       end
@@ -36,7 +36,7 @@ RSpec.describe FriendRequestsController, type: :controller do
       end
 
       it 'redirects' do
-        expect(response).to redirect_to(user_path(@requester))
+        expect(response).to redirect_to(user_path(@requestee))
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe FriendRequestsController, type: :controller do
       requester = create(:user)
       friend_request = create(:friend_request, requester_id: requester.id, requestee_id: requestee.id)
       sign_in(requestee)
-
+      session[:return_to] = user_path(requestee)
       expect do
         delete :destroy, params: {
           id: friend_request.id
@@ -61,7 +61,7 @@ RSpec.describe FriendRequestsController, type: :controller do
         @requester = create(:user)
         @friend_request = create(:friend_request, requester_id: @requester.id, requestee_id: @requestee.id)
         parameters = { params: { id: @friend_request.id } }
-
+        session[:return_to] = @requestee
         sign_in(@requestee)
         delete :destroy, parameters
       end
@@ -71,7 +71,7 @@ RSpec.describe FriendRequestsController, type: :controller do
       end
 
       it 'redirects back after delete' do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to user_path(@requestee)
       end
     end
   end

@@ -6,11 +6,15 @@
     <p class="card-text">
       <p><%= @profile.bio %>
     </p>
+    <!--Friend request/pending received/sent request-->
     <% if @user != current_user %>
       <% if !current_user.friends.include?(@user) %>
         <% if !current_user.pending_request?(@user) && !@user.pending_request?(current_user) %>
-          <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: @user.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-block" %>
+          <div id="friend-request-btn-user-<%=@user.id%>">
+            <%= render "users/shows/send_friend_request_form", user: @user%>
+          </div>
         <% elsif current_user.pending_request?(@user) %>
+          <!--Active Request Sent btn-->
           <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
           <%= render  partial: "users/shows/request_sent_btn", locals: {request: request} %>
         <% elsif @user.pending_request?(current_user) %>

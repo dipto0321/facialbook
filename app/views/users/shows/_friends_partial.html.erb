@@ -10,8 +10,11 @@
       <div class="col-6">
         <% if current_user != friend %>
           <% if !current_user.friends.include?(friend) %>
-            <% if !current_user.pending_request?(friend) && !friend.pending_request?(current_user) %>
-              <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: friend.id, requester_id: current_user.id}), method: :post, class: "btn btn-primary btn-sm float-right" %>
+          <!--Add Friend Btn-->
+            <div id="friend-request-btn-user-<%=friend.id%>">
+              <% if !current_user.pending_request?(friend) && !friend.pending_request?(current_user) %>
+                <%= render "users/shows/send_friend_request_form", user: friend%>
+            </div>
             <% elsif current_user.pending_request?(friend) %>
               <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, friend.id)[0]%>
               <%= render  "users/shows/request_sent_btn", request: request %>

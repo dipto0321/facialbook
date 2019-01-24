@@ -1,0 +1,2 @@
+<% btn_class = params[:controller] == "users/all_friends" ? "btn btn-primary btn-sm float-right": "btn btn-primary btn-block" %>
+<%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: user.id, requester_id: current_user.id}), method: :post, class: btn_class, remote: true %>
