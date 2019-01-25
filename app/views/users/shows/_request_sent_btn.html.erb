@@ -7,7 +7,7 @@
   <div class="dropdown-menu" style="min-width: <%= dropdown_menu_wd%>rem;">
     <%= link_to "Cancel request",   friend_request_path(request), 
     method: :delete,
-    class:"dropdown-item px-0 pl-1"
+    class:"dropdown-item px-0 pl-1", remote: true
     %>
   </div>
 </div>
