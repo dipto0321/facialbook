@@ -1,6 +1,6 @@
 <%= simple_form_for([commentable, comment]) do |f| %>
   <div class="form-row">
-    <div class="col-md-9">
+    <div class="col-md-9 d-inline">
       <%= f.input :body, label: false, input_html: { placeholder: action_type(commentable), rows: 1} %>
     </div>
     <div class="col-md-3">
