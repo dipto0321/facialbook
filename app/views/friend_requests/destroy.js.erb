@@ -1,1 +1,1 @@
-$("#friend-request-btn-<%=@friend_request.id%>").html("<%= escape_javascript(render("users/shows/send_friend_request_form",user: @friend_request.requestee))%>")
+$("#friend-request-btn-<%=@friend_request.id%>").html("<%= escape_javascript(render("users/shows/send_friend_request_form",user: @friend_request.requestee, origin: @origin))%>")

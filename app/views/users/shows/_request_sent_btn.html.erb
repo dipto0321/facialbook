@@ -1,9 +1,17 @@
 <div class="dropdown" id="friend-request-btn-<%=request.id%>">
-  <% btn_style = params[:origin] == 'users' || params[:controller] == "users" ? "btn-block" : "float-right btn-sm"%>
+  <% small_btn = "float-right btn-sm"%>
+  <% big_btn = "btn-block"%>
+  <% if @origin.nil? %>
+    <% btn_style = params[:controller] == 'users' || params[:controller] == "users" ? big_btn : small_btn%>
+    <% dropdown_menu_wd = params[:controller] == "users" ? 13.3 : 7.5 %>
+  <% else %>
+    <% btn_style = @origin.include?("all_friends") ? small_btn : big_btn %>
+    <% dropdown_menu_wd = @origin.include?("all_friends") ? 7.5 : 13.3 %>
+  <% end %>
+
   <a class="btn request-sent btn-silver dropdown-toggle <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Request sent
   </a>
-  <% dropdown_menu_wd = params[:origin] == 'users' || params[:controller] == "users" ? 13.3 : 7.5 %>
   <div class="dropdown-menu" style="min-width: <%= dropdown_menu_wd%>rem;">
     <%= link_to "Cancel request",   friend_request_path(request), 
     method: :delete,
