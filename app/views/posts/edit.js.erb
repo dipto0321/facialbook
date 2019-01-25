@@ -1,0 +1,3 @@
+<% if params[:controller] == "posts"%>
+  $("#post-body-<%=@post.id%>").html("<%= escape_javascript(render('posts/post_form', postable: @post.postable, post: @post, author: @post.author))%>");
+<% end %>
