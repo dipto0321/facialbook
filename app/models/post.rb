@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   default_scope { order(updated_at: :desc).eager_load(:author).eager_load(:likes).eager_load(:comments) }
   mount_uploader :post_pic, PostPicUploader
   validate :post_pic_size
+  validates :body, presence: true
 
   def self.timeline_posts(postable)
     Post.where('postable_id=? OR posts.author_id=?', postable.id, postable.id)
