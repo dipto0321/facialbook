@@ -4,10 +4,6 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def edit
     @comment = Comment.find_by(id: params[:id])
-    respond_to do |format|
-      format.html { render "edit"}
-      format.js
-    end
   end
 
   def create
@@ -29,8 +25,13 @@ class CommentsController < ApplicationController
     else
       flash[:danger] = 'Comment update rejected!'
     end
-    redirect_to session[:return_to]
-    session.delete(:return_to)
+    respond_to do |format|
+      format.html do
+        redirect_to session[:return_to]
+        session.delete(:return_to)
+      end
+      format.js
+    end
   end
 
   def destroy

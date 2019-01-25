@@ -13,7 +13,7 @@
           <!--Add Friend Btn-->
             <div id="friend-request-btn-user-<%=friend.id%>">
               <% if !current_user.pending_request?(friend) && !friend.pending_request?(current_user) %>
-                <%= render "users/shows/send_friend_request_form", user: friend%>
+                <%= render "users/shows/send_friend_request_form", user: friend, origin: nil%>
             </div>
             <% elsif current_user.pending_request?(friend) %>
               <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, friend.id)[0]%>

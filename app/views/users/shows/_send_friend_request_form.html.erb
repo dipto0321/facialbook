@@ -1,2 +1,8 @@
-<% btn_class = params[:controller] == "users/all_friends" ? "btn btn-primary btn-sm float-right": "btn btn-primary btn-block" %>
+<% small_btn = "btn btn-primary btn-sm float-right" %>
+<% big_btn =  "btn btn-primary btn-block"%>
+<% if origin.nil? %>
+  <% btn_class = params[:controller] == "users/all_friends" && params[:action] == "index" ? small_btn : big_btn %>
+<% else %>
+  <% btn_class = origin.include?("all_friends") ? small_btn : big_btn %>
+<% end %>
 <%= link_to  "Add Friend", friend_requests_path(friend_request: {requestee_id: user.id, requester_id: current_user.id}), method: :post, class: btn_class, remote: true %>

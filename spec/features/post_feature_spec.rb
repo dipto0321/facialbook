@@ -153,7 +153,7 @@ feature 'Edit post' do
       click_on('Edit')
       @body = Faker::Lorem.paragraph(5)
       fill_in 'Create post', with: @body
-      click_on('Share')
+      click_on('Update')
     end
 
     it "changes the post's content" do
@@ -174,7 +174,7 @@ feature 'Edit post' do
       click_on('Edit')
       @body = Faker::Lorem.paragraph(5)
       fill_in 'Create post', with: @body
-      click_on('Share')
+      click_on('Update')
     end
 
     it "should change the post's content" do
@@ -196,7 +196,7 @@ feature 'Edit post' do
       click_on('Edit')
       @body = Faker::Lorem.paragraph(5)
       fill_in 'Create post', with: @body
-      click_on('Share')
+      click_on('Update')
     end
 
     it "should change the post's content" do

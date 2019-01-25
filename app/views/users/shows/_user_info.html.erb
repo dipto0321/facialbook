@@ -11,7 +11,7 @@
       <% if !current_user.friends.include?(@user) %>
         <% if !current_user.pending_request?(@user) && !@user.pending_request?(current_user) %>
           <div id="friend-request-btn-user-<%=@user.id%>">
-            <%= render "users/shows/send_friend_request_form", user: @user%>
+            <%= render "users/shows/send_friend_request_form", user: @user, origin: nil%>
           </div>
         <% elsif current_user.pending_request?(@user) %>
           <!--Active Request Sent btn-->

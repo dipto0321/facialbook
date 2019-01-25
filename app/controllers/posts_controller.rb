@@ -23,8 +23,10 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:id])
     if @post.update(post_params)
-      flash[:success] = 'Post updated'
-      redirect_to session.delete(:return_to)
+      respond_to do |format|
+        format.html {redirect_to session.delete(:return_to)}
+        format.js
+      end
     else
       render 'edit'
     end
