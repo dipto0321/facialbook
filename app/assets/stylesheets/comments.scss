@@ -16,6 +16,7 @@
   display: inline;
 }
 
-.no-display {
+.no-display,
+.reply-box * {
   display: none;
 }

@@ -4,6 +4,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def edit
     @comment = Comment.find_by(id: params[:id])
+    respond_to do |format|
+      format.html { render "edit"}
+      format.js
+    end
   end
 
   def create
