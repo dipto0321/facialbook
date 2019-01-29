@@ -21,6 +21,11 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by(id: params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue => exception
+      flash[:danger] = "User does not exist"
+      redirect_to root_path
+    end
   end
 end

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :all_friends, only: :index, module: :users
     resources :mutual_friends, only: :index, module: :users
     resources :posts
+    resources :profiles, only: %i[new create]
   end
 
   resources :posts do
@@ -37,5 +38,5 @@ Rails.application.routes.draw do
 
   resources :friend_requests, only: %i[create update destroy]
 
-  resources :profiles, only: %i[edit update]
+  resources :profiles, only: %i[new create edit update]
 end
