@@ -2,23 +2,23 @@
 
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_profile
+  before_action :find_profile, except: :create
 
   def new
-    # @user = User.find_by(id: params[:user_id])
-    # if !@user.profile.nil?
-    #   flash[:warning] = "You already have a profile"
-    #   redirect_to user_path(@user)
-    # else
-    #   render "new"
-    # end
+    @user = User.find_by(id: params[:user_id])
+    if !@user.profile.nil?
+      flash[:warning] = "You already have a profile"
+      redirect_to user_path(@user)
+    else
+      render "new"
+    end
   end
 
   def edit; end
 
   def create
-    @user = User.find_by(id: params[:user_id])
-    @user.profile = profile_params
+    @user = current_user
+    @user.profile = Profile.new(profile_params)
     if @user.profile.save
       redirect_to user_path(@user)
     else

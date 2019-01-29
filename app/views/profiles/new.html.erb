@@ -1,6 +1,7 @@
 <h1>Create Profile</h1>
 <%= simple_form_for Profile.new do |f|%>
-  <%= f.input :profile_picture %>
+  <%= image_tag current_user.image %>
+  <%= f.input :profile_picture, input_html: {value: current_user.image} %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :birthday,

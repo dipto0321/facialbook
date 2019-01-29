@@ -39,7 +39,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'mini_magick', '4.9.2'
-gem 'omniauth', '~> 1.9'
+gem 'omniauth-facebook'
 gem 'simple_form'
 
 group :development, :test do
