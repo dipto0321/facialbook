@@ -7,11 +7,14 @@ class UsersController < ApplicationController
 
   def show
     session[:return_to] = request.url
-    begin
-      @user.profile
-    rescue => exception
-      flash[:danger] = "User does not exist"
-      redirect_to root_path
+    if @user.profile.nil?
+      if current_user == @user
+        flash[:danger] = "Finish creating your profile first"
+        redirect_to new_user_profile_path(current_user)
+      else
+        flash[:danger] = "User hasn't finished creating his/her profile"
+        redirect_to root_path
+      end
     else
       @profile = @user.profile
       @posts = Post.timeline_posts(@user)

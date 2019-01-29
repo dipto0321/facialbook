@@ -1,7 +1,7 @@
 <%= f.error_notification %>
 <div class="form-inputs">
   <% data_resource = params[:controller] == "devise/registrations" && params[:action] == "new" || params[:controller] == 'static_pages' ? resource.build_profile : resource.profile %>
-   <% if params[:action] == "new" %> 
+   <% if params[:action] != "edit" %> 
     <%= f.simple_fields_for :profile, data_resource do |f| %>
       <div class="row">
         <div class="col">
@@ -35,7 +35,7 @@
               label: false,
               required: true,
               input_html: { autocomplete: "new-password", placeholder:"Confirm Password" } %>
-  <% if params[:action] == "new" %>
+  <% if params[:action] != "edit" %>
     <%= f.simple_fields_for :profile, data_resource do |f|%>
       <%= f.input :birthday,
                   required: true,
@@ -52,6 +52,6 @@
 
 <div class="form-acti
 ons">
-  <% btn_text = params[:action] == "new" ? "Sign up" : "Update account"%>
+  <% btn_text = params[:action] == "edit" ? "Update account" : "Sign up"%>
   <%= f.button :submit, btn_text, class: "btn-success btn-block" %>
 </div>
