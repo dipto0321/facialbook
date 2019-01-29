@@ -19,6 +19,5 @@
   </div>
   <div class="nav-remember_me">
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-      <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path %>
   </div>
 <% end %>

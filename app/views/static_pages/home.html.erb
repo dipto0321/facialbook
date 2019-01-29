@@ -15,7 +15,14 @@
     <%= image_tag "bg.png", class:"mt-5"%>
   </div>
   <div class="col-md-5 pl-5">
-    <h1>Sign up</h1>
+    <div class="row">
+      <div class="col-5 pr-0">
+        <h1>Sign up</h1>
+      </div>
+      <div class="col-7 pt-3 px-0">
+        <%= link_to "or Login with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary btn-sm"%>
+      </div>
+    </div>
     <h5>It's free and always will be.</h5>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render  "devise/registrations/registration_form", f: f %>

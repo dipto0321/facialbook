@@ -39,7 +39,7 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <% profile_build_path = current_user.profile.nil? ? new_user_profile_path(current_user) : edit_profile_path(current_user.profile) %>
       <%= link_to  "Edit profile", profile_build_path, class: "dropdown-item" %>
-      <%= link_to  "Account setting", "#", class: "dropdown-item" %>
+      <%= link_to  "Account setting", edit_user_registration_path(current_user), class: "dropdown-item" %>
       <div class="dropdown-divider"></div>
       <%= link_to  "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
     </div>
