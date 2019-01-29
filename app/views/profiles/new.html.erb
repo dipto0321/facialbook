@@ -1,16 +1,2 @@
 <h1>Create Profile</h1>
-<%= simple_form_for Profile.new do |f|%>
-  <%= image_tag current_user.image %>
-  <%= f.input :profile_picture, input_html: {value: current_user.image} %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :birthday,
-                required: true,
-                as: :date,
-                start_year: 1905,
-                end_year: Date.today.year,
-                input_html: { autocomplete: "birthday"} %>
-    <%= f.input :gender, as: :radio_buttons, collection: [['female', 'female'], ['male', 'male']], label_method: :second, value_method: :first %>
-    <%= f.input :bio %>
-  <%= f.button :submit, "Create Profile"%>
-<%end%>
+<%= render "profile_form", profile: Profile.new %>

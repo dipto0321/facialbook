@@ -1,17 +1,2 @@
-<h1>Profiles#edit</h1>
-<%= simple_form_for @profile do |f|%>
-  <%= f.input :profile_picture %>
-  <%= image_tag image_url(@profile), class:"profile-picture"%>
-
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :birthday,
-                required: true,
-                as: :date,
-                start_year: 1905,
-                end_year: Date.today.year,
-                input_html: { autocomplete: "birthday"} %>
-    <%= f.input :gender, as: :radio_buttons, collection: [['female', 'female'], ['male', 'male']], label_method: :second, value_method: :first %>
-    <%= f.input :bio %>
-  <%= f.button :submit, "Update Profile"%>
-<%end%>
+<h1>Edit Profile</h1>
+<%= render "profile_form", profile: @profile %>
