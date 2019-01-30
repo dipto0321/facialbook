@@ -16,20 +16,20 @@ class User < ApplicationRecord
 
   has_many :likes, foreign_key: :liker_id, dependent: :destroy
 
-  has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
+  has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id, dependent: :destroy
 
-  has_many :passive_friendships, class_name: 'Friendship', foreign_key: :friend_id
+  has_many :passive_friendships, class_name: 'Friendship', foreign_key: :friend_id, dependent: :destroy
 
   has_many :added_friends, through: :active_friendships,
-                           source: :friend
+                           source: :friend, dependent: :destroy
 
-  has_many :adding_friends, through: :passive_friendships, source: :user
+  has_many :adding_friends, through: :passive_friendships, source: :user, dependent: :destroy
 
   # All the request send by the user
-  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id
+  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id, dependent: :destroy
 
   # All the request received by the user
-  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id
+  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id, dependent: :destroy
 
   has_many :requestees, through: :active_requests
 
