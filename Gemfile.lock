@@ -126,6 +126,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     ffi (1.9.25-x64-mingw32)
+    figaro (1.1.1)
+      thor (~> 0.14)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     gherkin (5.1.0)
@@ -343,6 +345,7 @@ DEPENDENCIES
   devise (~> 4.5)
   factory_bot_rails
   faker
+  figaro
   font-awesome-rails
   hirb
   jbuilder (~> 2.5)
