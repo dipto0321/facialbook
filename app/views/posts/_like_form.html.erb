@@ -1,5 +1,5 @@
 <%= link_to "Like", post_likes_path(post), method: :post, class: "btn btn-sm btn-link px-0", remote: true %>
 <% if post.likes.count > 0 %>
   <%= render "likes/likes_count", likeable: post%>
-  <%= render  "likes/like", likes: post.likes %>
+  <%= render  "likes/like", likes: post.likes, likeable: post %>
 <% end %>

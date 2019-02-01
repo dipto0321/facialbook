@@ -2,5 +2,5 @@
 <!-- Post likes views-->
 <% if post.likes.any? %>
   <%= render "likes/likes_count", likeable: post%>
-  <%= render  "likes/like", likes: post.likes %>
+  <%= render  "likes/like", likes: post.likes, likeable: post %>
 <% end %>
