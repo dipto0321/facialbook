@@ -4,7 +4,7 @@
 </form>
 <ul class="navbar-nav ml-auto">
   <li class="nav-item active">
-    <% name = current_user.profile.nil? ? current_user.name : current_user.profile.first_name %>
+    <% name = current_user.profile.nil? ? current_user.first_name : current_user.profile.first_name %>
     <a class="nav-link" href="<%= user_path(current_user) %>"><%= name %></a>
   </li>
   <li class="nav-item">
