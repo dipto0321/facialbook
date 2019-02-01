@@ -1,0 +1,16 @@
+<%= simple_form_for profile do |f|%>
+  <% image_url = params[:action] == "new" ? current_user.image : image_url(@profile) %>
+  <%= image_tag image_url, class:"profile-picture" %>
+  <%= f.input :profile_picture, input_html: {value: current_user.image} %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :birthday,
+                required: true,
+                as: :date,
+                start_year: 1905,
+                end_year: Date.today.year,
+                input_html: { autocomplete: "birthday"} %>
+    <%= f.input :gender, as: :radio_buttons, collection: [['female', 'female'], ['male', 'male']], label_method: :second, value_method: :first %>
+    <%= f.input :bio %>
+  <%= f.button :submit, class: "btn btn-primary"%>
+<%end%>

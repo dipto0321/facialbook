@@ -1,0 +1,6 @@
+<%=link_to "Unlike", post_like_path(post,like), method: :delete, class: "btn btn-sm btn-link px-0", remote: true %>
+<!-- Post likes views-->
+<% if post.likes.any? %>
+  <%= render "likes/likes_count", likeable: post%>
+  <%= render  "likes/like", likes: post.likes %>
+<% end %>

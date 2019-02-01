@@ -7,25 +7,36 @@ class FriendRequestsController < ApplicationController
 
     @requester = current_user
 
-    @friend_request = @requester.active_requests.build(requestee_id: @requestee.id)
+    @friend_request = FriendRequest.new(requestee_id: @requestee.id,requester_id: @requester.id)
+
+    @origin = session[:return_to]
+
     begin
       @friend_request.save
     rescue StandardError => exception
       flash[:danger] = 'You already sent a request'
-      redirect_back(fallback_location: root_path)
-    else
-      flash[:info] = "You added #{@requestee.profile.first_name} as friend. Wait for him/her to respond"
-      redirect_back(fallback_location: user_path(@requester))
+    end
+    respond_to do |format|
+      format.html do
+        redirect_to session[:return_to]
+        session.delete(:return_to)
+      end
+      format.js
     end
   end
 
   def destroy
     @friend_request = FriendRequest.find_by(id: params[:id])
-    if @friend_request.delete
-      flash[:warning] = 'Request deleted'
-    else
+    @origin = session[:return_to]
+    if !@friend_request.delete
       flash[:danger] = 'Request already deleted'
     end
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html do
+        redirect_to session[:return_to]
+        session.delete(:return_to)
+      end
+      format.js
+    end
   end
 end

@@ -7,7 +7,7 @@ feature 'user sign-up' do
     visit signup_path
   end
 
-  context 'all fills are present' do
+  context 'all fields are present' do
     it 'shows first name field' do
       expect(page).to have_selector("input[name='user[profile_attributes][first_name]']")
     end
@@ -46,7 +46,7 @@ feature 'user sign-up' do
       expect(page).to have_selector(:link_or_button, 'Sign up')
     end
     it 'shows login button' do
-      expect(page).to have_selector(:link_or_button, 'Log in', count: 1)
+      expect(page).to have_selector(:link_or_button, 'Log in', count: 2)
     end
   end
 end

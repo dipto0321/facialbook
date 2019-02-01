@@ -1,39 +1,41 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
   has_one :profile, dependent: :destroy
 
-  # User is post author
-  has_many :posts, foreign_key: :author_id, dependent: :destroy
+  # The post is authored by user
+  has_many :authored_posts, foreign_key: :author_id, class_name: "Post", dependent: :destroy
 
-  # User is post receiver
-  has_many :posts, as: :postable, dependent: :destroy
+  # The post is recieved by the user in his timeline
+  has_many :received_posts, as: :postable, class_name: "Post", dependent: :destroy
 
   has_many :comments, foreign_key: :author_id, dependent: :destroy
 
   has_many :likes, foreign_key: :liker_id, dependent: :destroy
 
-  has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id
+  has_many :active_friendships, class_name: 'Friendship', foreign_key: :user_id, dependent: :destroy
 
-  has_many :passive_friendships, class_name: 'Friendship', foreign_key: :friend_id
+  has_many :passive_friendships, class_name: 'Friendship', foreign_key: :friend_id, dependent: :destroy
 
   has_many :added_friends, through: :active_friendships,
-                           source: :friend
+                           source: :friend, dependent: :destroy
 
-  has_many :adding_friends, through: :passive_friendships, source: :user
+  has_many :adding_friends, through: :passive_friendships, source: :user, dependent: :destroy
 
-  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id
+  # All the request send by the user
+  has_many :active_requests, class_name: 'FriendRequest', foreign_key: :requester_id, dependent: :destroy
 
-  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id
+  # All the request received by the user
+  has_many :passive_requests, class_name: 'FriendRequest', foreign_key: :requestee_id, dependent: :destroy
 
   has_many :requestees, through: :active_requests
 
   has_many :requesters, through: :passive_requests
+
+  default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests).eager_load(:active_friendships).eager_load(:passive_friendships)}
 
   accepts_nested_attributes_for :profile, allow_destroy: true
   def friends
@@ -59,10 +61,6 @@ class User < ApplicationRecord
     passive_requests.where('responded=?', false)
   end
 
-  def build_post(postable)
-    postable.posts.build(author_id: id)
-  end
-
   def liked_post
     Post.joins(:likes).where('liker_id=?', id)
   end
@@ -70,4 +68,22 @@ class User < ApplicationRecord
   def liked_comment
     Comment.joins(:likes).where('liker_id=?', id)
   end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+  
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.image = auth.info.image # assuming the user model has an image
+    end
+  end
+
 end

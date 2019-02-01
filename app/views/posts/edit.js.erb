@@ -1,0 +1,5 @@
+<%# Show post form upon clicking Edit in dropdown %>
+$("#post-body-<%=@post.id%>").html("<%= escape_javascript(render('posts/post_form', postable: @post.postable, post: @post, author: @post.author))%>");
+
+<%# Remove display of dropdown when post form already shows %>
+$("#actions-dropdown-Post-<%=@post.id%>").addClass("no-display");

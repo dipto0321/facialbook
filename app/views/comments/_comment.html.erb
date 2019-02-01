@@ -5,22 +5,20 @@
         <%= image_tag( image_url(comment.author.profile), class:"img-fluid comment-pro-pic")%>
       </a>
       <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
-      <%= comment.body %>
+      <div id="comment-body-<%=comment.id%>" class="d-inline">
+        <p class="d-inline"><%= comment.body %></p>
+      </div>
+      
       <div class="d-inline">
         <!-- Comment like/unlike action-->
-        <% if !current_user.liked_comment.include? comment %>
-            <%= link_to "Like", comment_likes_path(comment), method: :post , class:"like-reply-btn ml-1"%>
-          <% else%>
-            <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
-            <%=link_to "Unlike", comment_like_path(comment,like), method: :delete,
-            class:"like-reply-btn ml-1"
-            %>
-        <% end %>
-        <!-- Comment likes views-->
-        <% if comment.likes.any? %>
-          <a href="#" data-toggle="modal" data-target="#likesModal" class="ml-1"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <%= comment.likes.count %></a>
-          <%= render  "likes/like", likes: comment.likes %>
-        <% end %>
+        <div id="comment-interaction-btns-<%=comment.id%>" class="like-reply-btn ml-1">
+          <% if !current_user.liked_comment.include? comment %>
+              <%= render "comments/like_form", comment: comment %>
+            <% else%>
+              <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
+              <%= render "comments/unlike_form", comment: comment, like: like%>
+          <% end %>
+        </div><!--End of interaction btns-->
       </div>
 
       <% unless params[:action] == "edit" %>
@@ -31,7 +29,7 @@
       <% end %>
     </div>
     <% if comment.commentable.class == Post %>
-      <div id="reply-box-<%=comment.id%>" class="card border-0">
+      <div id="reply-box-<%=comment.id%>" class="card border-0 reply-box">
         <%= render  "comments/comment_form", {commentable: comment, comment: Comment.new} %>
       </div>
     <% end %>

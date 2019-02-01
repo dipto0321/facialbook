@@ -39,8 +39,9 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'mini_magick', '4.9.2'
-gem 'omniauth', '~> 1.9'
+gem 'omniauth-facebook'
 gem 'simple_form'
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

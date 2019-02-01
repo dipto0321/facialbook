@@ -9,12 +9,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @postable = User.find_by(id: params[:post][:postable_id])
-    @author = User.find_by(id: params[:post][:author_id])
-    @post = @author.build_post(@postable)
-    @post.body = params[:post][:body]
-    @post.post_pic = params[:post][:post_pic]
 
+    @author = current_user
+    @post = @author.authored_posts.build(post_params)
     if @post.save
       flash[:success] = 'Post created!'
     else
@@ -24,17 +21,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    @postable = User.find_by(id: params[:post][:postable_id])
-    @author = User.find_by(id: params[:post][:author_id])
     @post = Post.find_by(id: params[:id])
-
-    @post.body = params[:post][:body]
-    @post.post_pic = params[:post][:post_pic]
-
-    if @post.save
-      flash[:success] = 'Post updated'
-      # debugger
-      redirect_to session.delete(:return_to)
+    if @post.update(post_params)
+      respond_to do |format|
+        format.html {redirect_to session.delete(:return_to)}
+        format.js
+      end
     else
       render 'edit'
     end
@@ -57,6 +49,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:author_id, :user_id, :post_pic, :body)
+    params.require(:post).permit(:postable_id,:postable_type, :user_id, :post_pic, :body)
   end
 end

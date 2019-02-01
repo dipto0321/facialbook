@@ -1,24 +1,26 @@
 <%= f.error_notification %>
 <div class="form-inputs">
   <% data_resource = params[:controller] == "devise/registrations" && params[:action] == "new" || params[:controller] == 'static_pages' ? resource.build_profile : resource.profile %>
-  <%= f.simple_fields_for :profile, data_resource do |f| %>
-    <div class="row">
-      <div class="col">
-        <%= f.input :first_name,
-                    label: false,
-                    required: true,
-                    autofocus: true ,
-                    input_html: { autocomplete: "first_name", placeholder:"First name"}%>
-      </div>
-        <div class="col pl-0">
-          <%= f.input :last_name,
+   <% if params[:action] != "edit" %> 
+    <%= f.simple_fields_for :profile, data_resource do |f| %>
+      <div class="row">
+        <div class="col">
+          <%= f.input :first_name,
                       label: false,
                       required: true,
                       autofocus: true ,
-                      input_html: { autocomplete: "last_name", placeholder:"Last name" }%>
+                      input_html: { autocomplete: "first_name", placeholder:"First name"}%>
         </div>
-    </div>
-  <%end%>
+          <div class="col pl-0">
+            <%= f.input :last_name,
+                        label: false,
+                        required: true,
+                        autofocus: true ,
+                        input_html: { autocomplete: "last_name", placeholder:"Last name" }%>
+          </div>
+      </div>
+    <%end%>
+  <% end %>
   <%= f.input :email,
               label: false,
               required: true,
@@ -33,22 +35,23 @@
               label: false,
               required: true,
               input_html: { autocomplete: "new-password", placeholder:"Confirm Password" } %>
-  <%= f.simple_fields_for :profile, data_resource do |f|%>
-    <%= f.input :birthday,
-                required: true,
-                as: :date,
-                start_year: 1905,
-                end_year: Date.today.year,
-                input_html: { autocomplete: "birthday", class:"px-0 mx-0"}%>
-      <div class="form-check form-check-inline">
-        <%= f.input :gender, as: :radio_buttons, collection: [['female', 'Female'], ['male', 'Male']], label_method: :second, value_method: :first%>
-      </div>
-
+  <% if params[:action] != "edit" %>
+    <%= f.simple_fields_for :profile, data_resource do |f|%>
+      <%= f.input :birthday,
+                  required: true,
+                  as: :date,
+                  start_year: 1905,
+                  end_year: Date.today.year,
+                  input_html: { autocomplete: "birthday", class:"px-0 mx-0"}%>
+        <div class="form-check form-check-inline">
+          <%= f.input :gender, as: :radio_buttons, collection: [['female', 'Female'], ['male', 'Male']], label_method: :second, value_method: :first%>
+        </div>
+    <% end %>
   <% end %>
-  
 </div>
 
 <div class="form-acti
 ons">
-  <%= f.button :submit, "Sign up", class: "btn-success btn-block" %>
+  <% btn_text = params[:action] == "edit" ? "Update account" : "Sign up"%>
+  <%= f.button :submit, btn_text, class: "btn-success btn-block" %>
 </div>
