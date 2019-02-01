@@ -11,6 +11,7 @@ class Profile < ApplicationRecord
   default_scope {eager_load(:user)}
 
   def full_name
+    return "#{first_name} #{middle_name} #{last_name}" if middle_name?
     "#{first_name} #{last_name}"
   end
 
