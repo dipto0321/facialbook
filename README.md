@@ -2,7 +2,7 @@
 
 by [Ryan](https://github.com/rvvergara) and [Dipto](https://github.com/dipto0321)
 
-Facebook clone created using Ruby On Rails. [Live Demo](https://facialbook.herokuapp.com)
+Facebook clone created using Ruby On Rails. [Live Demo](https://facials.herokuapp.com)
 
 ### Minimum features:
 
@@ -13,7 +13,7 @@ Facebook clone created using Ruby On Rails. [Live Demo](https://facialbook.herok
 5. Newsfeed and Timeline
 6. Posting on the newsfeed, on one's own timeline and on a friend's timeline (allows image uploading)
 7. Editing and Deleting authored posts
-8. Commenting on posts or other comments 
+8. Commenting on posts or other comments
 9. Editing and deleting comments
 10. Liking and Unliking posts and comments
 11. Showing Like count
@@ -22,6 +22,7 @@ Database used: Postgresql
 Test Suite used: RSpec
 
 Other major gems used:
+
 - Devise
 - Bootstrap for the frontend
 - SASS for custom styles
@@ -29,3 +30,18 @@ Other major gems used:
 - Simple form for all forms
 - Carrierwave for image uploading feature
 - FactoryBot for generating spec data
+
+### Installation Instructions:
+
+- After cloning, run:
+
+```
+touch config/application.yml
+```
+
+- And then inside this newly created file include the following lines:
+
+```
+DB_USERNAME: <type your own username here>
+DB_PASSWORD: <type your corresponding password here>
+```
