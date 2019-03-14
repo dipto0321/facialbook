@@ -64,11 +64,19 @@ DB_USERNAME: <type your own username here>
 DB_PASSWORD: <type your corresponding password here>
 ```
 
+-After that run these commands
+
+```
+rails db:setup && rails db:schema:load
+```
+
 ## Usage
 
 ```
-
+rails server
 ```
+
+Then goto `http:\\localhost:3000`
 
 ## API
 
