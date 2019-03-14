@@ -1,10 +1,24 @@
-# Facialbook app V1
+# facialbook
 
-by [Ryan](https://github.com/rvvergara) and [Dipto](https://github.com/dipto0321)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-Facebook clone created using Ruby On Rails. [Live Demo](https://facials.herokuapp.com)
+> Facebook clone created using Ruby On Rails. [Live Demo](https://facials.herokuapp.com)
 
-### Minimum features:
+## Table of Contents
+
+- [facialbook](#facialbook)
+  - [Table of Contents](#table-of-contents)
+  - [Minimum features:](#minimum-features)
+  - [Security](#security)
+  - [Background](#background)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [API](#api)
+  - [Maintainers](#maintainers)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## Minimum features:
 
 1. User signup and signin (with Remember Me) and creation of Profile (with Profile picture uploading)
 2. Sending, Accepting, Cancelling and Deleting (Rejecting) Friend Requests
@@ -17,6 +31,10 @@ Facebook clone created using Ruby On Rails. [Live Demo](https://facials.herokuap
 9. Editing and deleting comments
 10. Liking and Unliking posts and comments
 11. Showing Like count
+
+## Security
+
+## Background
 
 Database used: Postgresql
 Test Suite used: RSpec
@@ -31,7 +49,7 @@ Other major gems used:
 - Carrierwave for image uploading feature
 - FactoryBot for generating spec data
 
-### Installation Instructions:
+## Install
 
 - After cloning, run:
 
@@ -45,3 +63,25 @@ touch config/application.yml
 DB_USERNAME: <type your own username here>
 DB_PASSWORD: <type your corresponding password here>
 ```
+
+## Usage
+
+```
+
+```
+
+## API
+
+## Maintainers
+
+[@Ryan and Dipto](https://github.com/Ryan and Dipto)
+
+## Contributing
+
+[Ryan](https://github.com/rvvergara) and [Dipto](https://github.com/dipto0321)
+
+Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+
+## License
+
+ryto © 2019 Ryan and Dipto
