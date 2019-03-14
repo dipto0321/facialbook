@@ -1,4 +1,4 @@
-# facialbook
+# Facialbook
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
@@ -6,7 +6,7 @@
 
 ## Table of Contents
 
-- [facialbook](#facialbook)
+- [Facialbook](#facialbook)
   - [Table of Contents](#table-of-contents)
   - [Minimum features:](#minimum-features)
   - [Security](#security)
@@ -74,7 +74,7 @@ DB_PASSWORD: <type your corresponding password here>
 
 ## Maintainers
 
-[@Ryan and Dipto](https://github.com/Ryan and Dipto)
+[@Ryan](https://github.com/rvvergara) and [@Dipto](https://github.com/dipto0321)
 
 ## Contributing
 
