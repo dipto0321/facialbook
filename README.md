@@ -36,10 +36,15 @@
 
 ## Background
 
-Database used: Postgresql
-Test Suite used: RSpec
+**Database used:**
 
-Other major gems used:
+  - Postgresql
+  
+**Test Suite used:** 
+
+  - RSpec
+
+**Other major gems used:**
 
 - Devise
 - Bootstrap for the frontend
