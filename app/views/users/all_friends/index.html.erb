@@ -1,0 +1,6 @@
+<div class="mt-5">
+  <h1 class="profile-full-name ml-5"><%= @user.profile.first_name%>'s Friends</h1>
+  <% if @all_friends.any? %>
+    <%= render partial: "users/shows/friends_partial", locals:{friend_resource: @all_friends}%>
+  <%end%>
+</div>

@@ -1,0 +1,44 @@
+<% if comment != @comment %>
+  <li class="list-group-item my-1">
+    <div class="rounded-pill comment-bg my-1 py-2 px-3">
+      <a href="<%= user_path(comment.author)%>">
+        <%= image_tag( image_url(comment.author.profile), class:"img-fluid comment-pro-pic")%>
+      </a>
+      <%= link_to comment.author.profile.full_name, user_path(comment.author)%>
+      <div id="comment-body-<%=comment.id%>" class="d-inline">
+        <p class="d-inline"><%= comment.body %></p>
+      </div>
+      
+      <div class="d-inline">
+        <!-- Comment like/unlike action-->
+        <div id="comment-interaction-btns-<%=comment.id%>" class="like-reply-btn ml-1">
+          <% if !current_user.liked_comment.include? comment %>
+              <%= render "comments/like_form", comment: comment %>
+            <% else%>
+              <% like = Like.where("liker_id=? AND likeable_id=?", current_user.id, comment.id)[0]%>
+              <%= render "comments/unlike_form", comment: comment, like: like%>
+          <% end %>
+        </div><!--End of interaction btns-->
+      </div>
+
+      <% unless params[:action] == "edit" %>
+        <%= render "shared/actions", actionable: comment, post: comment.commentable, owner: comment.commentable.author,
+        edit_path: edit_post_comment_path(comment.commentable,comment),
+        delete_path: post_comment_path(comment.commentable,comment)
+        %>
+      <% end %>
+    </div>
+    <% if comment.commentable.class == Post %>
+      <div id="reply-box-<%=comment.id%>" class="card border-0 reply-box">
+        <%= render  "comments/comment_form", {commentable: comment, comment: Comment.new} %>
+      </div>
+    <% end %>
+     <% if comment.comments.any? && params[:controller] != "comments/comments" %>
+        <section class="mt-2 p-2 border replies-section">
+          <%= render comment.comments %>
+      </section>
+    <% end %>
+  </li>
+<% else %>
+  <%= render  "comments/comment_form", {commentable: comment.commentable, comment: comment} %>
+<% end %>

@@ -1,0 +1,33 @@
+<section class="mt-3">
+<% if user_signed_in? %>
+  <%= render  "posts/post_pop_up" %>
+  
+  <section>
+    <% if @posts.any?%>
+      <%= render @posts %>
+    <% end %>
+  </section>
+
+<% else %>
+<section class="row mt-5">
+  <div class="col-md-7">
+    <h3 id="tagline">Facebook helps you connect and share with the people in your life.</h3>
+    <%= image_tag "bg.png", class:"mt-5"%>
+  </div>
+  <div class="col-md-5 pl-5">
+    <div class="row">
+      <div class="col-5 pr-0">
+        <h1>Sign up</h1>
+      </div>
+      <div class="col-7 pt-3 px-0">
+        <%= link_to "or Login with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary btn-sm"%>
+      </div>
+    </div>
+    <h5>It's free and always will be.</h5>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render  "devise/registrations/registration_form", f: f %>
+    <% end %>
+  </div>
+</section>
+<% end %>
+</section>

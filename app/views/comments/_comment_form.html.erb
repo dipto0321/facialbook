@@ -1,0 +1,25 @@
+<%= simple_form_for([commentable, comment], remote: true) do |f| %>
+  <div class="form-row">
+    <div class="col-md-9 d-inline">
+      <%= f.input :body, label: false, input_html: { placeholder: action_type(commentable), rows: 1} %>
+    </div>
+    <div class="col-md-3">
+      <%= f.button :submit, action_type(commentable), class: "btn-sm btn-outline-primary mt-1" %>
+
+      <% if params[:action] == "edit" %>
+        <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel mr-2">Cancel</a>
+        <%= link_to  "Delete",
+                comment_comment_path(comment),
+                method: :delete, class: "delete-cancel"%>
+      <% end %>
+
+
+
+
+
+    </div>
+  </div>
+  <%= f.input :author_id, as: :hidden, input_html:{ value: current_user.id} %>
+<% end %>
+
+<!--Click enter to submit comment-->

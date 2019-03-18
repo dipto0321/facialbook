@@ -1,0 +1,15 @@
+<%= link_to "Like", comment_likes_path(comment), method: :post, remote: true%>
+<% if comment.likes.count > 0 %>
+  <%= render "likes/likes_count", likeable: comment%>
+  <%= render  "likes/like", likes: comment.likes, likeable: comment %>
+<% end %>
+<% comment_box_id = comment.commentable_type == "Post" ? comment.id : comment.commentable.id %>
+<%= link_to "Reply", "#", class:"reply-to-comment-#{comment_box_id}"%>
+
+<script>
+  $(".reply-to-comment-<%=comment_box_id%>").on("click", e => {
+    e.stopPropagation();
+    e.preventDefault();
+    $("#reply-box-<%=comment_box_id%>").removeClass("reply-box");
+  })
+</script>

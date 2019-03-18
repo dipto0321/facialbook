@@ -1,0 +1,3 @@
+$("#comment-body-<%=@comment.id%>").html("<%= escape_javascript(render('comments/comment_form', commentable: @comment.commentable, comment: @comment))%>");
+  
+$("#actions-dropdown-Comment-<%=@comment.id%>").addClass("no-display");

@@ -1,0 +1,17 @@
+<section class="row mt-3">
+  <div class="col-md-3">
+    <%= render  "users/shows/user_info" %>
+    <%= render  "users/shows/friends_box" %>
+  </div>
+  <div class="col-md-9">
+    <%= render "posts/post_pop_up"%>
+  <section>
+    <% if @posts.any? %>
+      <%= render @posts %>
+    <% end %>
+  </section>
+  </div>
+</section>
+
+
+

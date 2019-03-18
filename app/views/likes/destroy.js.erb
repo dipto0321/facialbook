@@ -1,0 +1,5 @@
+<% if params[:controller] == "posts/likes"%>
+  $("#post-interaction-btns-<%=@likeable.id%>").html("<%= escape_javascript(render('posts/like_form', post: @likeable))%>");
+<%elsif%>
+  $("#comment-interaction-btns-<%=@likeable.id%>").html("<%= escape_javascript(render('comments/like_form', comment: @likeable))%>");
+<%end%>

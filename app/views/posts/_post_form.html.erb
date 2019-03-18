@@ -1,0 +1,26 @@
+<%= simple_form_for([postable, post], remote: true) do |f| %>
+  <div class="modal-content">
+    <div class="modal-body">
+      <%=f.input :body, label: "Create post" %>
+      <%=f.input :postable_id, as: :hidden, input_html:{value: postable.id} %>
+      <%=f.input :postable_type, as: :hidden, input_html:{value: "User"} %>
+      <div class="upload-btn-wrapper">
+        <button class="file-btn"><i class="fa fa-upload" aria-hidden="true"></i></button>
+        <%=f.input :post_pic, label: false%>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="<%= session[:return_to]%>", data-dismiss="modal" class="delete-cancel">Cancel</a>
+      <% if params[:action] == "edit" %>
+      <div class="float-right mr-2 delete-cancel">
+        <%= link_to  "Delete",
+            post_path(post),
+            method: :delete,
+          class: "ml-2" %>
+      </div>
+    <% end %>
+      <% btn_txt = params[:action] == "edit" ? "Update" : "Share"%>
+      <%= f.button :submit, btn_txt, class:"btn-sm btn-primary float-right"%>
+    </div>
+  </div>
+<% end %>

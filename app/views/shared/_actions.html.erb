@@ -1,0 +1,16 @@
+<% if current_user == actionable.author || current_user == owner %>
+  <div class="post_options float-right">
+    <div class="dropdown">
+      <button class="btn btn-sm" type="button" id="postActionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postActionButton" id="actions-dropdown-<%=actionable.class%>-<%=actionable.id%>">
+        <%= link_to  "Edit", edit_path, class: "dropdown-item", remote: true%>
+        <%= link_to  "Delete",
+         delete_path,
+         method: :delete, 
+         class: "dropdown-item" %>
+      </div>
+    </div>
+  </div>
+<% end %>

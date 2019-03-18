@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-body" id="profile-card">
+    <% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
+    <%= image_tag image_url, class:"img-fluid"%>
+    <h1 class="profile-full-name"><%=@profile.full_name %></h1>
+    <p class="card-text">
+      <p><%= @profile.bio %>
+    </p>
+    <!--Friend request/pending received/sent request-->
+    <% if @user != current_user %>
+      <% if !current_user.friends.include?(@user) %>
+        <% if !current_user.pending_request?(@user) && !@user.pending_request?(current_user) %>
+          <div id="friend-request-btn-user-<%=@user.id%>">
+            <%= render "users/shows/send_friend_request_form", user: @user, origin: nil%>
+          </div>
+        <% elsif current_user.pending_request?(@user) %>
+          <!--Active Request Sent btn-->
+          <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
+          <%= render  partial: "users/shows/request_sent_btn", locals: {request: request} %>
+        <% elsif @user.pending_request?(current_user) %>
+          <%= render partial:"users/shows/respond_to_friend_request", locals:{user: @user}%>
+        <% end %>
+      <% else %>
+        <%= render  partial:"users/shows/already_friends_btn",locals:{user: @user} %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

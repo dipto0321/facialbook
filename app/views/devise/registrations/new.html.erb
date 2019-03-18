@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <div  class="w-50 mx-auto pl-2 mb-3">
+    <h1>Create a New Account</h1>
+    <h5>It's free and always will be.</h5>
+  </div>
+    <div class="mx-auto px-2 w-50">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render  "registration_form", f: f %>
+      <% end %>
+      
+    </div>
+</div>

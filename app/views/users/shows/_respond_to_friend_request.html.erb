@@ -1,0 +1,23 @@
+<div class="dropdown">
+  <% btn_style = params[:controller] == 'users' ? "btn-block" : "float-right"%>
+  <a class="btn btn-sm btn-silver dropdown-toggle font-sm <%= btn_style %>" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Respond to Friend Request
+  </a>
+  <% dropdown_menu_wd = params[:controller] == 'users' ? 13.3 : 12.7 %>
+  <div class="dropdown-menu" style="min-width: <%= dropdown_menu_wd%>rem;">
+    <!--Confirm request-->
+    <%= link_to "Confirm request",
+     friendships_path(friendship:{
+       user_id: user.id,
+       friend_id: current_user.id
+     }),
+      method: :post,
+      class:"dropdown-item"%>
+    <!--Delete request-->
+    <% request = FriendRequest.where("requester_id=? AND requestee_id=?",user.id,current_user.id)[0]%>
+    <%= link_to "Delete request",
+     friend_request_path(request),
+     method: :delete,
+      class:"dropdown-item"%>
+  </div>
+</div>
