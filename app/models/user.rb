@@ -38,6 +38,9 @@ class User < ApplicationRecord
   default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests).eager_load(:active_friendships).eager_load(:passive_friendships)}
 
   accepts_nested_attributes_for :profile, allow_destroy: true
+  
+  before_validation :force_profile_creation
+
   def friends
     added_friends + adding_friends
   end
@@ -87,11 +90,16 @@ class User < ApplicationRecord
   end
 
   private
+
   def self.parse_name(user, name)
     name_arr = name.split(" ")
     user.last_name = name_arr.pop
     user.middle_name = name_arr.last
     user.first_name = name_arr.first
+  end
+
+  def force_profile_creation
+    errors.add(:profile, :blank, message: "cannot be nil") if profile.nil?
   end
 
 end
