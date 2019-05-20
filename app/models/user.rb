@@ -35,7 +35,12 @@ class User < ApplicationRecord
 
   has_many :requesters, through: :passive_requests
 
-  default_scope {eager_load(:profile).eager_load(:active_requests).eager_load(:passive_requests).eager_load(:active_friendships).eager_load(:passive_friendships)}
+  default_scope {
+                eager_load(:profile)
+                .eager_load(:active_requests)
+                .eager_load(:passive_requests)
+                .eager_load(:active_friendships)
+                .eager_load(:passive_friendships) }
 
   accepts_nested_attributes_for :profile, allow_destroy: true
   
@@ -99,7 +104,7 @@ class User < ApplicationRecord
   end
 
   def force_profile_creation
-    errors.add(:profile, :blank, message: "cannot be nil") if profile.nil?
+    errors.add(:profile, :blank, message: "can't be nil") if profile.nil?
   end
 
 end
