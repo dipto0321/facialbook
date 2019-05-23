@@ -54,6 +54,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "delegations" do
+    let(:george) { create(:user)}
+    
+    it "returns full name for user" do
+      expect(george.full_name).to eq(george.profile.full_name)
+    end
+
+    it "returns birthday for user" do
+      expect(george.birthday).to eq(george.profile.birthday)
+    end
+  end
+
   describe "instance methods" do
     let(:john) { create(:user) }
     let(:mike) { create(:user) }

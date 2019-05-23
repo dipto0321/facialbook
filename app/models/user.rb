@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  delegate :first_name, :last_name, :middle_name, :full_name, :birthday, :gender, to: :profile
   # The post is authored by user
   has_many :authored_posts, foreign_key: :author_id, class_name: "Post", dependent: :destroy
 
