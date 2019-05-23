@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 2019_02_01_041847) do
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "friend_id"
+    t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["concatenated"], name: "index_friendships_on_concatenated", unique: true
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
