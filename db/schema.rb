@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(version: 2019_02_01_041847) do
     t.boolean "accepted"
     t.bigint "requester_id"
     t.bigint "requestee_id"
+    t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["concatenated"], name: "index_friend_requests_on_concatenated", unique: true
     t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
     t.index ["requester_id", "requestee_id"], name: "index_friend_requests_on_requester_id_and_requestee_id"
     t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
