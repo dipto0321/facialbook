@@ -14,6 +14,6 @@ class Friendship < ApplicationRecord
   private
 
   def concatenate_ids
-    self.concatenated = [user.id, friend.id].sort.join
+    self.concatenated = [user.id, friend.id].sort.insert(1, "X").join
   end
 end

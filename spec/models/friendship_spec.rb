@@ -16,7 +16,6 @@ RSpec.describe Friendship, type: :model do
 
   context "find_friendship class method" do
     it "returns friendship between 2 users" do
-      debugger
       expect(Friendship.find_friendship(user, friend)).to eq(friendship)
     end
   end
