@@ -1,12 +1,25 @@
 # frozen_string_literal: true
 
 User.create(
-  email: 'ryto.verkar@gmail.com',
+  email: 'ryto@gmail.com',
   password: 'password',
   password_confirmation: 'password',
   profile_attributes: {
     first_name: 'Ryto',
     last_name: 'Verkar',
+    birthday: Faker::Date.birthday,
+    gender: 'male',
+    bio: Faker::Lorem.paragraph(10)
+  }
+)
+
+User.create(
+  email: 'aidan@gmail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  profile_attributes: {
+    first_name: 'Aidan',
+    last_name: 'Turner',
     birthday: Faker::Date.birthday,
     gender: 'male',
     bio: Faker::Lorem.paragraph(10)
