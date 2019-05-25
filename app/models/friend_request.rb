@@ -8,10 +8,6 @@ class FriendRequest < ApplicationRecord
   before_validation :prevent_requesting_existing_friend
   before_save :concatenate_ids
 
-  def accept
-    update_attributes(responded: true, accepted: true)
-  end
-
   private
 
   def concatenate_ids
