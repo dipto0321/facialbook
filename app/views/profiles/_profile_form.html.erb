@@ -1,7 +1,7 @@
 <%= simple_form_for profile do |f|%>
   <% image_url = params[:action] == "new" ? current_user.image : image_url(@profile) %>
   <%= image_tag image_url, class:"profile-picture" %>
-  <%= f.input :profile_picture, input_html: {value: current_user.image || current_user.profile.profile_picture} %>
+  <%= f.input :profile_picture, input_html: {value: current_user.profile.profile_picture} %>
   <%= f.input :first_name, input_html:{value: current_user.first_name || current_user.profile.first_name} %>
   <%= f.input :middle_name, input_html:{value: current_user.middle_name || current_user.profile.middle_name} %>
   <%= f.input :last_name, input_html:{value: current_user.last_name || current_user.profile.last_name} %>
