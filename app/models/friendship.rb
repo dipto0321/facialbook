@@ -8,7 +8,7 @@ class Friendship < ApplicationRecord
   before_save :concatenate_ids
 
   def self.find_friendship(user, friend)
-    where("concatenated=?", [user.id, friend.id].sort.join)[0]
+    where("concatenated=?", [user.id, friend.id].sort.insert(1, "X").join)[0]
   end
 
   private
