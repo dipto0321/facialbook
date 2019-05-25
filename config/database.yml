@@ -5,8 +5,8 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  username: <%= Rails.application.credentials.pg_credentials[:username] %>
+  password: <%= Rails.application.credentials.pg_credentials[:password] %>
   timeout: 5000
 
 development:
