@@ -61,15 +61,12 @@ class User < ApplicationRecord
     Friendship.where("user_id=? OR friend_id=?", id, id)
   end
 
-  def pending_request?(requestee)
-    pending = active_requests.where("responded=? AND requestee_id=?", false, requestee.id)[0]
-    return false if pending.nil?
-
-    !pending.responded
+  def has_pending_request_to?(requestee)
+    !active_requests.where("requestee_id=?", requestee.id).empty?
   end
 
-  def pending_passive_requests
-    passive_requests.where("responded=?", false)
+  def has_pending_request_from?(requester)
+    !passive_requests.where("requester_id=?", requester.id)
   end
 
   def newsfeed_posts

@@ -1,6 +1,6 @@
-<% if user.pending_passive_requests.any? %>
+<% if user.passive_requests.any? %>
   <ul class="list-group">
-    <% user.pending_passive_requests.each do |request| %>
+    <% user.passive_requests.each do |request| %>
       <li class="dropdown-item">
         <% image_url = request.requester.profile.profile_picture? ? request.requester.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
         <a href="<%= user_path(request.requester)%>">
