@@ -66,7 +66,7 @@ class User < ApplicationRecord
   end
 
   def has_pending_request_from?(requester)
-    !passive_requests.where("requester_id=?", requester.id)
+    !passive_requests.where("requester_id=?", requester.id).empty?
   end
 
   def newsfeed_posts
