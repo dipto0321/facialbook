@@ -289,4 +289,5 @@ Devise.setup do |config|
   # end
   callback_url = Rails.env.production? ? "https://facials.herokuapp.com/users/auth/facebook/callback" : "http://localhost:3000/users/auth/facebook/callback"
   config.omniauth :facebook, Rails.application.credentials.fb_api[:app_id], Rails.application.credentials.fb_api[:app_secret], callback_url: callback_url
+
 end
