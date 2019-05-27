@@ -72,6 +72,12 @@ class User < ApplicationRecord
     passive_requests.where("responded=?", false)
   end
 
+  def newsfeed_posts
+    friend_ids = friends.map(&:id)
+    combined_ids = friend_ids + [id]
+    Post.where("postable_id IN (?) OR posts.author_id IN (?)", combined_ids, combined_ids)
+  end
+
   def timeline_posts
     Post.where('postable_id=? OR posts.author_id=?', id, id)
   end
