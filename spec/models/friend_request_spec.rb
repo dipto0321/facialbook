@@ -42,6 +42,7 @@ RSpec.describe FriendRequest do
         request1 = build(:friend_request, requester_id: @bert.id, requestee_id: @adam.id)
         request2 = build(:friend_request, requester_id: @adam.id, requestee_id: @bert.id)
         expect(request1).to_not be_valid
+        expect(request2).to_not be_valid
       end
     end
   end

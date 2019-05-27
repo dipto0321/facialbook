@@ -20,6 +20,6 @@ class Friendship < ApplicationRecord
 
   def delete_associated_request
     request = FriendRequest.where("concatenated=?", concatenated)[0]
-    request.delete
+    request.delete unless request.nil?
   end
 end
