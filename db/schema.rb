@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_065054) do
+ActiveRecord::Schema.define(version: 2019_05_27_120735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(version: 2019_05_25_065054) do
   end
 
   create_table "friend_requests", force: :cascade do |t|
-    t.boolean "responded", default: false
-    t.boolean "accepted"
     t.bigint "requester_id"
     t.bigint "requestee_id"
     t.string "concatenated"
