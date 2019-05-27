@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: "User"
   belongs_to :postable, polymorphic: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
@@ -10,20 +10,11 @@ class Post < ApplicationRecord
   validate :post_pic_size
   validates :body, presence: true
 
-  def self.timeline_posts(postable)
-    Post.where('postable_id=? OR posts.author_id=?', postable.id, postable.id)
-  end
-
-  def self.user_newsfeed_posts(postable)
-    friend_ids = postable.friends.map(&:id)
-    Post.where('postable_id IN (?) OR posts.author_id IN (?)', friend_ids + [postable.id], friend_ids + [postable.id])
-  end
-
   private
 
   def post_pic_size
     if post_pic.size > 5.megabytes
-      errors.add(:post_pic, 'should be less than 5MB')
+      errors.add(:post_pic, "should be less than 5MB")
     end
   end
 end

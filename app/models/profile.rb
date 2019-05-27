@@ -5,8 +5,6 @@ class Profile < ApplicationRecord
   mount_uploader :profile_picture, ProfilePictureUploader
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :birthday, presence: true
-  validates :gender, presence: true
   validate :profile_picture_size
   default_scope {eager_load(:user)}
 
