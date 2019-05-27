@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :post_comment, class: 'Comment' do
-    commentable_id { 1 }
-    commentable_type { 'Post' }
-    author_id { 1 }
+  factory :post_comment, class: "Comment" do
+    commentable_type { "Post" }
+    association :commentable, factory: :post
+    association :author, factory: :user
     body { Faker::Lorem.paragraph(2) }
   end
 
-  factory :comment_reply, class: 'Comment' do
-    commentable_id { 2 }
-    commentable_type { 'Comment' }
-    author_id { 1 }
+  factory :comment_reply, class: "Comment" do
+    commentable_type { "Comment" }
+    association :commentable, factory: :comment
+    association :author, factory: :user
     body { Faker::Lorem.paragraph(2) }
   end
 end
