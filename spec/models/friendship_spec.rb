@@ -8,12 +8,20 @@ RSpec.describe Friendship, type: :model do
   let(:friend) { create(:user) }
 
   before do
+    @request = create(:friend_request, requester_id: user.id, requestee_id: friend.id)
     @friendship = create(:friendship, user_id: user.id, friend_id: friend.id)
   end
 
   describe "before_save callback" do
     it "concatenates ids of user and friend before save" do
       expect(@friendship.concatenated).to eq([user.id, friend.id].sort.insert(1, "X").join)
+    end
+  end
+
+  describe "after_save callback" do
+    it "deletes associated request" do
+      expect(user.active_requests).to be_empty
+      expect(friend.passive_requests).to be_empty
     end
   end
 
