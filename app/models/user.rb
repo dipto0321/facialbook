@@ -72,6 +72,10 @@ class User < ApplicationRecord
     passive_requests.where("responded=?", false)
   end
 
+  def timeline_posts
+    Post.where('postable_id=? OR posts.author_id=?', id, id)
+  end
+
   def liked_post
     Post.joins(:likes).where("liker_id=?", id)
   end

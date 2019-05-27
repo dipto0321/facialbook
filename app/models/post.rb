@@ -10,10 +10,6 @@ class Post < ApplicationRecord
   validate :post_pic_size
   validates :body, presence: true
 
-  def self.timeline_posts(postable)
-    Post.where('postable_id=? OR posts.author_id=?', postable.id, postable.id)
-  end
-
   def self.user_newsfeed_posts(postable)
     friend_ids = postable.friends.map(&:id)
     Post.where('postable_id IN (?) OR posts.author_id IN (?)', friend_ids + [postable.id], friend_ids + [postable.id])
