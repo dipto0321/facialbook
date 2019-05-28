@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "validation of user" do
@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
   end
 
   context "user not created without profile" do
-    let(:user) { build(:user)}
+    let(:user) { build(:user) }
     it "is invalid" do
       user.profile = nil
       user.valid?
@@ -55,8 +55,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "delegations" do
-    let(:george) { create(:user)}
-    
+    let(:george) { create(:user) }
+
     it "returns full name for user" do
       expect(george.full_name).to eq(george.profile.full_name)
     end
@@ -96,5 +96,22 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe "has_pending_request_to? and has_pending_request_from?" do
+      before do
+        create(:friend_request, requester_id: rachel.id, requestee_id: charles.id)
+      end
+
+      context "rachel has a pending request to charles" do
+        it "returns true" do
+          expect(rachel.has_pending_request_to?(charles)).to be(true)
+        end
+
+        context "charles has a pending request from rachel" do
+          it "returns true" do
+            expect(charles.has_pending_request_from?(rachel)).to be(true)
+          end
+        end
+      end
+    end
   end
 end
