@@ -8,7 +8,7 @@ class Friendship < ApplicationRecord
   before_save :concatenate_ids
   after_save :delete_associated_request
 
-  def self.find_friendship(user, friend)
+  def self.between(user, friend)
     where("concatenated=?", [user.id, friend.id].sort.insert(1, "X").join)[0]
   end
 
