@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   before_action :find_profile, except: :create
 
   def new
-    @user = User.find_by(id: params[:user_id])
+    @user = current_user || User.find_by(id: params[:user_id])
     if !@user.profile.nil?
       flash[:warning] = "You already have a profile"
       redirect_to user_path(@user)
