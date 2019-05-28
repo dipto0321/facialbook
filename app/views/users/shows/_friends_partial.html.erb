@@ -3,8 +3,7 @@
     <li class="col-6 list-group-item mx-2 mb-2">
     <div class="row">
       <div class="col-6">
-        <% image_url = friend.profile.profile_picture? ? friend.profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
-        <a href="<%=user_path(friend)%>"><%= image_tag image_url, class:"img-fluid profile-picture"%></a>
+        <a href="<%=user_path(friend)%>"><%= image_tag image_url(friend.profile), class:"img-fluid profile-picture"%></a>
         <%= link_to friend.profile.full_name, friend %>
       </div>
       <div class="col-6">
