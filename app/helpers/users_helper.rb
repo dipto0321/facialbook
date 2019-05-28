@@ -37,4 +37,8 @@ module UsersHelper
   def image_url(user_profile)
     user_profile.profile_picture? ? user_profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg"
   end
+
+  def user_first_n_friends(user, n)
+    user.friends.take(n)
+  end
 end
