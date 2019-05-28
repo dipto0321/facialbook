@@ -11,14 +11,12 @@
         <% if current_user != friend %>
           <% if !current_user.friends.include?(friend) %>
           <!--Add Friend Btn-->
-            <div id="friend-request-btn-user-<%=friend.id%>">
               <% if !current_user.has_pending_request_to?(friend) && !friend.has_pending_request_to?(current_user) %>
                 <%= render "users/shows/send_friend_request_form", user: friend, origin: nil%>
-            </div>
-            <% elsif current_user.pending_request?(friend) %>
+            <% elsif current_user.has_pending_request_to?(friend) %>
               <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, friend.id)[0]%>
               <%= render  "users/shows/request_sent_btn", request: request %>
-            <% elsif friend.pending_request?(current_user) %>
+            <% elsif friend.has_pending_request_to?(current_user) %>
               <%= render  "users/shows/respond_to_friend_request", user: friend %>
             <% end %>
           <% else %>
