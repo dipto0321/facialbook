@@ -8,19 +8,8 @@
     </p>
     <!--Friend request/pending received/sent request-->
     <% if @user != current_user %>
-      <% if !current_user.friends.include?(@user) %>
-        <% if !current_user.has_pending_request_to?(@user) && !@user.has_pending_request_to?(current_user) %>
-            <%= render "users/shows/send_friend_request_form", user: @user, origin: nil%>
-        <% elsif current_user.has_pending_request_to?(@user) %>
-          <!--Active Request Sent btn-->
-          <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
-          <%= render "users/shows/request_sent_btn", request: request %>
-        <% elsif current_user.has_pending_request_from?(@user) %>
-          <%= render "users/shows/respond_to_friend_request", user: @user%>
-        <% end %>
-      <% else %>
-        <%= render  "users/shows/already_friends_btn", user: @user %>
-      <% end %>
+      <% button_to_show = button(current_user, @user) %>
+      <%= render  "users/shows/#{button_to_show[:filename]}", button_to_show[:locals] %>
     <% end %>
   </div>
 </div>

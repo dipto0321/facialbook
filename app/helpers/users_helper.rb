@@ -4,4 +4,32 @@ module UsersHelper
   def find_friendship(user1, user2)
     Friendship.between(user1, user2)
   end
+  def button(current, user)
+    button_to_show = Hash.new
+    if !current.friends.include?(user)
+      if !current.has_pending_request_to?(user) && !current.has_pending_request_from?(user)
+
+        button_to_show[:filename] = "send_friend_request_form"
+        button_to_show[:locals] = {user: user, origin: nil}
+
+      elsif current.has_pending_request_to?(user)
+
+        concatenated_ids = [current.id, user.id].sort.insert(1, 'X').join
+
+        request = FriendRequest.where("concatenated=?",concatenated_ids)[0]
+
+        button_to_show[:filename] = "request_sent_btn"
+        button_to_show[:locals] = {request: request}
+
+      elsif current_user.has_pending_request_from?(user)
+        
+        button_to_show[:filename] = "respond_to_friend_request"
+        button_to_show[:locals] = {user: user}
+      end
+    else
+      button_to_show[:filename] = "already_friends_btn"
+      button_to_show[:locals] = {user: user}
+    end
+    button_to_show
+  end
 end
