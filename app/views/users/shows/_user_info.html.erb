@@ -10,9 +10,7 @@
     <% if @user != current_user %>
       <% if !current_user.friends.include?(@user) %>
         <% if !current_user.has_pending_request_to?(@user) && !@user.has_pending_request_to?(current_user) %>
-          <div id="friend-request-btn-user-<%=@user.id%>">
             <%= render "users/shows/send_friend_request_form", user: @user, origin: nil%>
-          </div>
         <% elsif current_user.has_pending_request_to?(@user) %>
           <!--Active Request Sent btn-->
           <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
