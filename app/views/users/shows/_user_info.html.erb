@@ -6,7 +6,6 @@
     <p class="card-text">
       <p><%= @profile.bio %>
     </p>
-    <!--Friend request/pending received/sent request-->
     <% if @user != current_user %>
       <% button_to_show = button(current_user, @user) %>
       <%= render  "users/shows/#{button_to_show[:filename]}", button_to_show[:locals] %>
