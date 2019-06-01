@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveIndexesFromFriendRequestsAndFriendships < ActiveRecord::Migration[5.2]
   def change
     remove_index :friend_requests, %i[requester_id requestee_id]

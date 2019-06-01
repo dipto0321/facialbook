@@ -6,10 +6,11 @@ class Profile < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validate :profile_picture_size
-  default_scope {eager_load(:user)}
+  default_scope { eager_load(:user) }
 
   def full_name
     return "#{first_name} #{middle_name} #{last_name}" if middle_name?
+
     "#{first_name} #{last_name}"
   end
 

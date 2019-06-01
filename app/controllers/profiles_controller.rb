@@ -7,10 +7,10 @@ class ProfilesController < ApplicationController
   def new
     @user = current_user || User.find_by(id: params[:user_id])
     if !@user.profile.nil?
-      flash[:warning] = "You already have a profile"
+      flash[:warning] = 'You already have a profile'
       redirect_to user_path(@user)
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
     if @user.profile.save
       redirect_to user_path(@user)
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -42,6 +42,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :middle_name ,:birthday, :gender, :bio, :profile_picture)
+    params.require(:profile).permit(:first_name, :last_name, :middle_name, :birthday, :gender, :bio, :profile_picture)
   end
 end

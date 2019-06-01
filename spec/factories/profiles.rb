@@ -7,15 +7,15 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     birthday { Faker::Date.birthday(18, 65) }
     bio { Faker::Lorem.sentence(3) }
-    gender { "male" }
+    gender { 'male' }
   end
 
-  factory :invalid_profile, class: "Profile" do
+  factory :invalid_profile, class: 'Profile' do
     association :user
     first_name {}
     last_name { Faker::Name.last_name }
     birthday { Faker::Date.birthday(18, 65) }
     bio { Faker::Lorem.sentence(3) }
-    gender { "female" }
+    gender { 'female' }
   end
 end

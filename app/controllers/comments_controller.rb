@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:id])
     begin
       @comment.delete
-    rescue StandardError => exception
+    rescue StandardError => e
       flash[:danger] = 'You are trying to delete a non-existing comment'
     else
       flash[:warning] = 'Comment deleted.'

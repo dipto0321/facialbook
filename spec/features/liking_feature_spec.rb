@@ -23,12 +23,12 @@ feature 'liking and unliking' do
     end
 
     it 'likes the post' do
-      expect(page).to have_selector(:link_or_button, "#{@post.likes.count}")
+      expect(page).to have_selector(:link_or_button, @post.likes.count.to_s)
     end
 
-    it "unlikes a post" do
-      click_on "Unlike"
-      expect(page).to have_selector(:link_or_button, "Like", count: 2)
+    it 'unlikes a post' do
+      click_on 'Unlike'
+      expect(page).to have_selector(:link_or_button, 'Like', count: 2)
     end
   end
 
@@ -40,14 +40,12 @@ feature 'liking and unliking' do
     end
 
     it 'likes the post' do
-      expect(page).to have_selector(:link_or_button, "#{@comment.likes.count}")
+      expect(page).to have_selector(:link_or_button, @comment.likes.count.to_s)
     end
 
-    it "unlikes a comment" do
-      click_on "Unlike"
-      expect(page).to have_selector(:link_or_button, "Like", count: 2)
+    it 'unlikes a comment' do
+      click_on 'Unlike'
+      expect(page).to have_selector(:link_or_button, 'Like', count: 2)
     end
-
   end
-
 end

@@ -287,7 +287,6 @@ Devise.setup do |config|
   # ActiveSupport.on_load(:devise_failure_app) do
   #   include Turbolinks::Controller
   # end
-  callback_url = Rails.env.production? ? "https://facials.herokuapp.com/users/auth/facebook/callback" : "http://localhost:3000/users/auth/facebook/callback"
+  callback_url = Rails.env.production? ? 'https://facials.herokuapp.com/users/auth/facebook/callback' : 'http://localhost:3000/users/auth/facebook/callback'
   config.omniauth :facebook, Rails.application.credentials.fb_api[:app_id], Rails.application.credentials.fb_api[:app_secret], callback_url: callback_url
-
 end

@@ -65,10 +65,10 @@ feature "visiting user's profile" do
   end
 
   it 'shows likes by @friend_who_posted on @post_by_current_user' do
-    expect(page).to have_selector(:link_or_button,  "#{@share_by_friend.likes.count}")
+    expect(page).to have_selector(:link_or_button,  @share_by_friend.likes.count.to_s)
   end
 
   it 'shows likes on comments' do
-    expect(page).to have_selector(:link_or_button,  "#{@post_comment.likes.count}")
+    expect(page).to have_selector(:link_or_button,  @post_comment.likes.count.to_s)
   end
 end

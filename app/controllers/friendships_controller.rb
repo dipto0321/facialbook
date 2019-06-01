@@ -11,11 +11,11 @@ class FriendshipsController < ApplicationController
 
     begin
       @friendship.save
-    rescue StandardError => exception
-      flash[:danger] = "You are already friends"
+    rescue StandardError => e
+      flash[:danger] = 'You are already friends'
       redirect_back(fallback_location: root_path)
     else
-      flash[:success] = "You are now friends"
+      flash[:success] = 'You are now friends'
       redirect_back(fallback_location: user_path(@user))
     end
   end
@@ -23,9 +23,9 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = Friendship.find_by(id: params[:id])
     if @friendship.delete
-      flash[:warning] = "Friend removed"
+      flash[:warning] = 'Friend removed'
     else
-      flash[:danger] = "Friend already deleted"
+      flash[:danger] = 'Friend already deleted'
     end
     redirect_back(fallback_location: root_path)
   end
