@@ -8,22 +8,16 @@ module UsersHelper
   def button(current, user)
     button_to_show = {}
     if !current.friends.include?(user)
-      if !current.has_pending_request_to?(user) && !current.has_pending_request_from?(user)
-
+      case true
+      when !current.has_pending_request_to?(user) && !current.has_pending_request_from?(user)
         button_to_show[:filename] = 'send_friend_request_form'
         button_to_show[:locals] = { user: user, origin: nil }
-
-      elsif current.has_pending_request_to?(user)
-
+      when current.has_pending_request_to?(user)
         concatenated_ids = [current.id, user.id].sort.insert(1, 'X').join
-
         request = FriendRequest.where('concatenated=?', concatenated_ids)[0]
-
         button_to_show[:filename] = 'request_sent_btn'
         button_to_show[:locals] = { request: request }
-
-      elsif current_user.has_pending_request_from?(user)
-
+      when current_user.has_pending_request_from?(user)
         button_to_show[:filename] = 'respond_to_friend_request'
         button_to_show[:locals] = { user: user }
       end

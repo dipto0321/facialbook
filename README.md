@@ -7,15 +7,15 @@
 ## Table of Contents
 
 - [Facialbook](#facialbook)
-  - [Table of Contents](#table-of-contents)
-  - [Motivation](#motivation)
-  - [Minimum features:](#minimum-features)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [API](#api)
-  - [Maintainers](#maintainers)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Motivation](#motivation)
+- [Minimum features:](#minimum-features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Motivation
 
@@ -23,7 +23,7 @@ This project is our implementation of Facebook - the world's biggest social netw
 
 We wanted to showcase our Ruby on Rails skills with this project. Soon, we intend to also incorporate React and NextJS to deal with the frontend (and server side rendering) while converting our backend to a simple API.
 
-## Minimum features:
+## Minimum features
 
 1. User signup and signin (with Remember Me) and creation of Profile (with Profile picture uploading)
 2. Sending, Accepting, Cancelling and Deleting (Rejecting) Friend Requests
@@ -39,7 +39,7 @@ We wanted to showcase our Ruby on Rails skills with this project. Soon, we inten
 
 ## Installation
 
-### System Requirements:
+### System Requirements
 
 - Ruby version of at least 2.5.3
 - Rails version of at least 5.2.3
@@ -76,7 +76,7 @@ Configure database by running `rails db:setup` -> creates the `development` and 
 
 ## Usage
 
-### Development Server:
+### Development Server
 
 ```
 rails server
@@ -92,7 +92,7 @@ Simply run
 rspec
 ```
 
-## Production
+### Production
 
 If using Heroku, make sure you have an existing heroku app for this or run:
 

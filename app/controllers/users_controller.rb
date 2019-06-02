@@ -15,8 +15,8 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
-  rescue StandardError => e
-    flash[:danger] = 'User does not exist'
+  rescue StandardError
+    flash[:danger] = "User doesn't exist"
     redirect_to root_path
   end
 end
