@@ -7,13 +7,13 @@ class FriendRequestsController < ApplicationController
 
     @requester = current_user
 
-    @friend_request = FriendRequest.new(requestee_id: @requestee.id,requester_id: @requester.id)
+    @friend_request = FriendRequest.new(requestee_id: @requestee.id, requester_id: @requester.id)
 
     @origin = session[:return_to]
 
     begin
       @friend_request.save
-    rescue StandardError => exception
+    rescue StandardError
       flash[:danger] = 'You already sent a request'
     end
     respond_to do |format|
@@ -28,9 +28,7 @@ class FriendRequestsController < ApplicationController
   def destroy
     @friend_request = FriendRequest.find_by(id: params[:id])
     @origin = session[:return_to]
-    if !@friend_request.delete
-      flash[:danger] = 'Request already deleted'
-    end
+    flash[:danger] = 'Request already deleted' unless @friend_request.delete
     respond_to do |format|
       format.html do
         redirect_to session[:return_to]

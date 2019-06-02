@@ -1,28 +1,13 @@
 <div class="card">
   <div class="card-body" id="profile-card">
-    <% image_url = @profile.profile_picture? ? @profile.profile_picture.url : "https://www.lewesac.co.uk/wp-content/uploads/2017/12/default-avatar.jpg" %>
-    <%= image_tag image_url, class:"img-fluid"%>
+    <%= image_tag image_url(@profile), class:"img-fluid"%>
     <h1 class="profile-full-name"><%=@profile.full_name %></h1>
     <p class="card-text">
       <p><%= @profile.bio %>
     </p>
-    <!--Friend request/pending received/sent request-->
     <% if @user != current_user %>
-      <% if !current_user.friends.include?(@user) %>
-        <% if !current_user.has_pending_request_to?(@user) && !@user.has_pending_request_to?(current_user) %>
-          <div id="friend-request-btn-user-<%=@user.id%>">
-            <%= render "users/shows/send_friend_request_form", user: @user, origin: nil%>
-          </div>
-        <% elsif current_user.has_pending_request_to?(@user) %>
-          <!--Active Request Sent btn-->
-          <% request = FriendRequest.where("requester_id=? AND requestee_id=?",current_user.id, @user.id)[0]%>
-          <%= render "users/shows/request_sent_btn", request: request %>
-        <% elsif current_user.has_pending_request_from?(@user) %>
-          <%= render partial:"users/shows/respond_to_friend_request", locals:{user: @user}%>
-        <% end %>
-      <% else %>
-        <%= render  "users/shows/already_friends_btn", user: @user %>
-      <% end %>
+      <% button_to_show = button(current_user, @user) %>
+      <%= render  "users/shows/#{button_to_show[:filename]}", button_to_show[:locals] %>
     <% end %>
   </div>
 </div>

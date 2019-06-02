@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Comments::LikesController do
-  describe "GET #index" do
+  describe 'GET #index' do
     before :each do
       @user = create(:user)
       @user_post = create(:user_post, author_id: @user.id, postable_id: @user.id)
@@ -12,14 +12,14 @@ RSpec.describe Comments::LikesController do
       @like1 = create(:comment_like, liker_id: @liker.id, likeable_id: @comment.id)
       @like2 = create(:comment_like, liker_id: @user.id, likeable_id: @comment.id)
       sign_in(@user)
-      get :index, params:{comment_id: @comment.id}
+      get :index, params: { comment_id: @comment.id }
     end
 
-    it "assigns to @likes" do
+    it 'assigns to @likes' do
       expect(assigns(:likes)).to eq(@comment.likes)
     end
 
-    it "shows an accurate likes count" do
+    it 'shows an accurate likes count' do
       expect(assigns(:likes).count).to eq(@comment.likes.count)
     end
   end

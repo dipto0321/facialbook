@@ -1,0 +1,10 @@
+<li class="col-4 px-0 mt-1">
+  <a href="<%=user_path(friend)%>">
+    <div class="card">
+      <%=image_tag image_url(friend.profile), class:"card-img-top img-fluid"%>
+      <div class="card-body p-0">
+        <p class="card-text text-center"><%= friend.profile.full_name %></p>
+      </div>
+    </div>
+  </a>
+</li>

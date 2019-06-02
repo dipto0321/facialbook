@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   end
 
   def create
-
     @author = current_user
     @post = @author.authored_posts.build(post_params)
     if @post.save
@@ -24,7 +23,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     if @post.update(post_params)
       respond_to do |format|
-        format.html {redirect_to session.delete(:return_to)}
+        format.html { redirect_to session.delete(:return_to) }
         format.js
       end
     else
@@ -36,7 +35,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     begin
       @post.delete
-    rescue StandardError => exception
+    rescue StandardError
       flash[:danger] = 'Post already deleted or never existed'
       redirect_to root_path
     else
@@ -49,6 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:postable_id,:postable_type, :user_id, :post_pic, :body)
+    params.require(:post).permit(:postable_id, :postable_type, :user_id, :post_pic, :body)
   end
 end

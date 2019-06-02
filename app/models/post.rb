@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  belongs_to :author, class_name: "User"
+  belongs_to :author, class_name: 'User'
   belongs_to :postable, polymorphic: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
@@ -14,7 +14,7 @@ class Post < ApplicationRecord
 
   def post_pic_size
     if post_pic.size > 5.megabytes
-      errors.add(:post_pic, "should be less than 5MB")
+      errors.add(:post_pic, 'should be less than 5MB')
     end
   end
 end
