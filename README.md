@@ -8,15 +8,20 @@
 
 - [Facialbook](#facialbook)
   - [Table of Contents](#table-of-contents)
+  - [Motivation](#motivation)
   - [Minimum features:](#minimum-features)
-  - [Security](#security)
-  - [Background](#background)
-  - [Install](#install)
+  - [Installation](#installation)
   - [Usage](#usage)
   - [API](#api)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
   - [License](#license)
+
+## Motivation
+
+This project is our implementation of Facebook - the world's biggest social network.
+
+We wanted to showcase our Ruby on Rails skills with this project. Soon, we intend to also incorporate React and NextJS to deal with the frontend (and server side rendering) while converting our backend to a simple API.
 
 ## Minimum features:
 
@@ -32,50 +37,46 @@
 10. Liking and Unliking posts and comments
 11. Showing Like count
 
-## Security
+## Installation
 
-## Background
+### System Requirements:
 
-**Database used:**
+- Ruby version of at least 2.5.3
+- Rails version of at least 5.2.3
+- PostgreSQL version 9 above
 
-  - Postgresql
-  
-**Test Suite used:** 
+After cloning:
 
-  - RSpec
+In `Gemfile` change `ruby '2.6.3'` to correspond to your system's ruby version. For `rbenv` users, run the command in the terminal: `rbenv local <your system's ruby version>`.
 
-**Other major gems used:**
+Run `bundle update` to install the latest version of the gems in the `Gemfile`.
 
-- Devise
-- Bootstrap for the frontend
-- SASS for custom styles
-- Faker for generating fake data (user, posts, comments, likes)
-- Simple form for all forms
-- Carrierwave for image uploading feature
-- FactoryBot for generating spec data
+Run in the terminal:
 
-## Install
-
-- After cloning, run:
-
-```
-touch config/application.yml
+```ruby
+EDITOR="<your default code editor> --wait" rails credentials:edit
 ```
 
-- And then inside this newly created file include the following lines:
+This will fire up a `XYZ.credentials.yml
+file. In this file edit the following:
 
-```
-DB_USERNAME: <type your own username here>
-DB_PASSWORD: <type your corresponding password here>
+```ruby
+pg_credentials:
+  username: <your local postgreSQL username>
+  password: <corresponding password>
+
+fb_api:
+  app_id: <your FB APP ID>
+  app_secret: <your FB APP SECRET>
 ```
 
-- After that run these commands
+Then save and close this file. It will generate a `master.key` file.
 
-```
-rails db:setup && rails db:schema:load
-```
+Configure database by running `rails db:setup` -> creates the `development` and `test` databases and seeds the application.
 
 ## Usage
+
+### Development Server:
 
 ```
 rails server
@@ -83,7 +84,37 @@ rails server
 
 Then goto `http:\\localhost:3000`
 
-## API
+### Testing:
+
+Simply run
+
+```ruby
+rspec
+```
+
+## Production
+
+If using Heroku, make sure you have an existing heroku app for this or run:
+
+```ruby
+heroku create <app name>
+```
+
+to create an app in Heroku and add heroku as a remote.
+
+In Heroku app settings click on Reveal Config Vars then add the following fields (along with their values in your credentials):
+
+```
+FB_APP_ID
+FB_APP_SECRET
+RAILS_MASTER_KEY
+```
+
+Then in your local terminal run:
+
+```ruby
+heroku run rails db:migrate && heroku run rails db:seed
+```
 
 ## Maintainers
 
@@ -91,7 +122,7 @@ Then goto `http:\\localhost:3000`
 
 ## Contributing
 
-[Ryan](https://github.com/rvvergara) and [Dipto](https://github.com/dipto0321)
+Contact maintainers for contribution instructions.
 
 Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
