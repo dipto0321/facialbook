@@ -35,10 +35,6 @@ RSpec.describe FriendshipsController do
         expect(assigns(:friend)).to eq(@friend)
       end
 
-      it 'assigns to @friend_request' do
-        expect(assigns(:friend_request)).to eq(@friend_request)
-      end
-
       it 'redirects' do
         expect(response).to redirect_to(user_path(@user))
       end
