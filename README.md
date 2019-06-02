@@ -84,7 +84,7 @@ rails server
 
 Then goto `http:\\localhost:3000`
 
-### Testing:
+### Testing
 
 Simply run
 

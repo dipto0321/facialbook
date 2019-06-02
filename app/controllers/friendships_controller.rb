@@ -11,7 +11,7 @@ class FriendshipsController < ApplicationController
 
     begin
       @friendship.save
-    rescue StandardError => e
+    rescue StandardError
       flash[:danger] = 'You are already friends'
       redirect_back(fallback_location: root_path)
     else

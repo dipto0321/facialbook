@@ -13,7 +13,7 @@ class FriendRequestsController < ApplicationController
 
     begin
       @friend_request.save
-    rescue StandardError => e
+    rescue StandardError
       flash[:danger] = 'You already sent a request'
     end
     respond_to do |format|

@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     begin
       @post.delete
-    rescue StandardError => e
+    rescue StandardError
       flash[:danger] = 'Post already deleted or never existed'
       redirect_to root_path
     else
