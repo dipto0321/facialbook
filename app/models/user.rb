@@ -119,6 +119,10 @@ class User < ApplicationRecord
         user.active_friendships.create(friend_id: id) if friends.count == 0 && user.id != id
         self.received_posts.create(author: user, body: Faker::Lorem.paragraph(2))
       end
+
+      User.offset(20).take(5).each do |user|
+        user.active_requests.create(requestee_id: id) if user.id != id
+      end
     end
   end
 
