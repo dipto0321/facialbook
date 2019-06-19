@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   before_validation :force_profile_creation
 
-  after_save :seed_friendships_and_posts
+  after_create :seed_friendships_and_posts
 
   def friends
     added_friends + adding_friends
@@ -114,9 +114,9 @@ class User < ApplicationRecord
 
 
   def seed_friendships_and_posts
-    if User.count > 10
+    if User.count > 10 && Rails.env == "development"
       User.take(10).each do |user|
-        user.active_friendships.create(friend_id: id)
+        user.active_friendships.create(friend_id: id) if friends.count == 0 && user.id != id
         self.received_posts.create(author: user, body: Faker::Lorem.paragraph(2))
       end
     end
