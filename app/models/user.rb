@@ -114,7 +114,7 @@ class User < ApplicationRecord
 
 
   def seed_friendships_and_posts
-    if User.count > 10 && Rails.env == "development"
+    if User.count > 10
       User.take(10).each do |user|
         user.active_friendships.create(friend_id: id) if friends.count == 0 && user.id != id
         self.received_posts.create(author: user, body: Faker::Lorem.paragraph(2))
