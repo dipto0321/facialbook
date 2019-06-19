@@ -1,5 +1,5 @@
 class ChangeUserIdTypeToUuid < ActiveRecord::Migration[5.2]
-  def change
+  def up
     add_column :users, :uuid, :uuid, default:"gen_random_uuid()", null: false
     
     change_table :friendships do |t|
@@ -14,6 +14,7 @@ class ChangeUserIdTypeToUuid < ActiveRecord::Migration[5.2]
     
     change_table :posts do |t|
       t.remove  :author_id
+      t.remove :postable_id
     end
     
     change_table :profiles do |t|
@@ -22,10 +23,12 @@ class ChangeUserIdTypeToUuid < ActiveRecord::Migration[5.2]
     
     change_table :comments do |t|
       t.remove  :author_id
+      t.remove :commentable_id
     end
     
     change_table :likes do |t|
       t.remove  :liker_id
+      t.remove :likeable_id
     end
 
     change_table :users do |t|

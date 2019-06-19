@@ -10,26 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_19_044539) do
+ActiveRecord::Schema.define(version: 2019_06_19_065128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "commentable_type"
-    t.bigint "commentable_id"
     t.text "body"
     t.string "comment_pic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.uuid "author_id"
+    t.uuid "commentable_id"
   end
 
   create_table "friend_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "requester_id"
+    t.uuid "requestee_id"
     t.index ["concatenated"], name: "index_friend_requests_on_concatenated", unique: true
   end
 
@@ -37,25 +39,27 @@ ActiveRecord::Schema.define(version: 2019_06_19_044539) do
     t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.uuid "friend_id"
     t.index ["concatenated"], name: "index_friendships_on_concatenated", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type"
-    t.bigint "likeable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.uuid "liker_id"
+    t.uuid "likeable_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "body"
     t.string "post_pic"
     t.string "postable_type"
-    t.bigint "postable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+    t.uuid "author_id"
+    t.uuid "postable_id"
   end
 
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -68,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_06_19_044539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "middle_name"
+    t.uuid "user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -89,4 +94,12 @@ ActiveRecord::Schema.define(version: 2019_06_19_044539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "users", column: "author_id", name: "comments_author_id_fkey"
+  add_foreign_key "friend_requests", "users", column: "requestee_id", name: "friend_requests_requestee_id_fkey"
+  add_foreign_key "friend_requests", "users", column: "requester_id", name: "friend_requests_requester_id_fkey"
+  add_foreign_key "friendships", "users", column: "friend_id", name: "friendships_friend_id_fkey"
+  add_foreign_key "friendships", "users", name: "friendships_user_id_fkey"
+  add_foreign_key "likes", "users", column: "liker_id", name: "likes_liker_id_fkey"
+  add_foreign_key "posts", "users", column: "author_id", name: "posts_author_id_fkey"
+  add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
 end
