@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-User.create(
+ryto = User.create(
   email: 'ryto@gmail.com',
   password: 'password',
   password_confirmation: 'password',
@@ -56,10 +56,8 @@ end
   )
 end
 
-ryto = User.first
-
 5.times do
-  User.create(
+  user = User.create(
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password',
@@ -73,12 +71,12 @@ ryto = User.first
   )
   Friendship.create(
     user_id: ryto.id,
-    friend_id: User.last.id
+    friend_id: user.id
   )
 end
 
 5.times do
-  User.create(
+  user = User.create(
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password',
@@ -92,7 +90,7 @@ end
   )
   Friendship.create(
     user_id: ryto.id,
-    friend_id: User.last.id
+    friend_id: user.id
   )
 end
 

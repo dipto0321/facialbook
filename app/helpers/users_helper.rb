@@ -13,7 +13,7 @@ module UsersHelper
         button_to_show[:filename] = 'send_friend_request_form'
         button_to_show[:locals] = { user: user, origin: nil }
       when current.has_pending_request_to?(user)
-        concatenated_ids = [current.id, user.id].sort.insert(1, 'X').join
+        concatenated_ids = [current.id, user.id].sort.join
         request = FriendRequest.where('concatenated=?', concatenated_ids)[0]
         button_to_show[:filename] = 'request_sent_btn'
         button_to_show[:locals] = { request: request }
