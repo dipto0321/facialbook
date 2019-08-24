@@ -11,7 +11,7 @@ feature 'Create a new post' do
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'password'
       click_on('Log in')
-      @body = Faker::Lorem.paragraph(5)
+      @body = Faker::Lorem.paragraph(sentence_count: 5)
       within '#postFormModal' do
         fill_in 'Create post', with: @body
         click_on('Share')
@@ -48,7 +48,7 @@ feature 'Create a new post' do
       fill_in 'Password', with: 'password'
       click_on('Log in')
       visit user_path(@current_user)
-      @another_body = Faker::Lorem.paragraph(5)
+      @another_body = Faker::Lorem.paragraph(sentence_count: 5)
       within '#postFormModal' do
         fill_in 'Create post', with: @another_body
         click_on('Share')
@@ -88,7 +88,7 @@ feature 'Create a new post' do
       fill_in 'Password', with: 'password'
       click_on('Log in')
       visit user_path(@friend)
-      @greeting = Faker::Lorem.paragraph(5)
+      @greeting = Faker::Lorem.paragraph(sentence_count: 5)
       within '#postFormModal' do
         fill_in 'Create post', with: @greeting
         click_on('Share')
@@ -151,7 +151,7 @@ feature 'Edit post' do
       fill_in 'Password', with: 'password'
       click_on('Log in')
       click_on('Edit')
-      @body = Faker::Lorem.paragraph(5)
+      @body = Faker::Lorem.paragraph(sentence_count: 5)
       fill_in 'Create post', with: @body
       click_on('Update')
     end
@@ -172,7 +172,7 @@ feature 'Edit post' do
       click_on('Log in')
       visit user_path(@user)
       click_on('Edit')
-      @body = Faker::Lorem.paragraph(5)
+      @body = Faker::Lorem.paragraph(sentence_count: 5)
       fill_in 'Create post', with: @body
       click_on('Update')
     end
@@ -194,7 +194,7 @@ feature 'Edit post' do
       click_on('Log in')
       visit user_path(@friend)
       click_on('Edit')
-      @body = Faker::Lorem.paragraph(5)
+      @body = Faker::Lorem.paragraph(sentence_count: 5)
       fill_in 'Create post', with: @body
       click_on('Update')
     end

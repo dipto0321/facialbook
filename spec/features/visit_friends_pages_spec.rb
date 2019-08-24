@@ -15,9 +15,9 @@ feature 'visiting all_friends page' do
     before :each do
       @user = create(:user)
       @visitor = create(:user)
-      10.times do
-        create(:user)
-        create(:friendship, user_id: @user.id, friend_id: User.last.id)
+      2.times do
+        friend = create(:user)
+        create(:friendship, user_id: @user.id, friend_id: friend.id)
       end
 
       create(:friendship, user_id: @visitor.id, friend_id: @user.friends.last.id)
@@ -62,9 +62,9 @@ feature 'visiting mutual_friends page' do
     before :each do
       @user = create(:user)
       @visitor = create(:user)
-      10.times do
-        create(:user)
-        create(:friendship, user_id: @user.id, friend_id: User.last.id)
+      2.times do
+        friend = create(:user)
+        create(:friendship, user_id: @user.id, friend_id: friend.id)
       end
 
       create(:friendship, user_id: @visitor.id, friend_id: @user.friends.last.id)

@@ -18,7 +18,7 @@ feature 'create new comment on post' do
 
   context 'posting from home page' do
     before :each do
-      @comment_body = Faker::Lorem.paragraph(2)
+      @comment_body = Faker::Lorem.paragraph(sentence_count: 2)
       fill_in 'comment_body', with: @comment_body
       click_on 'Comment'
     end
