@@ -15,7 +15,6 @@ gem 'sass-rails', '~> 5.0'
 
 gem 'uglifier', '>= 1.3.0'
 
-
 gem 'coffee-rails', '~> 4.2'
 
 gem 'turbolinks', '~> 5'
@@ -36,16 +35,16 @@ gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'database_cleaner'
-  gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.8'
   gem 'capybara'
   gem 'cucumber-rails', '~> 1.6', require: false
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'hirb'
   gem 'launchy'
   gem 'pry-rails'
   gem 'rack_session_access'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.8'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 4.0.0.rc1'
   gem 'webdrivers'

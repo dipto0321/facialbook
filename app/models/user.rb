@@ -112,17 +112,16 @@ class User < ApplicationRecord
     errors.add(:profile, :blank, message: "can't be nil") if profile.nil?
   end
 
-
   def seed_friendships_and_posts
-    if User.count > 10
-      User.take(10).each do |user|
-        user.active_friendships.create(friend_id: id) if friends.count == 0 && user.id != id
-        self.received_posts.create(author: user, body: Faker::Lorem.paragraph(2))
-      end
+    return unless User.count > 10
 
-      User.offset(20).take(5).each do |user|
-        user.active_requests.create(requestee_id: id) if user.id != id
-      end
+    User.take(10).each do |user|
+      user.active_friendships.create(friend_id: id) if friends.count.zero? && user.id != id
+      received_posts.create(author: user, body: Faker::Lorem.paragraph(sentence_count: 2))
+    end
+
+    User.offset(20).take(5).each do |user|
+      user.active_requests.create(requestee_id: id) if user.id != id
     end
   end
 
