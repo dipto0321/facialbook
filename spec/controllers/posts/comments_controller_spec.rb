@@ -13,7 +13,7 @@ RSpec.describe Posts::CommentsController do
         post :create, params: {
           comment: {
             author_id: commenter.id,
-            body: Faker::Lorem.paragraph(2)
+            body: Faker::Lorem.paragraph(sentence_count: 2)
           }, post_id: user_post.id
         }
       end.to change(Comment, :count).by(1)
