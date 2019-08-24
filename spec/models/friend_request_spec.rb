@@ -31,8 +31,8 @@ RSpec.describe FriendRequest do
   describe 'before_save callback' do
     context 'no requests between Adam and Bert' do
       let(:request) { create(:friend_request, requester_id: @adam.id, requestee_id: @bert.id) }
-      it "creates a new string w/ an 'X' in the middle of their ids" do
-        expect(request.concatenated).to match("#{@adam.id}X#{@bert.id}")
+      it 'creates a new string that combines their sorted ids' do
+        expect(request.concatenated).to match([@adam.id, @bert.id].sort.join)
       end
     end
 

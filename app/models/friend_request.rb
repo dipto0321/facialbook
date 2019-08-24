@@ -15,7 +15,9 @@ class FriendRequest < ApplicationRecord
   end
 
   def existing_friendship?
-    !requester.active_friendships.where('concatenated=?', concatenate_ids).empty? || !requester.passive_friendships.where('concatenated=?', concatenate_ids).empty?
+    !requester.active_friendships
+      .where('concatenated=?', concatenate_ids).empty? || !requester.passive_friendships
+        .where('concatenated=?', concatenate_ids).empty?
   end
 
   def prevent_requesting_existing_friend
