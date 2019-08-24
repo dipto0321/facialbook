@@ -10,68 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_120735) do
+ActiveRecord::Schema.define(version: 2019_06_19_065128) do
+
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "commentable_type"
-    t.bigint "commentable_id"
-    t.bigint "author_id"
     t.text "body"
     t.string "comment_pic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.uuid "author_id"
+    t.uuid "commentable_id"
   end
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.bigint "requester_id"
-    t.bigint "requestee_id"
+  create_table "friend_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "requester_id"
+    t.uuid "requestee_id"
     t.index ["concatenated"], name: "index_friend_requests_on_concatenated", unique: true
-    t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
-    t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
   end
 
-  create_table "friendships", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "friend_id"
+  create_table "friendships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "concatenated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.uuid "friend_id"
     t.index ["concatenated"], name: "index_friendships_on_concatenated", unique: true
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type"
-    t.bigint "likeable_id"
-    t.bigint "liker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
-    t.index ["liker_id"], name: "index_likes_on_liker_id"
+    t.uuid "liker_id"
+    t.uuid "likeable_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "body"
     t.string "post_pic"
     t.string "postable_type"
-    t.bigint "postable_id"
-    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_posts_on_author_id"
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+    t.uuid "author_id"
+    t.uuid "postable_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "birthday"
@@ -81,10 +72,10 @@ ActiveRecord::Schema.define(version: 2019_05_27_120735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "middle_name"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.uuid "user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -103,12 +94,12 @@ ActiveRecord::Schema.define(version: 2019_05_27_120735) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "users", column: "author_id"
-  add_foreign_key "friend_requests", "users", column: "requestee_id"
-  add_foreign_key "friend_requests", "users", column: "requester_id"
-  add_foreign_key "friendships", "users"
-  add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "likes", "users", column: "liker_id"
-  add_foreign_key "posts", "users", column: "author_id"
-  add_foreign_key "profiles", "users"
+  add_foreign_key "comments", "users", column: "author_id", name: "comments_author_id_fkey"
+  add_foreign_key "friend_requests", "users", column: "requestee_id", name: "friend_requests_requestee_id_fkey"
+  add_foreign_key "friend_requests", "users", column: "requester_id", name: "friend_requests_requester_id_fkey"
+  add_foreign_key "friendships", "users", column: "friend_id", name: "friendships_friend_id_fkey"
+  add_foreign_key "friendships", "users", name: "friendships_user_id_fkey"
+  add_foreign_key "likes", "users", column: "liker_id", name: "likes_liker_id_fkey"
+  add_foreign_key "posts", "users", column: "author_id", name: "posts_author_id_fkey"
+  add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
 end

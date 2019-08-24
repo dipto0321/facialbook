@@ -13,7 +13,7 @@ RSpec.describe Friendship, type: :model do
 
   describe 'before_save callback' do
     it 'concatenates ids of user and friend before save' do
-      expect(@friendship.concatenated).to eq([user.id, friend.id].sort.insert(1, 'X').join)
+      expect(@friendship.concatenated).to eq([user.id, friend.id].sort.join)
     end
   end
 

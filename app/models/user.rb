@@ -49,6 +49,8 @@ class User < ApplicationRecord
 
   before_validation :force_profile_creation
 
+  after_create :seed_friendships_and_posts
+
   def friends
     added_friends + adding_friends
   end
@@ -108,6 +110,19 @@ class User < ApplicationRecord
 
   def force_profile_creation
     errors.add(:profile, :blank, message: "can't be nil") if profile.nil?
+  end
+
+  def seed_friendships_and_posts
+    return unless User.count > 10
+
+    User.take(10).each do |user|
+      user.active_friendships.create(friend_id: id) if friends.count.zero? && user.id != id
+      received_posts.create(author: user, body: Faker::Lorem.paragraph(sentence_count: 2))
+    end
+
+    User.offset(20).take(5).each do |user|
+      user.active_requests.create(requestee_id: id) if user.id != id
+    end
   end
 
   private_class_method def self.parse_name(user, name)

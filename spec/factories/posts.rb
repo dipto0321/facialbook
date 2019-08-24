@@ -5,6 +5,6 @@ FactoryBot.define do
     postable_type { 'User' }
     association :postable, factory: :user
     association :author, factory: :user
-    body { Faker::Lorem.paragraph(5) }
+    body { Faker::Lorem.paragraph(sentence_count: 5) }
   end
 end

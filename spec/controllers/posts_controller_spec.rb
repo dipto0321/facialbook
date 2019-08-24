@@ -13,7 +13,7 @@ RSpec.describe PostsController, type: :controller do
           post: {
             postable_id: postable_user.id,
             postable_type: 'User',
-            body: Faker::Lorem.paragraph(2)
+            body: Faker::Lorem.paragraph(sentence_count: 2)
           }
         }
       end.to change(Post, :count).by(1)

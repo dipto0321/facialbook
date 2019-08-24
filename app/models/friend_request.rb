@@ -11,11 +11,13 @@ class FriendRequest < ApplicationRecord
   private
 
   def concatenate_ids
-    self.concatenated = [requester.id, requestee.id].sort.insert(1, 'X').join
+    self.concatenated = [requester.id, requestee.id].sort.join
   end
 
   def existing_friendship?
-    !requester.active_friendships.where('concatenated=?', concatenate_ids).empty? || !requester.passive_friendships.where('concatenated=?', concatenate_ids).empty?
+    !requester.active_friendships
+      .where('concatenated=?', concatenate_ids).empty? || !requester.passive_friendships
+        .where('concatenated=?', concatenate_ids).empty?
   end
 
   def prevent_requesting_existing_friend

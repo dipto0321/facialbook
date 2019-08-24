@@ -32,6 +32,7 @@ module Facialbook
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
       g.test_framework :rspec,
                        fixtures: true,
                        view_specs: false,

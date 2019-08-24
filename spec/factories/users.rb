@@ -11,7 +11,7 @@ FactoryBot.define do
                                  first_name: Faker::Name.male_first_name,
                                  last_name: Faker::Name.last_name,
                                  gender: 'male',
-                                 birthday: Faker::Date.birthday(18, 65))
+                                 birthday: Faker::Date.birthday(min_age: 18, max_age: 65))
     end
   end
 

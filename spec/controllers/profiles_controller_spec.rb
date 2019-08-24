@@ -10,10 +10,6 @@ RSpec.describe ProfilesController, type: :controller do
       get :edit, params: { id: @user.id }
     end
 
-    it 'assigns to @profile' do
-      expect(assigns(:profile)).to eq(@user.profile)
-    end
-
     it 'renders the edit template' do
       expect(response).to render_template('edit')
     end
@@ -23,7 +19,7 @@ RSpec.describe ProfilesController, type: :controller do
     before :each do
       @user = create(:user)
       @profile = @user.profile
-      @bio = Faker::Lorem.sentence(3)
+      @bio = Faker::Lorem.sentence(word_count: 3)
       sign_in(@user)
 
       parameters = { params: {
